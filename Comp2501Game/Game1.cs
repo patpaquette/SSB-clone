@@ -1,0 +1,143 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Comp2501Game.Systems;
+
+namespace Comp2501Game
+{
+    /// <summary>
+    /// This is the main type for your game
+    /// </summary>
+    public class Game1 : Microsoft.Xna.Framework.Game
+    {
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
+        SpriteFont spriteFont;
+        List<GameSystem> _systems;
+        List<GameObject> _objects;
+
+        public Game1()
+        {
+            graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Comp2501GameContent";
+            this._systems = new List<GameSystem>();
+            this._objects = new List<GameObject>();
+        }
+
+        /// <summary>
+        /// Allows the game to perform any initialization it needs to before starting to run.
+        /// This is where it can query for any required services and load any non-graphic
+        /// related content.  Calling base.Initialize will enumerate through any components
+        /// and initialize them as well.
+        /// </summary>
+        protected override void Initialize()
+        {
+            LineBatch.Init(this.GraphicsDevice);
+
+            foreach (GameSystem system in this._systems)
+            {
+                system.Initialize();
+            }
+
+            foreach (GameObject obj in this._objects)
+            {
+                obj.Initialize();
+            }
+
+            base.Initialize();
+        }
+
+        /// <summary>
+        /// LoadContent will be called once per game and is the place to load
+        /// all of your content.
+        /// </summary>
+        protected override void LoadContent()
+        {
+            // Create a new SpriteBatch, which can be used to draw textures.
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            spriteFont = Content.Load<SpriteFont>("SpriteFont1");
+            // TODO: use this.Content to load your game content here
+        }
+
+        /// <summary>
+        /// UnloadContent will be called once per game and is the place to unload
+        /// all content.
+        /// </summary>
+        protected override void UnloadContent()
+        {
+            // TODO: Unload any non ContentManager content here
+        }
+
+        /// <summary>
+        /// Allows the game to run logic such as updating the world,
+        /// checking for collisions, gathering input, and playing audio.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        protected override void Update(GameTime gameTime)
+        {
+            // Allows the game to exit
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+                this.Exit();
+
+
+            foreach (GameSystem system in this._systems)
+            {
+                if (system.GetType() == SystemType.StateModifier)
+                {
+                    system.Update(gameTime);
+                }
+            }
+
+            base.Update(gameTime);
+        }
+
+        /// <summary>
+        /// This is called when the game should draw itself.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            foreach (GameSystem system in this._systems)
+            {
+                if (system.GetType() == SystemType.Renderer)
+                {
+                    system.Update(gameTime);
+                }
+            }
+
+            base.Draw(gameTime);
+        }
+
+        //Registers a system to the game
+        //Update calls will be in the registration order
+        public void RegisterSystem(GameSystem system)
+        {
+            this._systems.Add(system);
+
+            foreach (GameObject obj in this._objects)
+            {
+                system.TryRegisterObject(obj);
+            }
+        }
+
+        public void AddObject(GameObject obj)
+        {
+            this._objects.Add(obj);
+
+            foreach (GameSystem system in this._systems)
+            {
+                system.TryRegisterObject(obj);
+            }
+        }
+    }
+}

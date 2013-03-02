@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comp2501Game", "Comp2501Game.csproj", "{71814A4B-C76F-4D5F-8E65-C31987B06069}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Comp2501GameContent", "..\Comp2501GameContent\Comp2501GameContent.contentproj", "{FD31AFD6-4BF0-489C-A313-E19048D9EF79}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{71814A4B-C76F-4D5F-8E65-C31987B06069}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{71814A4B-C76F-4D5F-8E65-C31987B06069}.Debug|x86.ActiveCfg = Debug|x86
+		{71814A4B-C76F-4D5F-8E65-C31987B06069}.Debug|x86.Build.0 = Debug|x86
+		{71814A4B-C76F-4D5F-8E65-C31987B06069}.Release|Any CPU.ActiveCfg = Release|x86
+		{71814A4B-C76F-4D5F-8E65-C31987B06069}.Release|x86.ActiveCfg = Release|x86
+		{71814A4B-C76F-4D5F-8E65-C31987B06069}.Release|x86.Build.0 = Release|x86
+		{FD31AFD6-4BF0-489C-A313-E19048D9EF79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD31AFD6-4BF0-489C-A313-E19048D9EF79}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FD31AFD6-4BF0-489C-A313-E19048D9EF79}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD31AFD6-4BF0-489C-A313-E19048D9EF79}.Release|x86.ActiveCfg = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
