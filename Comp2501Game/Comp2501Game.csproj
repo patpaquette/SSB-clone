@@ -111,6 +111,7 @@
     <Compile Include="GameSystem.cs" />
     <Compile Include="Lib.cs" />
     <Compile Include="ObjectComponent.cs" />
+    <Compile Include="Objects\Components\AnimationDirectory.cs" />
     <Compile Include="Objects\Components\CollisionComponents\AABB.cs" />
     <Compile Include="Objects\Components\CollisionComponents\AABBCollisionComponent.cs" />
     <Compile Include="Objects\Components\ColorComponent.cs" />
@@ -121,6 +122,8 @@
     <Compile Include="Objects\Components\PlayerComponent.cs" />
     <Compile Include="Objects\Components\PositionComponent.cs" />
     <Compile Include="Objects\Components\Score.cs" />
+    <Compile Include="Objects\Components\SpriteComponent.cs" />
+    <Compile Include="Objects\Components\SpriteType.cs" />
     <Compile Include="Objects\TestObject.cs" />
     <Compile Include="Objects\Components\TimerComponent.cs" />
     <Compile Include="Objects\TimeObject.cs" />
@@ -129,6 +132,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Systems\AABBCollisionRenderSystem.cs" />
     <Compile Include="Systems\AABBCollisionSystem.cs" />
+    <Compile Include="Systems\AnimationSystem.cs" />
     <Compile Include="Systems\HealthSystem.cs" />
     <Compile Include="Systems\InputSystem.cs" />
     <Compile Include="Systems\PlayerInputSystem.cs" />

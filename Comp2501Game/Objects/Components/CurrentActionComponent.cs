@@ -8,13 +8,11 @@ namespace Comp2501Game.Objects.Components
 {
     class CurrentActionComponent : ObjectComponent
     {
-        public ArrayList pendingActions;
         public MovementType curAction;
 
         public CurrentActionComponent(MovementType action)
         {
             this.curAction = action;
-            this.pendingActions = new ArrayList();
         }
 
         public override ComponentType GetType()

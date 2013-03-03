@@ -14,7 +14,7 @@ namespace Comp2501Game.Objects.Components
         Timers,
         Score,
         Player,
-        SpriteSheet,
-        Action
+        Action,
+        Sprite,
     }
 }
