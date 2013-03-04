@@ -15,7 +15,8 @@ namespace Comp2501Game.Objects.Components
         public int curColumn;
         public int milisecondsSinceLastFrame;
 
-        public SpriteComponent(SpriteType type)
+        public SpriteComponent(GameObject parent, SpriteType type)
+            : base(parent)
         {
             this.CharacterType = type;
             this.spriteSheets = new Texture2D[4];
