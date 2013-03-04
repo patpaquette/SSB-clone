@@ -333,6 +333,25 @@ namespace Comp2501Game.Systems
                         }
                     }
 
+
+
+                    if (actionComponent.secondaryAction == SecondaryAction.Second_Falling || actionComponent.secondaryAction == SecondaryAction.Falling
+                        || actionComponent.secondaryAction == SecondaryAction.Jump || actionComponent.secondaryAction == SecondaryAction.Second_Jump)
+                    {
+                        if (state.IsKeyDown(Keys.Right))
+                        {
+                            actionComponent.drift = Drift.Right;
+                        }
+                        else if (state.IsKeyDown(Keys.Left))
+                        {
+                            actionComponent.drift = Drift.Left;
+                        }
+                    }
+                    else
+                    {
+                        actionComponent.drift = Drift.None;
+                    }
+
                 }
 
             }

@@ -16,5 +16,6 @@ namespace Comp2501Game.Objects.Components
         Player,
         Action,
         Sprite,
+        Speed
     }
 }
