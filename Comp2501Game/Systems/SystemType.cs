@@ -8,6 +8,7 @@ namespace Comp2501Game.Systems
     public enum SystemType
     {
         StateModifier,
-        Renderer
+        Renderer,
+        Initializer
     }
 }

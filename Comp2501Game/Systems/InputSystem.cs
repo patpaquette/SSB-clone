@@ -31,121 +31,308 @@ namespace Comp2501Game.Systems
 
                 if (playerComponent.PlayerNumber == this.PlayerNumber)
                 {
-                    if (actionComponent.curAction == MovementType.Left_Stand)
+                    if (actionComponent.curDirection == DirectionalAction.Left && actionComponent.secondaryAction == SecondaryAction.Stand && actionComponent.primaryAction == PrimaryAction.None)
                     {
-                        if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.A))
+                        if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.B))
                         {
+                            actionComponent.secondaryAction = SecondaryAction.Stand;
+                            actionComponent.primaryAction = PrimaryAction.Up_B;
                         }
-                        else if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.B))
+                        else if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.A))
                         {
-                        }
-                        else if (state.IsKeyDown(Keys.Up))
-                        {
-                        }
-                        else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.A))
-                        {
+                            actionComponent.secondaryAction = SecondaryAction.Smash;
+                            actionComponent.primaryAction = PrimaryAction.Up_A;
                         }
                         else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.B))
                         {
-                        }
-                        else if (state.IsKeyDown(Keys.Down))
-                        {
-                        }
-                        else if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.A))
-                        {
-                        }
-                        else if (state.IsKeyDown(Keys.Left))
-                        {
-                        }
-                        else if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.A))
-                        {
-                        }
-                        else if (state.IsKeyDown(Keys.Right))
-                        {
-                        }
-                        else if (state.IsKeyDown(Keys.A))
-                        {
-                        }
-                        else if (state.IsKeyDown(Keys.B))
-                        {
-                        }
-                        else if (state.IsKeyDown(Keys.R))
-                        {
-                        }
-                        else
-                        {
-                        }
-
-
-                    }
-                    else if (actionComponent.curAction == MovementType.Right_Stand)
-                    {
-                        if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.A))
-                        {
-                        }
-                        else if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.B))
-                        {
-                        }
-                        else if (state.IsKeyDown(Keys.Up))
-                        {
+                            actionComponent.secondaryAction = SecondaryAction.Stand;
+                            actionComponent.primaryAction = PrimaryAction.Down_B;
                         }
                         else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.A))
                         {
-                        }
-                        else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.B))
-                        {
-                        }
-                        else if (state.IsKeyDown(Keys.Down))
-                        {
+                            actionComponent.secondaryAction = SecondaryAction.Smash;
+                            actionComponent.primaryAction = PrimaryAction.Down_A;
                         }
                         else if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.A))
                         {
-                        }
-                        else if (state.IsKeyDown(Keys.Left))
-                        {
+                            actionComponent.secondaryAction = SecondaryAction.Smash;
+                            actionComponent.primaryAction = PrimaryAction.Forward_A;
                         }
                         else if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.A))
                         {
+                            actionComponent.curDirection = DirectionalAction.Right;
+                            actionComponent.secondaryAction = SecondaryAction.Smash;
+                            actionComponent.primaryAction = PrimaryAction.Forward_A;
                         }
                         else if (state.IsKeyDown(Keys.Right))
                         {
+                            actionComponent.curDirection = DirectionalAction.Right;
+                        }
+                        else if (state.IsKeyDown(Keys.Left))
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Walk;
+                            actionComponent.primaryAction = PrimaryAction.None;
+                        }
+                        else if (state.IsKeyDown(Keys.Up))
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Jump;
+                            actionComponent.primaryAction = PrimaryAction.None;
                         }
                         else if (state.IsKeyDown(Keys.A))
                         {
+                            actionComponent.primaryAction = PrimaryAction.A;
                         }
                         else if (state.IsKeyDown(Keys.B))
                         {
+                            actionComponent.primaryAction = PrimaryAction.B;
                         }
                         else if (state.IsKeyDown(Keys.R))
                         {
+                            actionComponent.primaryAction = PrimaryAction.Grab;
+                        }
+                        else if (state.IsKeyDown(Keys.Z))
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Shield; 
+                        }
+                    }
+                    else if (actionComponent.curDirection == DirectionalAction.Right && actionComponent.secondaryAction == SecondaryAction.Stand && actionComponent.primaryAction == PrimaryAction.None)
+                    {
+
+                        if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.B))
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Stand;
+                            actionComponent.primaryAction = PrimaryAction.Up_B;
+                        }
+                        else if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.A))
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Smash;
+                            actionComponent.primaryAction = PrimaryAction.Up_A;
+                        }
+                        else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.B))
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Stand;
+                            actionComponent.primaryAction = PrimaryAction.Down_B;
+                        }
+                        else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.A))
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Smash;
+                            actionComponent.primaryAction = PrimaryAction.Down_A;
+                        }
+                        else if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.A))
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Smash;
+                            actionComponent.primaryAction = PrimaryAction.Forward_A;
+                        }
+                        else if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.A))
+                        {
+                            actionComponent.curDirection = DirectionalAction.Left;
+                            actionComponent.secondaryAction = SecondaryAction.Smash;
+                            actionComponent.primaryAction = PrimaryAction.Forward_A;
+                        }
+                        else if (state.IsKeyDown(Keys.Left))
+                        {
+                            actionComponent.curDirection = DirectionalAction.Right;
+                        }
+                        else if (state.IsKeyDown(Keys.Right))
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Walk;
+                            actionComponent.primaryAction = PrimaryAction.None;
+                        }
+                        else if (state.IsKeyDown(Keys.Up))
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Jump;
+                            actionComponent.primaryAction = PrimaryAction.None;
+                        }
+                        else if (state.IsKeyDown(Keys.A))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.A;
+                        }
+                        else if (state.IsKeyDown(Keys.B))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.B;
+                        }
+                        else if (state.IsKeyDown(Keys.R))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Grab;
+                        }
+                        else if (state.IsKeyDown(Keys.Z))
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Shield;
+                        }
+                    }
+                    else if (actionComponent.curDirection == DirectionalAction.Right && actionComponent.secondaryAction == SecondaryAction.Walk && actionComponent.primaryAction == PrimaryAction.None)
+                    {
+                        if (state.IsKeyDown(Keys.Right))
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Walk;
+                        }
+                        else if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.A))
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Walk;
+                            actionComponent.primaryAction = PrimaryAction.Forward_A;
+                        }
+                        else if (state.IsKeyDown(Keys.Z))
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Shield;
                         }
                         else
                         {
+                            actionComponent.secondaryAction = SecondaryAction.Stand;
                         }
-
                     }
-                    else if (actionComponent.curAction == MovementType.Left_Jump || actionComponent.curAction == MovementType.Left_Fall ||
-                        actionComponent.curAction == MovementType.Left_Fall_Fast)
+                    else if (actionComponent.curDirection == DirectionalAction.Left && actionComponent.secondaryAction == SecondaryAction.Walk && actionComponent.primaryAction == PrimaryAction.None)
                     {
-
-                    }
-                    else if (actionComponent.curAction == MovementType.Right_Jump || actionComponent.curAction == MovementType.Right_Fall ||
-                        actionComponent.curAction == MovementType.Right_Fall_Fast)
-                    {
-
-                    }
-                    else if (actionComponent.curAction == MovementType.Left_Walk)
-                    {
-                        if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.A))
+                        if (state.IsKeyDown(Keys.Left))
                         {
+                            actionComponent.secondaryAction = SecondaryAction.Walk;
                         }
-                    }
-                    else if (actionComponent.curAction == MovementType.Right_Walk)
-                    {
-                        if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.A))
+                        else if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.A))
                         {
+                            actionComponent.secondaryAction = SecondaryAction.Walk;
+                            actionComponent.primaryAction = PrimaryAction.Forward_A;
+                        }
+                        else if (state.IsKeyDown(Keys.Z))
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Shield;
+                        }
+                        else
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Stand;
                         }
                     }
+                    else if (actionComponent.secondaryAction == SecondaryAction.Shield && actionComponent.primaryAction == PrimaryAction.None)
+                    {
+                        if (state.IsKeyDown(Keys.Z))
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Shield;
+                        }
+                        else if (state.IsKeyDown(Keys.Right))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Roll_Right;
+                        }
+                        else if (state.IsKeyDown(Keys.Left))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Roll_Left;
+                        }
+                        else if (state.IsKeyDown(Keys.Up))
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Jump;
+                        }
+                        else if (state.IsKeyDown(Keys.A))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Grab;
+                            actionComponent.secondaryAction = SecondaryAction.Stand;
+                        }
+                        else
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Stand;
+                        }
+                    }
+                    else if (actionComponent.curDirection == DirectionalAction.Left && (actionComponent.secondaryAction == SecondaryAction.Falling || actionComponent.secondaryAction == SecondaryAction.Second_Falling)
+                        && (actionComponent.primaryAction == PrimaryAction.None || actionComponent.primaryAction == PrimaryAction.Fall_Faster))
+                    {
+                        if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.A))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Up_A;
+                        }
+                        else if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.B))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Up_B;
+                        }
+                        else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.A))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Down_A;
+                        }
+                        else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.B))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Down_B;
+                        }
+                        else if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.A))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Forward_A;
+                        }
+                        else if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.A))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Backward_A;
+                        }
+                        else if (state.IsKeyDown(Keys.A))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.A;
+                        }
+                        else if (state.IsKeyDown(Keys.Up) && actionComponent.secondaryAction != SecondaryAction.Second_Falling)
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Second_Jump;
+                        }
+                        else if (state.IsKeyDown(Keys.Right))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Drift_Right;
+                        }
+                        else if (state.IsKeyDown(Keys.Left))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Drift_Left;
+                        }
+                        else if (state.IsKeyDown(Keys.Down))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Fall_Faster;
+                        }
+                        else
+                        {
+                            actionComponent.primaryAction = PrimaryAction.None;
+                        }
+                    }
+                    else if (actionComponent.curDirection == DirectionalAction.Right && (actionComponent.secondaryAction == SecondaryAction.Falling || actionComponent.secondaryAction == SecondaryAction.Second_Falling)
+                       && (actionComponent.primaryAction == PrimaryAction.None || actionComponent.primaryAction == PrimaryAction.Fall_Faster))
+                    {
+                        if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.A))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Up_A;
+                        }
+                        else if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.B))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Up_B;
+                        }
+                        else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.A))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Down_A;
+                        }
+                        else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.B))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Down_B;
+                        }
+                        else if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.A))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Forward_A;
+                        }
+                        else if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.A))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Backward_A;
+                        }
+                        else if (state.IsKeyDown(Keys.A))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.A;
+                        }
+                        else if (state.IsKeyDown(Keys.Up) && actionComponent.secondaryAction != SecondaryAction.Second_Falling)
+                        {
+                            actionComponent.secondaryAction = SecondaryAction.Second_Jump;
+                        }
+                        else if (state.IsKeyDown(Keys.Right))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Drift_Right;
+                        }
+                        else if (state.IsKeyDown(Keys.Left))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Drift_Left;
+                        }
+                        else if (state.IsKeyDown(Keys.Down))
+                        {
+                            actionComponent.primaryAction = PrimaryAction.Fall_Faster;
+                        }
+                        else
+                        {
+                            actionComponent.primaryAction = PrimaryAction.None;
+                        }
+                    }
+
                 }
 
             }

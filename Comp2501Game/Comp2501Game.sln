@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comp2501Game", "Comp2501Game.csproj", "{71814A4B-C76F-4D5F-8E65-C31987B06069}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Comp2501GameContent", "..\Comp2501GameContent\Comp2501GameContent.contentproj", "{FD31AFD6-4BF0-489C-A313-E19048D9EF79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comp2501GameContent", "..\Comp2501GameContent\Comp2501GameContent.contentproj", "{D3CB4352-B506-48E0-964E-6271D297C961}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,10 @@ Global
 		{71814A4B-C76F-4D5F-8E65-C31987B06069}.Release|Any CPU.ActiveCfg = Release|x86
 		{71814A4B-C76F-4D5F-8E65-C31987B06069}.Release|x86.ActiveCfg = Release|x86
 		{71814A4B-C76F-4D5F-8E65-C31987B06069}.Release|x86.Build.0 = Release|x86
-		{FD31AFD6-4BF0-489C-A313-E19048D9EF79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FD31AFD6-4BF0-489C-A313-E19048D9EF79}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{FD31AFD6-4BF0-489C-A313-E19048D9EF79}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{FD31AFD6-4BF0-489C-A313-E19048D9EF79}.Release|x86.ActiveCfg = Debug|Any CPU
+		{D3CB4352-B506-48E0-964E-6271D297C961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3CB4352-B506-48E0-964E-6271D297C961}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D3CB4352-B506-48E0-964E-6271D297C961}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3CB4352-B506-48E0-964E-6271D297C961}.Release|x86.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
