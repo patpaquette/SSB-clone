@@ -11,11 +11,11 @@ namespace Comp2501Game.Objects.Components
         public int numColumns;
         public int attackTimer;
 
-        public AnimationDirectory(int row, int col, int attk)
+        public AnimationDirectory(int rowNum, int numCol, int attkTime)
         {
-            rowNumber = row;
-            numColumns = col;
-            attackTimer = attk;
+            rowNumber = rowNum;
+            numColumns = numCol;
+            attackTimer = attkTime;
         }
     }
 }

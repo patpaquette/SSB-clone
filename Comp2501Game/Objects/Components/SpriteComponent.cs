@@ -10,14 +10,17 @@ namespace Comp2501Game.Objects.Components
     class SpriteComponent : ObjectComponent 
     {
         public Texture2D[] spriteSheets;
-        public Dictionary<MovementType, AnimationDirectory> animationFrameWork;
+        public Dictionary<CurrentActionComponent, AnimationDirectory> animationFrameWork;
         public SpriteType CharacterType;
+        public int curColumn;
+        public int milisecondsSinceLastFrame;
 
-        public SpriteComponent(Texture2D[] sheets, Dictionary<MovementType, AnimationDirectory> info, SpriteType type)
+        public SpriteComponent(SpriteType type)
         {
-            spriteSheets = sheets;
-            animationFrameWork = info;
-            CharacterType = type;
+            this.CharacterType = type;
+            this.spriteSheets = new Texture2D[4];
+            this.animationFrameWork = new Dictionary<CurrentActionComponent, AnimationDirectory>();
+            this.curColumn = 0;
         }
 
         public override ComponentType GetType()

@@ -8,11 +8,15 @@ namespace Comp2501Game.Objects.Components
 {
     class CurrentActionComponent : ObjectComponent
     {
-        public MovementType curAction;
+        public DirectionalAction curDirection;
+        public SecondaryAction secondaryAction;
+        public PrimaryAction primaryAction;
 
-        public CurrentActionComponent(MovementType action)
+        public CurrentActionComponent(DirectionalAction direction, SecondaryAction SecondaryAct, PrimaryAction primaryAct)
         {
-            this.curAction = action;
+            this.curDirection = direction;
+            this.secondaryAction = SecondaryAct;
+            this.primaryAction = primaryAct;
         }
 
         public override ComponentType GetType()
