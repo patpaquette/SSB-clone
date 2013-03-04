@@ -10,7 +10,8 @@ namespace Comp2501Game.Objects.Components
         public int deaths;
         public int kills;
 
-        public Score()
+        public Score(GameObject parent)
+            : base(parent)
         {
             this.deaths = 0;
             this.kills = 0;

@@ -9,7 +9,8 @@ namespace Comp2501Game.Objects.Components
     {
         public int PlayerNumber;
 
-        public PlayerComponent(int playerNumber)
+        public PlayerComponent(GameObject parent, int playerNumber)
+            : base(parent)
         {
             this.PlayerNumber = playerNumber;
         }

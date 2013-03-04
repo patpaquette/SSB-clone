@@ -108,7 +108,7 @@ namespace Comp2501Game.Systems
         {
            // this._topRightCorner = new Vector2(this.Game.Window.ClientBounds.Width - 50, this.Game.Window.ClientBounds.Height - 50);
             this._topRightCorner = new Vector2(20, 20);
-            this._myTime = new TimerComponent();
+            //this._myTime = new TimerComponent();
 
             base.Initialize();
         }

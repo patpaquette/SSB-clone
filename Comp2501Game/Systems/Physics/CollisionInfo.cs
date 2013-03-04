@@ -9,17 +9,19 @@ namespace Comp2501Game.Objects.Components.CollisionComponents
 {
     class CollisionInfo
     {
+        public GameObject Entity1;
+        public GameObject Entity2;
         public float Depth;
         public Vector2 Normal;
-        public Vertex Vertex;
-        public Edge Edge;
+        //public Vector2 Vector2;
+        //public Edge Edge;
 
-        public CollisionInfo(float depth, Vector2 normal, Vertex vertex, Edge edge)
+        public CollisionInfo(GameObject entity1, GameObject entity2, float depth, Vector2 normal)//, Vector2 Vector2, Edge edge)
         {
+            this.Entity1 = entity1;
+            this.Entity2 = entity2;
             this.Depth = depth;
             this.Normal = normal;
-            this.Vertex = vertex;
-            this.Edge = edge;
         }
     }
 }

@@ -8,6 +8,13 @@ namespace Comp2501Game
 {
     public abstract class ObjectComponent
     {
+        public GameObject ParentEntity;
+
+        public ObjectComponent(GameObject parent)
+        {
+            this.ParentEntity = parent;
+        }
+
         public abstract ComponentType GetType();
     }
 }

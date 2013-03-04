@@ -11,7 +11,8 @@ namespace Comp2501Game.Objects.Components
         public ArrayList pendingActions;
         public MovementType curAction;
 
-        public CurrentActionComponent(MovementType action)
+        public CurrentActionComponent(GameObject parent, MovementType action)
+            : base(parent)
         {
             this.curAction = action;
             this.pendingActions = new ArrayList();

@@ -2,6 +2,7 @@ using Comp2501Game.Systems;
 using System;
 using Comp2501Game.Objects;
 using Microsoft.Xna.Framework;
+using Comp2501Game.Systems.Collisions;
 
 namespace Comp2501Game
 {
@@ -17,9 +18,11 @@ namespace Comp2501Game
             {
 
                 //game.RegisterSystem(new TestRenderSystem(game));
-                game.RegisterSystem(new AABBCollisionRenderSystem(game));
+                //game.RegisterSystem(new AABBCollisionRenderSystem(game));
                 game.RegisterSystem(new PlayerInputSystem(game, 1));
-                game.RegisterSystem(new AABBCollisionSystem(game));
+                //game.RegisterSystem(new AABBCollisionSystem(game));
+                game.RegisterSystem(new SATCollisionSystem(game));
+                game.RegisterSystem(new CollisionRenderSystem(game));
                 game.RegisterSystem(new TimerSystem(game));
                 game.RegisterSystem(new TimerRenderSystem(game));
                 game.AddObject(

@@ -8,7 +8,7 @@ namespace Comp2501Game.Systems.Collisions
 {
     abstract class CollisionSystem : GameSystem
     {
-        protected List<CollisionInfo> _collisions;
+        private List<CollisionInfo> _collisions;
 
         public CollisionSystem(Game1 game)
             : base(game)

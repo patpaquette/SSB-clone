@@ -16,7 +16,8 @@ namespace Comp2501Game.Objects.Components
         public Boolean isComplete;
 
         //constructor
-        public TimerComponent()
+        public TimerComponent(GameObject parent)
+            : base(parent)
         {
             this.startCount = -97;
             this.endCount = -97;

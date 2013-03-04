@@ -10,7 +10,8 @@ namespace Comp2501Game.Objects.Components
     {
         public Color Color;
 
-        public ColorComponent(Color color)
+        public ColorComponent(GameObject parent, Color color)
+            : base(parent)
         {
             this.Color = color;
         }

@@ -43,9 +43,9 @@ namespace Comp2501Game.Libs.Geometry
             PointParametric min = new PointParametric(line, 999999);
             PointParametric tempPoint;
 
-            foreach (Vector2 Vector2 in vertices)
+            foreach (Vector2 vertex in vertices)
             {
-                tempPoint = line.GetProjectionPoint(Vector2);
+                tempPoint = line.GetProjectionPoint(vertex);
                 if (tempPoint.T > max.T)
                 {
                     max = tempPoint;
@@ -61,10 +61,10 @@ namespace Comp2501Game.Libs.Geometry
 
         public static float GetProjection(
             Vector2 axis,
-            Vector2 vertex
+            Vertex vertex
             )
         {
-            float dotProduct = Vector2.Dot(axis, vertex);
+            float dotProduct = Vector2.Dot(axis, vertex.ToVector2());
             return dotProduct;
         }
 
@@ -111,28 +111,6 @@ namespace Comp2501Game.Libs.Geometry
             else
             {
                 return new SegmentVec2(Vector2.Zero, Vector2.Zero);
-            }
-        }
-
-        public static void ProjectShapeToAxis(Vector2 axis, Shape shape, ref float min, ref float max)
-        {
-            List<Vector2> vertices = shape.GetVertices();
-            float proj = LinearFunctions.GetProjection(axis, vertices[0]);
-
-            min = max = proj;
-
-            for (int i = 1; i < vertices.Count; i++)
-            {
-                proj = LinearFunctions.GetProjection(axis, vertices[i]);
-
-                if (proj < min)
-                {
-                    min = proj;
-                }
-                else if (proj > max)
-                {
-                    max = proj;
-                }
             }
         }
     }

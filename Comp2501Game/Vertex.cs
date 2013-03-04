@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Comp2501Game.Libs.Geometry
 {
-    public class Vertex
+    class Vertex
     {
         public float X;
         public float Y;

@@ -13,8 +13,8 @@ namespace Comp2501Game.Objects.Components
         public bool Collided;
         public SegmentVec2 ProjectionSegment;
 
-        public AABBCollisionComponent(bool active)
-            : base()
+        public AABBCollisionComponent(GameObject parent, bool active)
+            : base(parent)
         {
             this.CollisionBoxes = new List<AABB>();
             this.Active = active;
@@ -22,7 +22,8 @@ namespace Comp2501Game.Objects.Components
             this.ProjectionSegment = new SegmentVec2(Vector2.Zero, Vector2.Zero);
         }
 
-        public AABBCollisionComponent(bool active, List<AABB> collisionBoxes)
+        public AABBCollisionComponent(GameObject parent, bool active, List<AABB> collisionBoxes)
+            : base(parent)
         {
             this.CollisionBoxes = collisionBoxes;
             this.Active = active;

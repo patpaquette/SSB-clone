@@ -12,7 +12,8 @@ namespace Comp2501Game.Objects.Components.Health_Components
         public float currentDmg;  
 
         //constructor sets damage taken to 0
-        public HealthComponent()
+        public HealthComponent(GameObject parent)
+            : base(parent)
         {
             this.currentDmg = 0.0f;
         }

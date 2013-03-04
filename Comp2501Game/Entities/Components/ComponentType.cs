@@ -15,6 +15,7 @@ namespace Comp2501Game.Objects.Components
         Score,
         Player,
         SpriteSheet,
-        Action
+        Action,
+        BoundingBox
     }
 }

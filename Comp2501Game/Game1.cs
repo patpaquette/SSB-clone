@@ -26,7 +26,7 @@ namespace Comp2501Game
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Comp2501GameContent";
+            Content.RootDirectory = "Content";
             this._systems = new List<GameSystem>();
             this._objects = new List<GameObject>();
         }

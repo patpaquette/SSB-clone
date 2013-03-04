@@ -18,7 +18,7 @@ namespace Comp2501Game.Systems
         public TimerRenderSystem(Game1 game)
             : base(game)
         {
-            this.Game.Content.RootDirectory = "Comp2501GameContent";
+            //this.Game.Content.RootDirectory = "Comp2501GameContent";
             this._componentDependencies.Add(ComponentType.Position);
             this._componentDependencies.Add(ComponentType.Timers);
             this._componentDependencies.Add(ComponentType.Color);

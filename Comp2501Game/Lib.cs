@@ -44,9 +44,9 @@ namespace Comp2501Game
             PointParametric min = new PointParametric(line, 999999);
             PointParametric tempPoint;
 
-            foreach (Vector2 vertex in vertices)
+            foreach (Vector2 Vector2 in vertices)
             {
-                tempPoint = line.GetProjectionPoint(vertex);
+                tempPoint = line.GetProjectionPoint(Vector2);
                 if (tempPoint.T > max.T)
                 {
                     max = tempPoint;

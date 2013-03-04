@@ -13,11 +13,11 @@ using Microsoft.Xna.Framework;
         //cunstructor
         public TimeObject(Game1 game, Vector2 posit, Color col) : base (game)
         {
-            this.AddComponent(new PositionComponent(posit));
+            this.AddComponent(new PositionComponent(this, posit));
 
-            this.AddComponent(new ColorComponent(col));
+            this.AddComponent(new ColorComponent(this, col));
 
-            this.AddComponent(new TimerComponent());
+            this.AddComponent(new TimerComponent(this));
         }
     }
 }

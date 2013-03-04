@@ -18,7 +18,7 @@ namespace Comp2501Game
             : base(game)
         {
             this._game = game;
-            this._game.RegisterSystem(this);
+            //this._game.RegisterSystem(this);
             this._componentDependencies = new List<ComponentType>();
             this._objects = new List<GameObject>();
         }
