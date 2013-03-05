@@ -116,6 +116,7 @@
     <Compile Include="Libs\Geometry\Shape.cs" />
     <Compile Include="Libs\Geometry\Types.cs" />
     <Compile Include="ObjectComponent.cs" />
+    <Compile Include="Objects\Components\Holder\AnimationDirectory.cs" />
     <Compile Include="Objects\Components\CollisionComponents\AABB.cs" />
     <Compile Include="Objects\Components\CollisionComponents\AABBCollisionComponent.cs" />
     <Compile Include="Objects\Components\CollisionComponents\BoundingBoxComponent.cs" />
@@ -123,9 +124,14 @@
     <Compile Include="Objects\Components\CurrentActionComponent.cs" />
     <Compile Include="Objects\Components\Health Components\Health.cs" />
     <Compile Include="Objects\Components\Holder\AnimationDirectory.cs" />
+    <Compile Include="Objects\Components\SpeedComponent.cs" />
+    <Compile Include="Objects\Components\Types\ComponentType.cs" />
+    <Compile Include="Objects\Components\CurrentActionComponent.cs" />
+    <Compile Include="Objects\Components\Not Yet Implemented\Health Components\Health.cs" />
+    <Compile Include="Objects\Components\Types\MovementType.cs" />
     <Compile Include="Objects\Components\PlayerComponent.cs" />
     <Compile Include="Objects\Components\PositionComponent.cs" />
-    <Compile Include="Objects\Components\Score.cs" />
+    <Compile Include="Objects\Components\Not Yet Implemented\Score.cs" />
     <Compile Include="Objects\Components\SpriteComponent.cs" />
     <Compile Include="Objects\Components\Types\ComponentType.cs" />
     <Compile Include="Objects\Components\Types\MovementType.cs" />
@@ -150,6 +156,18 @@
     <Compile Include="Systems\TestRenderSystem.cs" />
     <Compile Include="Systems\TimerRenderSystem.cs" />
     <Compile Include="Systems\TimerSystem.cs" />
+    <Compile Include="Systems\Renderer\AABBCollisionRenderSystem.cs" />
+    <Compile Include="Systems\StateMod\AABBCollisionSystem.cs" />
+    <Compile Include="Systems\StateMod\AnimationSystem.cs" />
+    <Compile Include="Systems\StateMod\HealthSystem.cs" />
+    <Compile Include="Systems\StateMod\InputSystem.cs" />
+    <Compile Include="Systems\StateMod\MovementSystem.cs" />
+    <Compile Include="Systems\StateMod\PlayerInputSystem.cs" />
+    <Compile Include="Systems\Initializer\SpriteInitializationSystem.cs" />
+    <Compile Include="Systems\Types\SystemType.cs" />
+    <Compile Include="Systems\Renderer\TestRenderSystem.cs" />
+    <Compile Include="Systems\Renderer\TimerRenderSystem.cs" />
+    <Compile Include="Systems\StateMod\TimerSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

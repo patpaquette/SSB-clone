@@ -65,4 +65,11 @@ namespace Comp2501Game.Objects.Components
         Left,
         Right
     }
+
+    public enum Drift
+    {
+        Left,
+        Right,
+        None
+    }
 }
