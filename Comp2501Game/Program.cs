@@ -3,6 +3,8 @@ using System;
 using Comp2501Game.Objects;
 using Microsoft.Xna.Framework;
 using Comp2501Game.Systems.Collisions;
+using Comp2501Game.Systems.Renderer;
+using Comp2501Game.EntityFactory;
 
 namespace Comp2501Game
 {
@@ -16,6 +18,8 @@ namespace Comp2501Game
         {
             using (Game1 game = new Game1())
             {
+                EnvironmentFactory envFactory = new EnvironmentFactory(game);
+                Rectangle clientBounds = game.Window.ClientBounds;
 
                 //game.RegisterSystem(new TestRenderSystem(game));
                 //game.RegisterSystem(new AABBCollisionRenderSystem(game));
@@ -25,6 +29,7 @@ namespace Comp2501Game
                 game.RegisterSystem(new CollisionRenderSystem(game));
                 game.RegisterSystem(new TimerSystem(game));
                 game.RegisterSystem(new TimerRenderSystem(game));
+                game.RegisterSystem(new LinebatchMeshRenderSystem(game));
                 game.AddObject(
                     new TestObject(
                         game, 
@@ -43,6 +48,10 @@ namespace Comp2501Game
                         new Color(0.0f, 0.0f, 1.0f, 0.2f),
                         2,
                         false));
+                game.AddObject(envFactory.BuildStaticRectangularObstacle(
+                    new Vector2(clientBounds.Width / 2, 450),
+                    new Rectangle(-clientBounds.Width / 2, -10, clientBounds.Width, 20),
+                    Color.Red));
                 game.AddObject(new TimeObject(game, new Vector2 (0, 0), Color.Black));
 
                 game.Run();

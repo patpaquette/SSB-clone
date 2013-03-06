@@ -28,15 +28,15 @@ namespace Comp2501Game.Objects.Components.CollisionComponents
 
         public Shape GetTransformedShape()
         {
-            PositionComponent posComponent = (PositionComponent)ParentEntity.GetComponent(ComponentType.Position);
+            Transform2DComponent transformComponent = (Transform2DComponent)ParentEntity.GetComponent(ComponentType.Transform2D);
 
-            if (posComponent != null)
+            if (transformComponent != null)
             {
                 List<Vector2> transformedVertices = new List<Vector2>();
 
                 foreach (Vector2 v in this._shape.GetVertices())
                 {
-                    transformedVertices.Add(new Vector2(v.X + posComponent.Position.X, v.Y + posComponent.Position.Y));
+                    transformedVertices.Add(new Vector2(v.X + transformComponent.GetTranslation().X, v.Y + transformComponent.GetTranslation().Y));
                 }
 
                 return new Shape(transformedVertices);

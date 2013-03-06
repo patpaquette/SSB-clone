@@ -15,7 +15,7 @@ namespace Comp2501Game.Systems
         public PlayerInputSystem(Game1 game, int playerNumber)
             : base(game)
         {
-            this._componentDependencies.Add(ComponentType.Position);
+            this._componentDependencies.Add(ComponentType.Transform2D);
             this._componentDependencies.Add(ComponentType.Player);
             this.PlayerNumber = playerNumber;
         }
@@ -27,30 +27,30 @@ namespace Comp2501Game.Systems
             foreach (GameObject obj in this._objects)
             {
                 PlayerComponent playerComponent = (PlayerComponent)obj.GetComponent(ComponentType.Player);
-                PositionComponent positionComponent = (PositionComponent)obj.GetComponent(ComponentType.Position);
+                Transform2DComponent transform2DComponent = (Transform2DComponent)obj.GetComponent(ComponentType.Transform2D);
                 float positionStep = 1.0f;
 
                 if (playerComponent.PlayerNumber == this.PlayerNumber)
                 {
                     if (state.IsKeyDown(Keys.Up))
                     {
-                        positionComponent.Position -= new Vector2(0.0f, positionStep);
+                        transform2DComponent.AddTranslation(new Vector2(0.0f, -positionStep));
                     }
                     else if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.Right))
                     {
-                        positionComponent.Position -= new Vector2(-positionStep, positionStep);
+                        transform2DComponent.AddTranslation(new Vector2(-positionStep, -positionStep));
                     }
                     else if (state.IsKeyDown(Keys.Down))
                     {
-                        positionComponent.Position += new Vector2(0.0f, positionStep);
+                        transform2DComponent.AddTranslation(new Vector2(0.0f, positionStep));
                     }
                     else if (state.IsKeyDown(Keys.Left))
                     {
-                        positionComponent.Position -= new Vector2(positionStep, 0.0f);
+                        transform2DComponent.AddTranslation(new Vector2(-positionStep, 0.0f));
                     }
                     else if (state.IsKeyDown(Keys.Right))
                     {
-                        positionComponent.Position += new Vector2(positionStep, 0.0f);
+                        transform2DComponent.AddTranslation(new Vector2(positionStep, 0.0f));
                     }
                     if (state.IsKeyDown(Keys.Escape))
                     {

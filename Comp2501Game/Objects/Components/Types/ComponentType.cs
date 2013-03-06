@@ -16,10 +16,9 @@ namespace Comp2501Game.Objects.Components
         Player,
         Action,
         Sprite,
-<<<<<<< HEAD
-        BoundingBox
-=======
-        Speed
->>>>>>> 5885c8e08afd6fb1b053c2df896a95123bd826fd
+        BoundingBox,
+        Speed,
+        Transform2D,
+        Mesh
     }
 }

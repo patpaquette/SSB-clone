@@ -6,19 +6,19 @@ using Microsoft.Xna.Framework;
 
 namespace Comp2501Game.Objects.Components
 {
-    class SpeedComponent : ObjectComponent 
+    class MeshComponent : ObjectComponent
     {
-        public Vector2 characterSpeed;
+        public List<Vector2> Vertices;
 
-        public SpeedComponent(GameObject parent, Vector2 speed)
+        public MeshComponent(GameObject parent, List<Vector2> vertices)
             : base(parent)
         {
-            this.characterSpeed = speed;
+            this.Vertices = vertices;
         }
 
         public override ComponentType GetType()
         {
-            return ComponentType.Speed;
+            return ComponentType.Mesh;
         }
     }
 }

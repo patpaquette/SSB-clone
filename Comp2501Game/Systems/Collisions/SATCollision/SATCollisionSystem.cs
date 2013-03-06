@@ -14,7 +14,7 @@ namespace Comp2501Game.Systems.Collisions
         public SATCollisionSystem(Game1 game)
             : base(game)
         {
-            this._componentDependencies.Add(Objects.Components.ComponentType.Position);
+            this._componentDependencies.Add(Objects.Components.ComponentType.Transform2D);
             this._componentDependencies.Add(Objects.Components.ComponentType.BoundingBox);
         }
 
@@ -53,9 +53,9 @@ namespace Comp2501Game.Systems.Collisions
 
         private CollisionInfo checkCollision(GameObject obj1, GameObject obj2)
         {
-            PositionComponent obj1Position = (PositionComponent)obj1.GetComponent(ComponentType.Position);
+            Transform2DComponent obj1Transform = (Transform2DComponent)obj1.GetComponent(ComponentType.Transform2D);
             BoundingBoxComponent obj1BoundingBox = (BoundingBoxComponent)obj1.GetComponent(ComponentType.BoundingBox);
-            PositionComponent obj2Position = (PositionComponent)obj2.GetComponent(ComponentType.Position);
+            Transform2DComponent obj2Transform = (Transform2DComponent)obj2.GetComponent(ComponentType.Transform2D);
             BoundingBoxComponent obj2BoundingBox = (BoundingBoxComponent)obj2.GetComponent(ComponentType.BoundingBox);
             List<Edge> edges = obj1BoundingBox.GetShape().GetEdges();
             edges.AddRange(obj2BoundingBox.GetShape().GetEdges());
@@ -110,7 +110,7 @@ namespace Comp2501Game.Systems.Collisions
             }
 
             //collision
-            Vector2 obj2obj1_vector = obj2Position.Position - obj1Position.Position;
+            Vector2 obj2obj1_vector = obj2Transform.GetTranslation() - obj1Transform.GetTranslation();
             obj2obj1_vector.Normalize();
             normal.Normalize();
 
@@ -119,7 +119,7 @@ namespace Comp2501Game.Systems.Collisions
                 normal = normal * -1;
             }
 
-            obj1Position.Position = obj1Position.Position + normal * depth;
+            obj1Transform.SetTranslation(obj1Transform.GetTranslation() + normal * depth);
 
             obj1BoundingBox.Collided = true;
             obj2BoundingBox.Collided = true;

@@ -6,6 +6,7 @@ using Comp2501Game.Objects.Components;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Comp2501Game.Objects.Components.CollisionComponents;
+using Comp2501Game.Libs.Geometry;
 
 namespace Comp2501Game.Systems
 {
@@ -21,7 +22,7 @@ namespace Comp2501Game.Systems
         public CollisionRenderSystem(Game1 game)
             : base(game)
         {
-            this._componentDependencies.Add(ComponentType.Position);
+            this._componentDependencies.Add(ComponentType.Transform2D);
             this._componentDependencies.Add(ComponentType.BoundingBox);
             this._componentDependencies.Add(ComponentType.Color);
         }
@@ -55,7 +56,7 @@ namespace Comp2501Game.Systems
 
             foreach (GameObject obj in this._objects)
             {
-                PositionComponent posComponent = (PositionComponent)obj.GetComponent(ComponentType.Position);
+                Transform2DComponent transformComponent = (Transform2DComponent)obj.GetComponent(ComponentType.Transform2D);
                 BoundingBoxComponent colComponent = (BoundingBoxComponent)obj.GetComponent(ComponentType.BoundingBox);
                 ColorComponent colorComponent = (ColorComponent)obj.GetComponent(ComponentType.Color);
                 Boolean aCollisionObj = true;
@@ -75,10 +76,23 @@ namespace Comp2501Game.Systems
                         col = Color.Green;
                     }
 
-                    Libs.Drawing.DrawShape(
-                        colComponent.GetShape(),
-                        Matrix.CreateTranslation(new Vector3(posComponent.Position.X, posComponent.Position.Y, 1)),
-                        col,
+                    List<Vector2> transformedVertices = LinearFunctions.GetTransformedVertices(
+                        colComponent.GetShape().GetVertices(),
+                        transformComponent.GetTranslation());
+                    Vector2 vertexBuffer = transformedVertices[0];
+
+                    for (int i = 1; i < transformedVertices.Count; i++)
+                    {
+                        Libs.Drawing.DrawLine(
+                            vertexBuffer, transformedVertices[i], colorComponent.Color, this._spriteBatch);
+
+                        vertexBuffer = transformedVertices[i];
+                    }
+
+                    Libs.Drawing.DrawLine(
+                        transformedVertices[0],
+                        transformedVertices[transformedVertices.Count - 1],
+                        colorComponent.Color,
                         this._spriteBatch);
                 }
             }

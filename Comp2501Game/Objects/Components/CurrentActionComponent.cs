@@ -13,12 +13,8 @@ namespace Comp2501Game.Objects.Components
         public PrimaryAction primaryAction;
         public Drift drift;
 
-<<<<<<< HEAD
-        public CurrentActionComponent(GameObject parent, DirectionalAction direction, SecondaryAction SecondaryAct, PrimaryAction primaryAct)
+        public CurrentActionComponent(GameObject parent, DirectionalAction direction, SecondaryAction SecondaryAct, PrimaryAction primaryAct, Drift drifting = Drift.None)
             : base(parent)
-=======
-        public CurrentActionComponent(DirectionalAction direction, SecondaryAction SecondaryAct, PrimaryAction primaryAct, Drift drifting = Drift.None)
->>>>>>> 5885c8e08afd6fb1b053c2df896a95123bd826fd
         {
             this.curDirection = direction;
             this.secondaryAction = SecondaryAct;

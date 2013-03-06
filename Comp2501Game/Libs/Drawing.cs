@@ -26,5 +26,10 @@ namespace Comp2501Game.Libs
                     transformedV2);
             }
         }
+
+        public static void DrawLine(Vector2 p1, Vector2 p2, Color color, SpriteBatch spriteBatch)
+        {
+            LineBatch.DrawLine(spriteBatch, color, p1, p2);
+        }
     }
 }

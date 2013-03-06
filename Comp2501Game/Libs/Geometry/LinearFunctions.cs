@@ -135,5 +135,17 @@ namespace Comp2501Game.Libs.Geometry
                 }
             }
         }
+
+        public static List<Vector2> GetTransformedVertices(List<Vector2> vertices, Vector2 translation)
+        {
+            List<Vector2> transformedVertices = new List<Vector2>();
+
+            foreach (Vector2 v in vertices)
+            {
+                transformedVertices.Add(v + translation);
+            }
+
+            return transformedVertices;
+        }
     }
 }

@@ -22,7 +22,11 @@ namespace Comp2501Game.Objects
             bool active)
             : base(game)
         {
-            PositionComponent posComponent = new PositionComponent(this, position);
+            Transform2DComponent transformComponent = new Transform2DComponent(
+                this, 
+                position, 
+                0.0f, 
+                new Vector2(1.0f));
             List<AABB> collisionBoxes = new List<AABB>();
             Vector2 v1 = new Vector2(-10, 10);
             Vector2 v2 = new Vector2(10, 10);
@@ -34,7 +38,7 @@ namespace Comp2501Game.Objects
             vertices.Add(v3);
             vertices.Add(v4);
 
-            this.AddComponent(posComponent);
+            this.AddComponent(transformComponent);
             this.AddComponent(new BoundingBoxComponent(this, new Shape(vertices), active));
                 
             this.AddComponent(new ColorComponent(this, color));
