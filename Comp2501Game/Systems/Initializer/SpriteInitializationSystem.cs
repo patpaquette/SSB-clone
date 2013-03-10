@@ -4,18 +4,21 @@ using System.Linq;
 using System.Text;
 using Comp2501Game.Objects.Components;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace Comp2501Game.Systems
 {
     class SpriteInitializationSystem : GameSystem
     {
         public int playerNumber;
+        public SpriteType type;
 
-        public SpriteInitializationSystem(Game1 game, int num)
+        public SpriteInitializationSystem(Game1 game, int num, SpriteType tp)
             :base(game)
         {
             this._componentDependencies.Add(ComponentType.Player);
             this._componentDependencies.Add(ComponentType.Sprite);
+            this.type = tp;
             this.playerNumber = num;
         }
 
@@ -136,7 +139,9 @@ namespace Comp2501Game.Systems
                         spriteComponent.animationFrameWork.Add(new ActionComponent(DirectionalAction.Right, SecondaryAction.Second_Hit, PrimaryAction.Front), new AnimationDirectory(23, 8, 400));
                         spriteComponent.animationFrameWork.Add(new ActionComponent(DirectionalAction.Right, SecondaryAction.Second_Hit, PrimaryAction.Behind), new AnimationDirectory(24, 8, 400));
                         spriteComponent.animationFrameWork.Add(new ActionComponent(DirectionalAction.Right, SecondaryAction.Second_Flying, PrimaryAction.Right), new AnimationDirectory(26, 8, 500));
-                        spriteComponent.animationFrameWork.Add(new ActionComponent(DirectionalAction.Right, SecondaryAction.Second_Flying, PrimaryAction.Left), new AnimationDirectory(27, 8, 500)); 
+                        spriteComponent.animationFrameWork.Add(new ActionComponent(DirectionalAction.Right, SecondaryAction.Second_Flying, PrimaryAction.Left), new AnimationDirectory(27, 8, 500));
+
+
                     }
 
                 }

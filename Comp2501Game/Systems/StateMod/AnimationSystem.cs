@@ -22,8 +22,11 @@ namespace Comp2501Game.Systems
 
          public override SystemType GetType()
          {
-             return SystemType.StateModifier;
+             return SystemType.Initializer;
          }
+
+  
+
 
          public override void Update(GameTime gameTime)
          {
@@ -32,10 +35,10 @@ namespace Comp2501Game.Systems
                  PlayerComponent playerComponent = (PlayerComponent)obj.GetComponent(ComponentType.Player);
                  CurrentActionComponent actionComponent = (CurrentActionComponent)obj.GetComponent(ComponentType.Action);
                  SpriteComponent spriteComponent = (SpriteComponent)obj.GetComponent(ComponentType.Sprite);
+                 //Console.WriteLine(actionComponent.curAction.curDirection + " " + actionComponent.curAction.secondaryAction + " " + actionComponent.curAction.primaryAction);
 
                  if (playerComponent.PlayerNumber == this.playerNumber)
                  {
-
                      spriteComponent.milisecondsSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
                      if (spriteComponent.milisecondsSinceLastFrame >= 60 /
                          (spriteComponent.animationFrameWork[actionComponent.curAction].numColumns /
@@ -131,6 +134,7 @@ namespace Comp2501Game.Systems
                          else
                          {
                              actionComponent.curAction.primaryAction = PrimaryAction.None;
+                             actionComponent.curAction.drift = Drift.None;
                          }
 
                      }

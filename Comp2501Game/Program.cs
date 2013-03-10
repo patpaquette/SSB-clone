@@ -24,7 +24,6 @@ namespace Comp2501Game
 
                 //game.RegisterSystem(new TestRenderSystem(game));
                 //game.RegisterSystem(new AABBCollisionRenderSystem(game));
-                game.RegisterSystem(new SpriteInitializationSystem(game, 1));
                 game.RegisterSystem(new PlayerInputSystem(game, 1));
                 //game.RegisterSystem(new AABBCollisionSystem(game));
                 game.RegisterSystem(new SATCollisionSystem(game));
@@ -38,20 +37,21 @@ namespace Comp2501Game
                 game.RegisterSystem(new AnimationSystem(game, 1));
                 game.AddObject(
                     new PlayerObject(game, new Vector2(200, 200), 0.0f, new Vector2(0,0), 1, Objects.Components.SpriteType.Yoshi));
-                game.AddObject(
-                    new TestObject(
-                        game,
-                        new Vector2(600, 300),
-                        100,
-                        100,
-                        new Color(0.0f, 0.0f, 1.0f, 0.2f),
-                        2,
-                        false));
-                game.AddObject(envFactory.BuildStaticRectangularObstacle(
-                    new Vector2(clientBounds.Width / 2, 450),
-                    new Rectangle(-clientBounds.Width / 2, -10, clientBounds.Width, 20),
-                    Color.Red));
-                game.AddObject(new TimeObject(game, new Vector2 (0, 0), Color.Black));
+                //game.RegisterSystem(new SpriteInitializationSystem(game, 1));
+               // game.AddObject(
+               //     new TestObject(
+               //         game,
+               //         new Vector2(600, 300),
+               //         100,
+              //          100,
+                //        new Color(0.0f, 0.0f, 1.0f, 0.2f),
+                  //      2,
+                    //    false));
+               // game.AddObject(envFactory.BuildStaticRectangularObstacle(
+               //     new Vector2(clientBounds.Width / 2, 450),
+               //     new Rectangle(-clientBounds.Width / 2, -10, clientBounds.Width, 20),
+                //    Color.Red));
+               // game.AddObject(new TimeObject(game, new Vector2 (0, 0), Color.Black));
 
                 game.Run();
             }

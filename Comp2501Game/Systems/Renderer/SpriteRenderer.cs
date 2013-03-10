@@ -41,6 +41,8 @@ namespace Comp2501Game.Systems.Renderer
                 PlayerComponent playerComponent = (PlayerComponent)obj.GetComponent(ComponentType.Player);
                 CurrentActionComponent currentAction = (CurrentActionComponent)obj.GetComponent(ComponentType.Action);
 
+                Console.WriteLine(currentAction.curAction.curDirection + " " + currentAction.curAction.secondaryAction + " " + currentAction.curAction.primaryAction + " " + currentAction.curAction.drift);
+
                 Rectangle sourceFrame = new Rectangle(spriteComponent.curColumn * 200,
                     spriteComponent.animationFrameWork[currentAction.curAction].rowNumber * 200,
                     200, 200);
