@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Comp2501Game.Systems.Collisions;
 using Comp2501Game.Systems.Renderer;
 using Comp2501Game.EntityFactory;
+using Comp2501Game.Systems.StateMod;
 
 namespace Comp2501Game
 {
@@ -23,6 +24,7 @@ namespace Comp2501Game
 
                 //game.RegisterSystem(new TestRenderSystem(game));
                 //game.RegisterSystem(new AABBCollisionRenderSystem(game));
+                game.RegisterSystem(new SpriteInitializationSystem(game, 1));
                 game.RegisterSystem(new PlayerInputSystem(game, 1));
                 //game.RegisterSystem(new AABBCollisionSystem(game));
                 game.RegisterSystem(new SATCollisionSystem(game));
@@ -30,15 +32,12 @@ namespace Comp2501Game
                 game.RegisterSystem(new TimerSystem(game));
                 game.RegisterSystem(new TimerRenderSystem(game));
                 game.RegisterSystem(new LinebatchMeshRenderSystem(game));
+                game.RegisterSystem(new InputSystem(game, 1));
+                game.RegisterSystem(new MovementSystem(game, 1));
+                game.RegisterSystem(new SpriteRenderer(game));
+                game.RegisterSystem(new AnimationSystem(game, 1));
                 game.AddObject(
-                    new TestObject(
-                        game, 
-                        new Vector2(300, 300),
-                        100,
-                        100,
-                        new Color(1.0f, 0.0f, 0.0f, 1.0f),
-                        1,
-                        true));
+                    new PlayerObject(game, new Vector2(200, 200), 0.0f, new Vector2(0,0), 1, Objects.Components.SpriteType.Yoshi));
                 game.AddObject(
                     new TestObject(
                         game,

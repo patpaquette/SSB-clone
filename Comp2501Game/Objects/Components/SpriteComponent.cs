@@ -10,7 +10,7 @@ namespace Comp2501Game.Objects.Components
     class SpriteComponent : ObjectComponent 
     {
         public Texture2D[] spriteSheets;
-        public Dictionary<CurrentActionComponent, AnimationDirectory> animationFrameWork;
+        public Dictionary<ActionComponent, AnimationDirectory> animationFrameWork;
         public SpriteType CharacterType;
         public int curColumn;
         public int milisecondsSinceLastFrame;
@@ -20,7 +20,7 @@ namespace Comp2501Game.Objects.Components
         {
             this.CharacterType = type;
             this.spriteSheets = new Texture2D[4];
-            this.animationFrameWork = new Dictionary<CurrentActionComponent, AnimationDirectory>();
+            this.animationFrameWork = new Dictionary<ActionComponent, AnimationDirectory>();
             this.curColumn = 0;
         }
 

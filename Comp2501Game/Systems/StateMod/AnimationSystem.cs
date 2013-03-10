@@ -14,9 +14,9 @@ namespace Comp2501Game.Systems
          public AnimationSystem(Game1 game, int playerNum)
             : base(game)
         {
-            this._componentDependencies.Add(ComponentType.Sprite);
             this._componentDependencies.Add(ComponentType.Player);
             this._componentDependencies.Add(ComponentType.Action);
+            this._componentDependencies.Add(ComponentType.Sprite);
             this.playerNumber = playerNum;
         }
 
@@ -31,95 +31,113 @@ namespace Comp2501Game.Systems
              {
                  PlayerComponent playerComponent = (PlayerComponent)obj.GetComponent(ComponentType.Player);
                  CurrentActionComponent actionComponent = (CurrentActionComponent)obj.GetComponent(ComponentType.Action);
-                 SpriteComponent spriteComponent = (SpriteComponent)obj.GetComponent(ComponentType.Action);
+                 SpriteComponent spriteComponent = (SpriteComponent)obj.GetComponent(ComponentType.Sprite);
 
-                 spriteComponent.milisecondsSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-                 if (spriteComponent.milisecondsSinceLastFrame >= 60 / (spriteComponent.animationFrameWork[actionComponent].numColumns / spriteComponent.animationFrameWork[actionComponent].attackTimer))
+                 if (playerComponent.PlayerNumber == this.playerNumber)
                  {
-                     spriteComponent.curColumn = (spriteComponent.curColumn + 1) % spriteComponent.animationFrameWork[actionComponent].numColumns;
-                     spriteComponent.milisecondsSinceLastFrame = 0;
 
+                     spriteComponent.milisecondsSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+                     if (spriteComponent.milisecondsSinceLastFrame >= 60 /
+                         (spriteComponent.animationFrameWork[actionComponent.curAction].numColumns /
+                         spriteComponent.animationFrameWork[actionComponent.curAction].attackTimer))
+                     {
+                         spriteComponent.curColumn = (spriteComponent.curColumn + 1)
+                             % spriteComponent.animationFrameWork[actionComponent.curAction].numColumns;
+                         spriteComponent.milisecondsSinceLastFrame = 0;
+
+                     }
+
+                     if (spriteComponent.curColumn == 0)
+                     {
+                         if (actionComponent.curAction.secondaryAction == SecondaryAction.Jump)
+                         {
+                             actionComponent.curAction.secondaryAction = SecondaryAction.Falling;
+                             actionComponent.curAction.primaryAction = PrimaryAction.None;
+                         }
+                         else if (actionComponent.curAction.secondaryAction == SecondaryAction.Second_Jump)
+                         {
+                             actionComponent.curAction.secondaryAction = SecondaryAction.Second_Falling;
+                             actionComponent.curAction.primaryAction = PrimaryAction.None;
+                         }
+                         else if (actionComponent.curAction.secondaryAction == SecondaryAction.Landing)
+                         {
+                             actionComponent.curAction.secondaryAction = SecondaryAction.Stand;
+                             actionComponent.curAction.primaryAction = PrimaryAction.None;
+                         }
+                         else if (actionComponent.curAction.secondaryAction == SecondaryAction.Hit
+                             && actionComponent.curAction.curDirection == DirectionalAction.Left)
+                         {
+                             if (actionComponent.curAction.primaryAction == PrimaryAction.Above
+                                 || actionComponent.curAction.primaryAction == PrimaryAction.Behind
+                                 || actionComponent.curAction.primaryAction == PrimaryAction.Below)
+                             {
+                                 actionComponent.curAction.secondaryAction = SecondaryAction.Flying;
+                                 actionComponent.curAction.primaryAction = PrimaryAction.Left;
+                             }
+                             else
+                             {
+                                 actionComponent.curAction.secondaryAction = SecondaryAction.Flying;
+                                 actionComponent.curAction.primaryAction = PrimaryAction.Right;
+                             }
+                         }
+                         else if (actionComponent.curAction.secondaryAction == SecondaryAction.Hit
+                             && actionComponent.curAction.curDirection == DirectionalAction.Right)
+                         {
+                             if (actionComponent.curAction.primaryAction == PrimaryAction.Above
+                                 || actionComponent.curAction.primaryAction == PrimaryAction.Behind
+                                 || actionComponent.curAction.primaryAction == PrimaryAction.Below)
+                             {
+                                 actionComponent.curAction.secondaryAction = SecondaryAction.Flying;
+                                 actionComponent.curAction.primaryAction = PrimaryAction.Right;
+                             }
+                             else
+                             {
+                                 actionComponent.curAction.secondaryAction = SecondaryAction.Flying;
+                                 actionComponent.curAction.primaryAction = PrimaryAction.Left;
+                             }
+                         }
+                         else if (actionComponent.curAction.secondaryAction == SecondaryAction.Second_Hit
+                             && actionComponent.curAction.curDirection == DirectionalAction.Left)
+                         {
+                             if (actionComponent.curAction.primaryAction == PrimaryAction.Above
+                                 || actionComponent.curAction.primaryAction == PrimaryAction.Behind
+                                 || actionComponent.curAction.primaryAction == PrimaryAction.Below)
+                             {
+                                 actionComponent.curAction.secondaryAction = SecondaryAction.Second_Flying;
+                                 actionComponent.curAction.primaryAction = PrimaryAction.Left;
+                             }
+                             else
+                             {
+                                 actionComponent.curAction.secondaryAction = SecondaryAction.Second_Flying;
+                                 actionComponent.curAction.primaryAction = PrimaryAction.Right;
+                             }
+                         }
+                         else if (actionComponent.curAction.secondaryAction == SecondaryAction.Second_Hit
+                             && actionComponent.curAction.curDirection == DirectionalAction.Right)
+                         {
+                             if (actionComponent.curAction.primaryAction == PrimaryAction.Above
+                                 || actionComponent.curAction.primaryAction == PrimaryAction.Behind
+                                 || actionComponent.curAction.primaryAction == PrimaryAction.Below)
+                             {
+                                 actionComponent.curAction.secondaryAction = SecondaryAction.Second_Flying;
+                                 actionComponent.curAction.primaryAction = PrimaryAction.Right;
+                             }
+                             else
+                             {
+                                 actionComponent.curAction.secondaryAction = SecondaryAction.Second_Flying;
+                                 actionComponent.curAction.primaryAction = PrimaryAction.Left;
+                             }
+                         }
+                         else
+                         {
+                             actionComponent.curAction.primaryAction = PrimaryAction.None;
+                         }
+
+                     }
                  }
 
-                 if (spriteComponent.curColumn == 0)
-                 {
-                     if (actionComponent.secondaryAction == SecondaryAction.Jump)
-                     {
-                         actionComponent.secondaryAction = SecondaryAction.Falling;
-                         actionComponent.primaryAction = PrimaryAction.None;
-                     }
-                     else if (actionComponent.secondaryAction == SecondaryAction.Second_Jump)
-                     {
-                         actionComponent.secondaryAction = SecondaryAction.Second_Falling;
-                         actionComponent.primaryAction = PrimaryAction.None;
-                     }
-                     else if (actionComponent.secondaryAction == SecondaryAction.Landing)
-                     {
-                         actionComponent.secondaryAction = SecondaryAction.Stand;
-                         actionComponent.primaryAction = PrimaryAction.None;
-                     }
-                     else if (actionComponent.secondaryAction == SecondaryAction.Hit && actionComponent.curDirection == DirectionalAction.Left)
-                     {
-                         if (actionComponent.primaryAction == PrimaryAction.Above || actionComponent.primaryAction == PrimaryAction.Behind || actionComponent.primaryAction == PrimaryAction.Below)
-                         {
-                             actionComponent.secondaryAction = SecondaryAction.Flying;
-                             actionComponent.primaryAction = PrimaryAction.Left;
-                         }
-                         else
-                         {
-                             actionComponent.secondaryAction = SecondaryAction.Flying;
-                             actionComponent.primaryAction = PrimaryAction.Right;
-                         }
-                     }
-                     else if (actionComponent.secondaryAction == SecondaryAction.Hit && actionComponent.curDirection == DirectionalAction.Right)
-                     {
-                         if (actionComponent.primaryAction == PrimaryAction.Above || actionComponent.primaryAction == PrimaryAction.Behind || actionComponent.primaryAction == PrimaryAction.Below)
-                         {
-                             actionComponent.secondaryAction = SecondaryAction.Flying;
-                             actionComponent.primaryAction = PrimaryAction.Right;
-                         }
-                         else
-                         {
-                             actionComponent.secondaryAction = SecondaryAction.Flying;
-                             actionComponent.primaryAction = PrimaryAction.Left;
-                         }
-                     }
-                     else if (actionComponent.secondaryAction == SecondaryAction.Second_Hit && actionComponent.curDirection == DirectionalAction.Left)
-                     {
-                         if (actionComponent.primaryAction == PrimaryAction.Above || actionComponent.primaryAction == PrimaryAction.Behind || actionComponent.primaryAction == PrimaryAction.Below)
-                         {
-                             actionComponent.secondaryAction = SecondaryAction.Second_Flying;
-                             actionComponent.primaryAction = PrimaryAction.Left;
-                         }
-                         else
-                         {
-                             actionComponent.secondaryAction = SecondaryAction.Second_Flying;
-                             actionComponent.primaryAction = PrimaryAction.Right;
-                         }
-                     }
-                     else if (actionComponent.secondaryAction == SecondaryAction.Second_Hit && actionComponent.curDirection == DirectionalAction.Right)
-                     {
-                         if (actionComponent.primaryAction == PrimaryAction.Above || actionComponent.primaryAction == PrimaryAction.Behind || actionComponent.primaryAction == PrimaryAction.Below)
-                         {
-                             actionComponent.secondaryAction = SecondaryAction.Second_Flying;
-                             actionComponent.primaryAction = PrimaryAction.Right;
-                         }
-                         else
-                         {
-                             actionComponent.secondaryAction = SecondaryAction.Second_Flying;
-                             actionComponent.primaryAction = PrimaryAction.Left;
-                         }
-                     }
-                     else
-                     {
-                         actionComponent.primaryAction = PrimaryAction.None;
-                     }
-
-                 }
+                 base.Update(gameTime);
              }
-
-             base.Update(gameTime);
-
          }
     }
 }

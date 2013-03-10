@@ -12,7 +12,7 @@ namespace Comp2501Game.Objects.Components
         private Vector2 _translation;
         private Vector2 _scale;
         private TestObject testObject;
-        private Vector2 position;
+        public Vector2 position;
 
         public Transform2DComponent(GameObject parent, Vector2 translation, float rotationDeg, Vector2 scale)
             : base(parent)

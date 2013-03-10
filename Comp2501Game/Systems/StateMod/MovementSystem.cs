@@ -16,7 +16,7 @@ namespace Comp2501Game.Systems.StateMod
         {
             this._componentDependencies.Add(ComponentType.Player);
             this._componentDependencies.Add(ComponentType.Action);
-            this._componentDependencies.Add(ComponentType.Position);
+            this._componentDependencies.Add(ComponentType.Transform2D);
             this.playerNumber = playerNum;
         }
 
@@ -26,100 +26,120 @@ namespace Comp2501Game.Systems.StateMod
             {
                 PlayerComponent playerComponent = (PlayerComponent)obj.GetComponent(ComponentType.Player);
                 CurrentActionComponent actionComponent = (CurrentActionComponent)obj.GetComponent(ComponentType.Action);
-                PositionComponent positionComponent = (PositionComponent)obj.GetComponent(ComponentType.Position);
+                Transform2DComponent positionComponent = (Transform2DComponent)obj.GetComponent(ComponentType.Transform2D);
 
-                if (actionComponent.curDirection == DirectionalAction.Left)
+
+
+                if (actionComponent.curAction.curDirection == DirectionalAction.Left)
                 {
-                    if (actionComponent.secondaryAction == SecondaryAction.Walk)
+                    if (actionComponent.curAction.secondaryAction == SecondaryAction.Walk)
                     {
-                        positionComponent.Position += new Vector2(-2.0f, 0f);
+                        positionComponent.position += new Vector2(-2.0f, 0f);
                     }
-                    else if (actionComponent.secondaryAction == SecondaryAction.Jump || actionComponent.secondaryAction == SecondaryAction.Second_Jump)
+                    else if (actionComponent.curAction.secondaryAction == SecondaryAction.Jump
+                        || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Jump)
                     {
-                        positionComponent.Position += new Vector2(0.0f, -4.0f);
+                        positionComponent.position += new Vector2(0.0f, -4.0f);
                     }
-                    else if ((actionComponent.secondaryAction == SecondaryAction.Falling || actionComponent.secondaryAction == SecondaryAction.Second_Falling)
-                        && (actionComponent.primaryAction != PrimaryAction.Fall_Faster || actionComponent.primaryAction != PrimaryAction.Drift_Left || actionComponent.primaryAction != PrimaryAction.Drift_Right))
+                    else if ((actionComponent.curAction.secondaryAction == SecondaryAction.Falling
+                        || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling)
+                        && (actionComponent.curAction.primaryAction != PrimaryAction.Fall_Faster
+                        || actionComponent.curAction.primaryAction != PrimaryAction.Drift_Left
+                        || actionComponent.curAction.primaryAction != PrimaryAction.Drift_Right))
                     {
-                        positionComponent.Position += new Vector2(0.0f, 1.0f);
+                        positionComponent.position += new Vector2(0.0f, 1.0f);
                     }
-                    else if ((actionComponent.secondaryAction == SecondaryAction.Falling || actionComponent.secondaryAction == SecondaryAction.Second_Falling)
-                        && (actionComponent.primaryAction == PrimaryAction.Fall_Faster))
+                    else if ((actionComponent.curAction.secondaryAction == SecondaryAction.Falling
+                        || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling)
+                        && (actionComponent.curAction.primaryAction == PrimaryAction.Fall_Faster))
                     {
-                        positionComponent.Position += new Vector2(0.0f, 2.0f);
+                        positionComponent.position += new Vector2(0.0f, 2.0f);
                     }
-                    else if ((actionComponent.secondaryAction == SecondaryAction.Falling || actionComponent.secondaryAction == SecondaryAction.Second_Falling)
-                        && (actionComponent.primaryAction == PrimaryAction.Drift_Left))
+                    else if ((actionComponent.curAction.secondaryAction == SecondaryAction.Falling
+                        || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling)
+                        && (actionComponent.curAction.primaryAction == PrimaryAction.Drift_Left))
                     {
-                        positionComponent.Position += new Vector2(-1.0f, 0.0f);
+                        positionComponent.position += new Vector2(-1.0f, 0.0f);
                     }
-                    else if ((actionComponent.secondaryAction == SecondaryAction.Falling || actionComponent.secondaryAction == SecondaryAction.Second_Falling)
-                        && (actionComponent.primaryAction == PrimaryAction.Drift_Left))
+                    else if ((actionComponent.curAction.secondaryAction == SecondaryAction.Falling
+                        || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling)
+                        && (actionComponent.curAction.primaryAction == PrimaryAction.Drift_Left))
                     {
-                        positionComponent.Position += new Vector2(-1.0f, 0.0f);
+                        positionComponent.position += new Vector2(-1.0f, 0.0f);
                     }
-                    else if (actionComponent.secondaryAction == SecondaryAction.Shield && actionComponent.primaryAction == PrimaryAction.Roll_Left)
+                    else if (actionComponent.curAction.secondaryAction == SecondaryAction.Shield
+                        && actionComponent.curAction.primaryAction == PrimaryAction.Roll_Left)
                     {
-                        positionComponent.Position += new Vector2(1.0f, 0.0f);
+                        positionComponent.position += new Vector2(1.0f, 0.0f);
                     }
-                    else if (actionComponent.secondaryAction == SecondaryAction.Shield && actionComponent.primaryAction == PrimaryAction.Roll_Right)
+                    else if (actionComponent.curAction.secondaryAction == SecondaryAction.Shield
+                        && actionComponent.curAction.primaryAction == PrimaryAction.Roll_Right)
                     {
-                        positionComponent.Position += new Vector2(3.0f, 0.0f);
+                        positionComponent.position += new Vector2(3.0f, 0.0f);
                     }
 
                 }
                 else
                 {
-                    if (actionComponent.secondaryAction == SecondaryAction.Walk)
+                    if (actionComponent.curAction.secondaryAction == SecondaryAction.Walk)
                     {
-                        positionComponent.Position += new Vector2(2.0f, 0f);
+                        positionComponent.position += new Vector2(2.0f, 0f);
                     }
-                    else if (actionComponent.secondaryAction == SecondaryAction.Jump || actionComponent.secondaryAction == SecondaryAction.Second_Jump)
+                    else if (actionComponent.curAction.secondaryAction == SecondaryAction.Jump
+                        || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Jump)
                     {
-                        positionComponent.Position += new Vector2(0.0f, -4.0f);
+                        positionComponent.position += new Vector2(0.0f, -4.0f);
                     }
-                    else if ((actionComponent.secondaryAction == SecondaryAction.Falling || actionComponent.secondaryAction == SecondaryAction.Second_Falling)
-                        && (actionComponent.primaryAction != PrimaryAction.Fall_Faster || actionComponent.primaryAction != PrimaryAction.Drift_Left || actionComponent.primaryAction != PrimaryAction.Drift_Right))
+                    else if ((actionComponent.curAction.secondaryAction == SecondaryAction.Falling 
+                        || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling)
+                        && (actionComponent.curAction.primaryAction != PrimaryAction.Fall_Faster || actionComponent.curAction.primaryAction != PrimaryAction.Drift_Left
+                        || actionComponent.curAction.primaryAction != PrimaryAction.Drift_Right))
                     {
-                        positionComponent.Position += new Vector2(0.0f, 1.0f);
+                        positionComponent.position += new Vector2(0.0f, 1.0f);
                     }
-                    else if ((actionComponent.secondaryAction == SecondaryAction.Falling || actionComponent.secondaryAction == SecondaryAction.Second_Falling)
-                        && (actionComponent.primaryAction == PrimaryAction.Fall_Faster))
+                    else if ((actionComponent.curAction.secondaryAction == SecondaryAction.Falling 
+                        || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling)
+                        && (actionComponent.curAction.primaryAction == PrimaryAction.Fall_Faster))
                     {
-                        positionComponent.Position += new Vector2(0.0f, 2.0f);
+                        positionComponent.position += new Vector2(0.0f, 2.0f);
                     }
-                    else if ((actionComponent.secondaryAction == SecondaryAction.Falling || actionComponent.secondaryAction == SecondaryAction.Second_Falling)
-                        && (actionComponent.primaryAction == PrimaryAction.Drift_Left))
+                    else if ((actionComponent.curAction.secondaryAction == SecondaryAction.Falling
+                        || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling)
+                        && (actionComponent.curAction.primaryAction == PrimaryAction.Drift_Left))
                     {
-                        positionComponent.Position += new Vector2(-1.0f, 0.0f);
+                        positionComponent.position += new Vector2(-1.0f, 0.0f);
                     }
-                    else if ((actionComponent.secondaryAction == SecondaryAction.Falling || actionComponent.secondaryAction == SecondaryAction.Second_Falling)
-                        && (actionComponent.primaryAction == PrimaryAction.Drift_Right))
+                    else if ((actionComponent.curAction.secondaryAction == SecondaryAction.Falling
+                        || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling)
+                        && (actionComponent.curAction.primaryAction == PrimaryAction.Drift_Right))
                     {
-                        positionComponent.Position += new Vector2(1.0f, 0.0f);
+                        positionComponent.position += new Vector2(1.0f, 0.0f);
                     }
-                    else if (actionComponent.secondaryAction == SecondaryAction.Shield && actionComponent.primaryAction == PrimaryAction.Roll_Left)
+                    else if (actionComponent.curAction.secondaryAction == SecondaryAction.Shield 
+                        && actionComponent.curAction.primaryAction == PrimaryAction.Roll_Left)
                     {
-                        positionComponent.Position += new Vector2(1.0f, 0.0f);
+                        positionComponent.position += new Vector2(1.0f, 0.0f);
                     }
-                    else if (actionComponent.secondaryAction == SecondaryAction.Shield && actionComponent.primaryAction == PrimaryAction.Roll_Left)
+                    else if (actionComponent.curAction.secondaryAction == SecondaryAction.Shield
+                        && actionComponent.curAction.primaryAction == PrimaryAction.Roll_Left)
                     {
-                        positionComponent.Position += new Vector2(-3.0f, 0.0f);
+                        positionComponent.position += new Vector2(-3.0f, 0.0f);
                     }
-                    else if (actionComponent.secondaryAction == SecondaryAction.Shield && actionComponent.primaryAction == PrimaryAction.Roll_Right)
+                    else if (actionComponent.curAction.secondaryAction == SecondaryAction.Shield
+                        && actionComponent.curAction.primaryAction == PrimaryAction.Roll_Right)
                     {
-                        positionComponent.Position += new Vector2(3.0f, 0.0f);
+                        positionComponent.position += new Vector2(3.0f, 0.0f);
                     }
                 }
 
 
-                if (actionComponent.drift == Drift.Left)
+                if (actionComponent.curAction.drift == Drift.Left)
                 {
-                    positionComponent.Position += new Vector2(-1.0f, 0.0f);
+                    positionComponent.position += new Vector2(-1.0f, 0.0f);
                 }
-                else if (actionComponent.drift == Drift.Right)
+                else if (actionComponent.curAction.drift == Drift.Right)
                 {
-                    positionComponent.Position += new Vector2(1.0f, 0.0f);
+                    positionComponent.position += new Vector2(1.0f, 0.0f);
                 }
             }
         }

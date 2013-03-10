@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Comp2501Game.Objects.Components;
 using Microsoft.Xna.Framework;
-using Comp2501Game.Objects.Components;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Comp2501Game.Systems

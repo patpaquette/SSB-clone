@@ -10,10 +10,10 @@ namespace Comp2501Game.Objects.Components
     {
         public Vector2 Position;
 
-        public PositionComponent(GameObject parent, Vector2 pos)
-            : base (parent)
+        public PositionComponent(GameObject parent, Vector2 position)
+            : base(parent)
         {
-            this.Position = pos;
+            this.Position = position;
         }
 
         public override ComponentType GetType()
