@@ -17,7 +17,6 @@ namespace Comp2501Game.Objects
              pos,
              rot,
              scale);
-
             this.AddComponent(transformComponent);
             this.AddComponent(new PlayerComponent(this, playerNum));
             this.AddComponent(new CurrentActionComponent(this,new ActionComponent(DirectionalAction.Left, SecondaryAction.Stand, PrimaryAction.None)));
