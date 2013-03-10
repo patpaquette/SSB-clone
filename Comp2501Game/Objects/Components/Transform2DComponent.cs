@@ -43,6 +43,11 @@ namespace Comp2501Game.Objects.Components
             return this._rotation * 180 / (float)Math.PI;
         }
 
+        public void SetRotationDeg(float deg)
+        {
+            this._rotation = deg * (float)Math.PI / 180;
+        }
+
         public Vector2 GetScale()
         {
             return this._scale;
