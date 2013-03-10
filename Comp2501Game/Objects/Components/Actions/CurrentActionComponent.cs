@@ -10,13 +10,10 @@ namespace Comp2501Game.Objects.Components
     {
         public ActionComponent curAction;
 
-        public CurrentActionComponent(GameObject parent, DirectionalAction direction, SecondaryAction SecondaryAct, PrimaryAction primaryAct, Drift drifting = Drift.None)
+        public CurrentActionComponent(GameObject parent, ActionComponent action)
             : base(parent)
         {
-            this.curAction.curDirection = direction;
-            this.curAction.secondaryAction = SecondaryAct;
-            this.curAction.primaryAction = primaryAct;
-            this.curAction.drift = drifting;
+            curAction = action;
         }
 
         public override ComponentType GetType()
