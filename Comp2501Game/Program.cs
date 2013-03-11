@@ -24,7 +24,7 @@ namespace Comp2501Game
 
                 //game.RegisterSystem(new TestRenderSystem(game));
                 //game.RegisterSystem(new AABBCollisionRenderSystem(game));
-                game.RegisterSystem(new PlayerInputSystem(game, 1));
+                //game.RegisterSystem(new PlayerInputSystem(game, 1));
                 //game.RegisterSystem(new AABBCollisionSystem(game));
                 //game.RegisterSystem(new SATCollisionSystem(game));
                 //game.RegisterSystem(new CollisionRenderSystem(game));
