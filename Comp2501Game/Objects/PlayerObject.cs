@@ -11,14 +11,16 @@ namespace Comp2501Game.Objects
 {
     class PlayerObject : GameObject
     {
-        public PlayerObject(Game1 game, Vector2 pos, float rot, Vector2 scale, int playerNum, SpriteType type)
+        public PlayerObject(Game1 game, int playerNum, SpriteType type)
             : base(game)
         {
             Transform2DComponent transformComponent = new Transform2DComponent(
              this,
-             pos,
-             rot,
-             scale);
+             new Vector2(300,500),
+             0.0f,
+             new Vector2(1.0f));
+            transformComponent.position = new Vector2(300, 100);
+                
             this.AddComponent(transformComponent);
             this.AddComponent(new PlayerComponent(this, playerNum));
             this.AddComponent(new CurrentActionComponent(this,new ActionComponent(DirectionalAction.Left, SecondaryAction.Stand, PrimaryAction.None)));

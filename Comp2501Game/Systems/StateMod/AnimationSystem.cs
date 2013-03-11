@@ -148,8 +148,8 @@ namespace Comp2501Game.Systems
                      }
                  }
 
-                 base.Update(gameTime);
              }
+             base.Update(gameTime);
          }
     }
 }

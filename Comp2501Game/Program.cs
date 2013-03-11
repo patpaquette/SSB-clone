@@ -31,12 +31,12 @@ namespace Comp2501Game
                 //game.RegisterSystem(new TimerSystem(game));
                 //game.RegisterSystem(new TimerRenderSystem(game));
                 //game.RegisterSystem(new LinebatchMeshRenderSystem(game));
-                game.RegisterSystem(new PlayerInputSystem(game, 1));
+                game.RegisterSystem(new InputSystem(game, 1));
                 game.RegisterSystem(new MovementSystem(game, 1));
                 game.RegisterSystem(new SpriteRenderer(game));
                 game.RegisterSystem(new AnimationSystem(game, 1));
                 game.AddObject(
-                    new PlayerObject(game, new Vector2(800, 500), 0.0f, new Vector2(0,0), 1, Objects.Components.SpriteType.Yoshi));
+                    new PlayerObject(game, 1, Objects.Components.SpriteType.Yoshi));
                 game.RegisterSystem(new SpriteInitializationSystem(game, 1));
                // game.AddObject(
                //     new TestObject(

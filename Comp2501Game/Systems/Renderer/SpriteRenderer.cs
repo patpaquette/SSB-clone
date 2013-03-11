@@ -21,14 +21,13 @@ namespace Comp2501Game.Systems.Renderer
             this._componentDependencies.Add(ComponentType.Transform2D);
             this._componentDependencies.Add(ComponentType.Sprite);
             this._componentDependencies.Add(ComponentType.Action);
-            this._componentDependencies.Add(ComponentType.Player);
             this._game = game;
         }
 
         public override void Initialize()
         {
             this._spriteBatch = new SpriteBatch(this.Game.GraphicsDevice);
-            base.Initialize();
+            //base.Initialize();
         }
 
         public override void Update(GameTime gameTime)
@@ -39,7 +38,6 @@ namespace Comp2501Game.Systems.Renderer
             {
                 Transform2DComponent transformComponent = (Transform2DComponent)obj.GetComponent(ComponentType.Transform2D);
                 SpriteComponent spriteComponent = (SpriteComponent)obj.GetComponent(ComponentType.Sprite);
-                PlayerComponent playerComponent = (PlayerComponent)obj.GetComponent(ComponentType.Player);
                 CurrentActionComponent actionComponent = (CurrentActionComponent)obj.GetComponent(ComponentType.Action);
 
                 Rectangle sourceFrame = new Rectangle(spriteComponent.curColumn * 200,
@@ -53,16 +51,16 @@ namespace Comp2501Game.Systems.Renderer
                     directionalFlip = SpriteEffects.FlipHorizontally;
                 }
 
-                double temp = spriteComponent.curRow; 
-
-                _spriteBatch.Draw(spriteComponent.spriteSheets[(int) Math.Floor(temp / 10.0)],
+                double temp = spriteComponent.curRow;
+                //Console.WriteLine(transformComponent.position.X + " ");
+                this._spriteBatch.Draw(spriteComponent.spriteSheets[(int) Math.Floor(temp / 10.0)],
                     transformComponent.position, sourceFrame, Color.White,
-                    transformComponent.GetRotationDeg(), new Vector2(0, 0), 1.0f, directionalFlip, 0.0f); 
+                    transformComponent.GetRotationDeg(), new Vector2(0, 0), 1.0f, directionalFlip, 1.0f); 
 
             }
             this._spriteBatch.End();
 
-            base.Update(gameTime);
+            //base.Update(gameTime);
         }
 
         public override SystemType GetType()
