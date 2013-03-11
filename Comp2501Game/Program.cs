@@ -24,20 +24,20 @@ namespace Comp2501Game
 
                 //game.RegisterSystem(new TestRenderSystem(game));
                 //game.RegisterSystem(new AABBCollisionRenderSystem(game));
-                game.RegisterSystem(new PlayerInputSystem(game, 1));
+                //game.RegisterSystem(new PlayerInputSystem(game, 1));
                 //game.RegisterSystem(new AABBCollisionSystem(game));
-                game.RegisterSystem(new SATCollisionSystem(game));
-                game.RegisterSystem(new CollisionRenderSystem(game));
-                game.RegisterSystem(new TimerSystem(game));
-                game.RegisterSystem(new TimerRenderSystem(game));
-                game.RegisterSystem(new LinebatchMeshRenderSystem(game));
+                //game.RegisterSystem(new SATCollisionSystem(game));
+                //game.RegisterSystem(new CollisionRenderSystem(game));
+                //game.RegisterSystem(new TimerSystem(game));
+                //game.RegisterSystem(new TimerRenderSystem(game));
+                //game.RegisterSystem(new LinebatchMeshRenderSystem(game));
                 game.RegisterSystem(new InputSystem(game, 1));
                 game.RegisterSystem(new MovementSystem(game, 1));
                 game.RegisterSystem(new SpriteRenderer(game));
                 game.RegisterSystem(new AnimationSystem(game, 1));
                 game.AddObject(
                     new PlayerObject(game, new Vector2(200, 200), 0.0f, new Vector2(0,0), 1, Objects.Components.SpriteType.Yoshi));
-                //game.RegisterSystem(new SpriteInitializationSystem(game, 1));
+                game.RegisterSystem(new SpriteInitializationSystem(game, 1));
                // game.AddObject(
                //     new TestObject(
                //         game,

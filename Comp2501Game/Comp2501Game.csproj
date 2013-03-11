@@ -118,6 +118,7 @@
     <Compile Include="Libs\Geometry\Types.cs" />
     <Compile Include="ObjectComponent.cs" />
     <Compile Include="Objects\Components\Actions\ActionComponent.cs" />
+    <Compile Include="Objects\Components\Actions\ActionList.cs" />
     <Compile Include="Objects\Components\CollisionComponents\AABB.cs" />
     <Compile Include="Objects\Components\CollisionComponents\AABBCollisionComponent.cs" />
     <Compile Include="Objects\Components\CollisionComponents\BoundingBoxComponent.cs" />

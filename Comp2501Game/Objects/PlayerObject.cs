@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Comp2501Game.Objects.Components;
 using Comp2501Game.Systems;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Comp2501Game.Objects
 {
@@ -22,6 +23,7 @@ namespace Comp2501Game.Objects
             this.AddComponent(new PlayerComponent(this, playerNum));
             this.AddComponent(new CurrentActionComponent(this,new ActionComponent(DirectionalAction.Left, SecondaryAction.Stand, PrimaryAction.None)));
             this.AddComponent(new SpriteComponent(this, type, game));
+
         }
             
    

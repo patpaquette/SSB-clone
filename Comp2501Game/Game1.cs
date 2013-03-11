@@ -20,6 +20,7 @@ namespace Comp2501Game
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteFont spriteFont;
+        Texture2D[] yoshiSpriteSheets;
         List<GameSystem> _systems;
         List<GameObject> _objects;
 
@@ -62,8 +63,13 @@ namespace Comp2501Game
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            yoshiSpriteSheets = new Texture2D[4];
             spriteFont = Content.Load<SpriteFont>("SpriteFont1");
+
+            yoshiSpriteSheets[0] = Content.Load<Texture2D>(@"Images/Yoshi_Sprite_Sheet1");
+            yoshiSpriteSheets[1] = Content.Load<Texture2D>(@"Images/Yoshi_Sprite_Sheet2");
+            yoshiSpriteSheets[2] = Content.Load<Texture2D>(@"Images/Yoshi_Sprite_Sheet3");
+            yoshiSpriteSheets[3] = Content.Load<Texture2D>(@"Images/Yoshi_Sprite_Sheet4");
             // TODO: use this.Content to load your game content here
         }
 

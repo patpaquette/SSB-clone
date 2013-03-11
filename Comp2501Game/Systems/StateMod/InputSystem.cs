@@ -23,14 +23,15 @@ namespace Comp2501Game.Systems
         public override void Update(GameTime gameTime)
         {
             KeyboardState state = Keyboard.GetState();
-
+            //Console.WriteLine("here1");
             foreach (GameObject obj in this._objects)
             {
+                //Console.WriteLine("here2");
                 PlayerComponent playerComponent = (PlayerComponent)obj.GetComponent(ComponentType.Player);
                 CurrentActionComponent actionComponent = (CurrentActionComponent)obj.GetComponent(ComponentType.Action);
-
                 if (playerComponent.PlayerNumber == this.PlayerNumber)
                 {
+
                     if (actionComponent.curAction.curDirection == DirectionalAction.Left 
                         && actionComponent.curAction.secondaryAction == SecondaryAction.Stand 
                         && actionComponent.curAction.primaryAction == PrimaryAction.None)
@@ -72,6 +73,7 @@ namespace Comp2501Game.Systems
                         }
                         else if (state.IsKeyDown(Keys.Left))
                         {
+                            //Console.WriteLine("This is C#");
                             actionComponent.curAction.secondaryAction = SecondaryAction.Walk;
                             actionComponent.curAction.primaryAction = PrimaryAction.None;
                         }

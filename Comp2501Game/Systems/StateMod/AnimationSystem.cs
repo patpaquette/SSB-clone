@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Comp2501Game.Objects.Components;
 using Microsoft.Xna.Framework;
+using Comp2501Game.Objects.Components.Actions;
 
 namespace Comp2501Game.Systems
 {
@@ -36,16 +37,24 @@ namespace Comp2501Game.Systems
                  CurrentActionComponent actionComponent = (CurrentActionComponent)obj.GetComponent(ComponentType.Action);
                  SpriteComponent spriteComponent = (SpriteComponent)obj.GetComponent(ComponentType.Sprite);
                  //Console.WriteLine(actionComponent.curAction.curDirection + " " + actionComponent.curAction.secondaryAction + " " + actionComponent.curAction.primaryAction);
+                 ActionComponent curAct = actionComponent.curAction;
+                 Dictionary<ActionComponent, AnimationDirectory> framework = spriteComponent.animationFrameWork;
+                 ActionList actList = spriteComponent.actions;
 
                  if (playerComponent.PlayerNumber == this.playerNumber)
                  {
+                     if (spriteComponent.curColumn == 0)
+                     {
+                         spriteComponent.curRow = framework[actList.actionList[actList.findAction(curAct)]].rowNumber;
+                     }
+
                      spriteComponent.milisecondsSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-                     if (spriteComponent.milisecondsSinceLastFrame >= 60 /
-                         (spriteComponent.animationFrameWork[actionComponent.curAction].numColumns /
-                         spriteComponent.animationFrameWork[actionComponent.curAction].attackTimer))
+                     if (spriteComponent.milisecondsSinceLastFrame >= (1000 / 
+                         framework[actList.actionList[actList.findAction(curAct)]].attackTimer) /
+                         framework[actList.actionList[actList.findAction(curAct)]].numColumns)
                      {
                          spriteComponent.curColumn = (spriteComponent.curColumn + 1)
-                             % spriteComponent.animationFrameWork[actionComponent.curAction].numColumns;
+                             % (framework[actList.actionList[actList.findAction(curAct)]].numColumns);
                          spriteComponent.milisecondsSinceLastFrame = 0;
 
                      }
