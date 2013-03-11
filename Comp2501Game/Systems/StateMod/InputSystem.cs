@@ -16,7 +16,7 @@ namespace Comp2501Game.Systems
         public InputSystem(Game1 game, int playerNumber)
             : base(game)
         {
-            this._componentDependencies.Add(ComponentType.Position);
+            this._componentDependencies.Add(ComponentType.Action);
             this._componentDependencies.Add(ComponentType.Player);
             this.PlayerNumber = playerNumber;
         }
