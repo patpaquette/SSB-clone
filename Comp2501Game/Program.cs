@@ -31,7 +31,7 @@ namespace Comp2501Game
                 //game.RegisterSystem(new TimerSystem(game));
                 //game.RegisterSystem(new TimerRenderSystem(game));
                 //game.RegisterSystem(new LinebatchMeshRenderSystem(game));
-                game.RegisterSystem(new InputSystem(game, 1));
+                game.RegisterSystem(new PlayerInputSystem(game, 1));
                 game.RegisterSystem(new MovementSystem(game, 1));
                 game.RegisterSystem(new SpriteRenderer(game));
                 game.RegisterSystem(new AnimationSystem(game, 1));
