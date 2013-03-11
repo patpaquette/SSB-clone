@@ -23,7 +23,7 @@ namespace Comp2501Game.Systems
         public override void Update(GameTime gameTime)
         {
             KeyboardState state = Keyboard.GetState();
-            //Console.WriteLine("here1");
+            //Console.WriteLine(this.PlayerNumber + " ");
             foreach (GameObject obj in this._objects)
             {
                 //Console.WriteLine("here2");

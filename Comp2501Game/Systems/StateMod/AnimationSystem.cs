@@ -23,7 +23,7 @@ namespace Comp2501Game.Systems
 
          public override SystemType GetType()
          {
-             return SystemType.Initializer;
+             return SystemType.StateModifier;
          }
 
   
@@ -40,7 +40,6 @@ namespace Comp2501Game.Systems
                  ActionComponent curAct = actionComponent.curAction;
                  Dictionary<ActionComponent, AnimationDirectory> framework = spriteComponent.animationFrameWork;
                  ActionList actList = spriteComponent.actions;
-
                  if (playerComponent.PlayerNumber == this.playerNumber)
                  {
                      if (spriteComponent.curColumn == 0)
@@ -50,8 +49,8 @@ namespace Comp2501Game.Systems
 
                      spriteComponent.milisecondsSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
                      if (spriteComponent.milisecondsSinceLastFrame >= (1000 / 
-                         framework[actList.actionList[actList.findAction(curAct)]].attackTimer) /
-                         framework[actList.actionList[actList.findAction(curAct)]].numColumns)
+                         ((framework[actList.actionList[actList.findAction(curAct)]].attackTimer) /
+                         framework[actList.actionList[actList.findAction(curAct)]].numColumns)))
                      {
                          spriteComponent.curColumn = (spriteComponent.curColumn + 1)
                              % (framework[actList.actionList[actList.findAction(curAct)]].numColumns);

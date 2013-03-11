@@ -24,7 +24,7 @@ namespace Comp2501Game
 
                 //game.RegisterSystem(new TestRenderSystem(game));
                 //game.RegisterSystem(new AABBCollisionRenderSystem(game));
-                //game.RegisterSystem(new PlayerInputSystem(game, 1));
+                game.RegisterSystem(new PlayerInputSystem(game, 1));
                 //game.RegisterSystem(new AABBCollisionSystem(game));
                 //game.RegisterSystem(new SATCollisionSystem(game));
                 //game.RegisterSystem(new CollisionRenderSystem(game));
@@ -36,7 +36,7 @@ namespace Comp2501Game
                 game.RegisterSystem(new SpriteRenderer(game));
                 game.RegisterSystem(new AnimationSystem(game, 1));
                 game.AddObject(
-                    new PlayerObject(game, new Vector2(200, 200), 0.0f, new Vector2(0,0), 1, Objects.Components.SpriteType.Yoshi));
+                    new PlayerObject(game, new Vector2(800, 500), 0.0f, new Vector2(0,0), 1, Objects.Components.SpriteType.Yoshi));
                 game.RegisterSystem(new SpriteInitializationSystem(game, 1));
                // game.AddObject(
                //     new TestObject(
@@ -51,7 +51,7 @@ namespace Comp2501Game
                //     new Vector2(clientBounds.Width / 2, 450),
                //     new Rectangle(-clientBounds.Width / 2, -10, clientBounds.Width, 20),
                 //    Color.Red));
-               // game.AddObject(new TimeObject(game, new Vector2 (0, 0), Color.Black));
+                game.AddObject(new TimeObject(game, new Vector2 (0, 0), Color.Black));
 
                 game.Run();
             }

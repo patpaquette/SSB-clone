@@ -61,6 +61,8 @@ namespace Comp2501Game.Systems.Renderer
 
             }
             this._spriteBatch.End();
+
+            base.Update(gameTime);
         }
 
         public override SystemType GetType()

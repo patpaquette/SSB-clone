@@ -22,8 +22,10 @@ namespace Comp2501Game.Systems.StateMod
 
         public override void Update(GameTime gameTime)
         {
+            //Console.WriteLine("here3");
             foreach (GameObject obj in this._objects)
             {
+                //Console.WriteLine("here4");
                 PlayerComponent playerComponent = (PlayerComponent)obj.GetComponent(ComponentType.Player);
                 CurrentActionComponent actionComponent = (CurrentActionComponent)obj.GetComponent(ComponentType.Action);
                 Transform2DComponent positionComponent = (Transform2DComponent)obj.GetComponent(ComponentType.Transform2D);
@@ -142,6 +144,8 @@ namespace Comp2501Game.Systems.StateMod
                     positionComponent.position += new Vector2(1.0f, 0.0f);
                 }
             }
+
+            base.Update(gameTime);
         }
 
 
