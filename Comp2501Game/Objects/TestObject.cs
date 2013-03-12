@@ -39,7 +39,7 @@ namespace Comp2501Game.Objects
             vertices.Add(v4);
 
             this.AddComponent(transformComponent);
-            this.AddComponent(new BoundingBoxComponent(this, new Shape(vertices), active));
+            this.AddComponent(new BoundingBoxComponent(this, new List<Shape>{new Shape(vertices)}, active));
                 
             this.AddComponent(new ColorComponent(this, color));
             this.AddComponent(new PlayerComponent(this, playerNumber));

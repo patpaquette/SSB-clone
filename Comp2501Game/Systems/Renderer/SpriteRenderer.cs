@@ -54,7 +54,7 @@ namespace Comp2501Game.Systems.Renderer
                 int temp = spriteComponent.curRow;
                 //Console.WriteLine((int) Math.Floor(temp / 10.0) + " ");
                 this._spriteBatch.Draw(spriteComponent.spriteSheets[(int) Math.Floor(temp / 10.0)],
-                    transformComponent.position, sourceFrame, Color.White,
+                    transformComponent.GetTranslation(), sourceFrame, Color.White,
                     transformComponent.GetRotationDeg(), new Vector2(0, 0), 1.0f, directionalFlip, 1.0f); 
 
             }

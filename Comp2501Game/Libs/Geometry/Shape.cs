@@ -42,5 +42,17 @@ namespace Comp2501Game.Libs.Geometry
 
             return edges;
         }
+
+        public static Shape BuildRectangle(Rectangle rect)
+        {
+            List<Vector2> vertices = new List<Vector2>();
+
+            vertices.Add(new Vector2(rect.Left, rect.Top));
+            vertices.Add(new Vector2(rect.Right, rect.Top));
+            vertices.Add(new Vector2(rect.Right, rect.Bottom));
+            vertices.Add(new Vector2(rect.Left, rect.Bottom));
+
+            return new Shape(vertices);
+        }
     }
 }

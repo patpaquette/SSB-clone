@@ -36,12 +36,12 @@ namespace Comp2501Game.Systems.StateMod
                 {
                     if (actionComponent.curAction.secondaryAction == SecondaryAction.Walk)
                     {
-                        positionComponent.position += new Vector2(-2.0f, 0f);
+                        positionComponent.AddTranslation(new Vector2(-2.0f, 0f));
                     }
                     else if (actionComponent.curAction.secondaryAction == SecondaryAction.Jump
                         || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Jump)
                     {
-                        positionComponent.position += new Vector2(0.0f, -4.0f);
+                        positionComponent.AddTranslation(new Vector2(0.0f, -4.0f));
                     }
                     else if ((actionComponent.curAction.secondaryAction == SecondaryAction.Falling
                         || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling)
@@ -49,35 +49,35 @@ namespace Comp2501Game.Systems.StateMod
                         || actionComponent.curAction.primaryAction != PrimaryAction.Drift_Left
                         || actionComponent.curAction.primaryAction != PrimaryAction.Drift_Right))
                     {
-                        positionComponent.position += new Vector2(0.0f, 1.0f);
+                        positionComponent.AddTranslation(new Vector2(0.0f, 1.0f));
                     }
                     else if ((actionComponent.curAction.secondaryAction == SecondaryAction.Falling
                         || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling)
                         && (actionComponent.curAction.primaryAction == PrimaryAction.Fall_Faster))
                     {
-                        positionComponent.position += new Vector2(0.0f, 2.0f);
+                        positionComponent.AddTranslation(new Vector2(0.0f, 2.0f));
                     }
                     else if ((actionComponent.curAction.secondaryAction == SecondaryAction.Falling
                         || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling)
                         && (actionComponent.curAction.primaryAction == PrimaryAction.Drift_Left))
                     {
-                        positionComponent.position += new Vector2(-1.0f, 0.0f);
+                        positionComponent.AddTranslation(new Vector2(-1.0f, 0.0f));
                     }
                     else if ((actionComponent.curAction.secondaryAction == SecondaryAction.Falling
                         || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling)
                         && (actionComponent.curAction.primaryAction == PrimaryAction.Drift_Left))
                     {
-                        positionComponent.position += new Vector2(-1.0f, 0.0f);
+                        positionComponent.AddTranslation(new Vector2(-1.0f, 0.0f));
                     }
                     else if (actionComponent.curAction.secondaryAction == SecondaryAction.Shield
                         && actionComponent.curAction.primaryAction == PrimaryAction.Roll_Left)
                     {
-                        positionComponent.position += new Vector2(1.0f, 0.0f);
+                        positionComponent.AddTranslation(new Vector2(1.0f, 0.0f));
                     }
                     else if (actionComponent.curAction.secondaryAction == SecondaryAction.Shield
                         && actionComponent.curAction.primaryAction == PrimaryAction.Roll_Right)
                     {
-                        positionComponent.position += new Vector2(3.0f, 0.0f);
+                        positionComponent.AddTranslation(new Vector2(3.0f, 0.0f));
                     }
 
                 }
@@ -85,63 +85,63 @@ namespace Comp2501Game.Systems.StateMod
                 {
                     if (actionComponent.curAction.secondaryAction == SecondaryAction.Walk)
                     {
-                        positionComponent.position += new Vector2(2.0f, 0f);
+                        positionComponent.AddTranslation(new Vector2(2.0f, 0f));
                     }
                     else if (actionComponent.curAction.secondaryAction == SecondaryAction.Jump
                         || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Jump)
                     {
-                        positionComponent.position += new Vector2(0.0f, -4.0f);
+                        positionComponent.AddTranslation(new Vector2(0.0f, -4.0f));
                     }
                     else if ((actionComponent.curAction.secondaryAction == SecondaryAction.Falling 
                         || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling)
                         && (actionComponent.curAction.primaryAction != PrimaryAction.Fall_Faster || actionComponent.curAction.primaryAction != PrimaryAction.Drift_Left
                         || actionComponent.curAction.primaryAction != PrimaryAction.Drift_Right))
                     {
-                        positionComponent.position += new Vector2(0.0f, 1.0f);
+                        positionComponent.AddTranslation(new Vector2(0.0f, 1.0f));
                     }
                     else if ((actionComponent.curAction.secondaryAction == SecondaryAction.Falling 
                         || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling)
                         && (actionComponent.curAction.primaryAction == PrimaryAction.Fall_Faster))
                     {
-                        positionComponent.position += new Vector2(0.0f, 2.0f);
+                        positionComponent.AddTranslation(new Vector2(0.0f, 2.0f));
                     }
                     else if ((actionComponent.curAction.secondaryAction == SecondaryAction.Falling
                         || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling)
                         && (actionComponent.curAction.primaryAction == PrimaryAction.Drift_Left))
                     {
-                        positionComponent.position += new Vector2(-1.0f, 0.0f);
+                        positionComponent.AddTranslation(new Vector2(-1.0f, 0.0f));
                     }
                     else if ((actionComponent.curAction.secondaryAction == SecondaryAction.Falling
                         || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling)
                         && (actionComponent.curAction.primaryAction == PrimaryAction.Drift_Right))
                     {
-                        positionComponent.position += new Vector2(1.0f, 0.0f);
+                        positionComponent.AddTranslation(new Vector2(1.0f, 0.0f));
                     }
                     else if (actionComponent.curAction.secondaryAction == SecondaryAction.Shield 
                         && actionComponent.curAction.primaryAction == PrimaryAction.Roll_Left)
                     {
-                        positionComponent.position += new Vector2(1.0f, 0.0f);
+                        positionComponent.AddTranslation(new Vector2(1.0f, 0.0f));
                     }
                     else if (actionComponent.curAction.secondaryAction == SecondaryAction.Shield
                         && actionComponent.curAction.primaryAction == PrimaryAction.Roll_Left)
                     {
-                        positionComponent.position += new Vector2(-3.0f, 0.0f);
+                        positionComponent.AddTranslation(new Vector2(-3.0f, 0.0f));
                     }
                     else if (actionComponent.curAction.secondaryAction == SecondaryAction.Shield
                         && actionComponent.curAction.primaryAction == PrimaryAction.Roll_Right)
                     {
-                        positionComponent.position += new Vector2(3.0f, 0.0f);
+                        positionComponent.AddTranslation(new Vector2(3.0f, 0.0f));
                     }
                 }
 
 
                 if (actionComponent.curAction.drift == Drift.Left)
                 {
-                    positionComponent.position += new Vector2(-1.0f, 0.0f);
+                    positionComponent.AddTranslation(new Vector2(-1.0f, 0.0f));
                 }
                 else if (actionComponent.curAction.drift == Drift.Right)
                 {
-                    positionComponent.position += new Vector2(1.0f, 0.0f);
+                    positionComponent.AddTranslation(new Vector2(1.0f, 0.0f));
                 }
             }
 

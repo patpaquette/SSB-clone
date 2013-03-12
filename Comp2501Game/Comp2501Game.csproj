@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityFactory\EnvironmentFactory.cs" />
+    <Compile Include="EntityFactory\DynamicEntityFactory.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameSystem.cs" />
     <Compile Include="Lib.cs" />

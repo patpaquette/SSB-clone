@@ -37,7 +37,11 @@ namespace Comp2501Game.EntityFactory
             MeshComponent meshComponent = new MeshComponent(obstacle, vertices);
             ColorComponent colorComponent = new ColorComponent(obstacle, color);
             BoundingBoxComponent boundingBoxComponent = new BoundingBoxComponent(
-                obstacle, new Shape(vertices), false); 
+                obstacle, 
+                new List<Shape>{
+                    new Shape(vertices)
+                }, 
+                false); 
 
             obstacle.AddComponent(transformComponent);
             obstacle.AddComponent(meshComponent);

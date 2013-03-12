@@ -16,16 +16,14 @@ namespace Comp2501Game.Objects
         {
             Transform2DComponent transformComponent = new Transform2DComponent(
              this,
-             new Vector2(300,500),
+             new Vector2(300,100),
              0.0f,
              new Vector2(1.0f));
-            transformComponent.position = new Vector2(300, 100);
                 
             this.AddComponent(transformComponent);
             this.AddComponent(new PlayerComponent(this, playerNum));
             this.AddComponent(new CurrentActionComponent(this,new ActionComponent(DirectionalAction.Left, SecondaryAction.Stand, PrimaryAction.None)));
             this.AddComponent(new SpriteComponent(this, type, game));
-
         }
             
    

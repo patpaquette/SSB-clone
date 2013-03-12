@@ -57,73 +57,102 @@ namespace Comp2501Game.Systems.Collisions
             BoundingBoxComponent obj1BoundingBox = (BoundingBoxComponent)obj1.GetComponent(ComponentType.BoundingBox);
             Transform2DComponent obj2Transform = (Transform2DComponent)obj2.GetComponent(ComponentType.Transform2D);
             BoundingBoxComponent obj2BoundingBox = (BoundingBoxComponent)obj2.GetComponent(ComponentType.BoundingBox);
-            List<Edge> edges = obj1BoundingBox.GetShape().GetEdges();
-            edges.AddRange(obj2BoundingBox.GetShape().GetEdges());
-            float minDistance = 9999.9f;
-            int edgeCounter = 0;
-            float depth = 0.0f;
+            List<Shape> obj1ColShapes = obj1BoundingBox.GetTransformedShapes();
+            List<Shape> obj2ColShapes = obj2BoundingBox.GetTransformedShapes();
+            bool collision = false;
             Vector2 normal = new Vector2(0.0f, 0.0f);
-            Vector2 Vector2;
             Edge edge;
+            float depth = 0.0f;
 
-
-            foreach (Edge e in edges)
+            foreach (Shape obj1Shape in obj1ColShapes)
             {
-                float obj1Min = 0.0f;
-                float obj1Max = 0.0f;
-                float obj2Min = 0.0f;
-                float obj2Max = 0.0f;
+                if (collision) break;
+                
+                List<Edge> edges = obj1Shape.GetEdges();
 
-                Vector2 v = e.GetNormalizedVector();
-                Vector2 axis = new Vector2(-v.Y, v.X);
-
-                LinearFunctions.ProjectShapeToAxis(
-                    axis, 
-                    obj1BoundingBox.GetTransformedShape(), 
-                    ref obj1Min, 
-                    ref obj1Max);
-
-                LinearFunctions.ProjectShapeToAxis(
-                    axis, 
-                    obj2BoundingBox.GetTransformedShape(), 
-                    ref obj2Min, 
-                    ref obj2Max);
-
-                float distance = LinearFunctions.IntervalDistance(obj1Min, obj1Max, obj2Min, obj2Max);
-
-                if (distance < 0) //projection overlap
+                foreach (Shape obj2Shape in obj2ColShapes)
                 {
-                    distance = Math.Abs(distance);
-                    if (Math.Abs(distance) < Math.Abs(minDistance)) //keep smallest collision vector
+                    List<Edge> allEdges = new List<Edge>();
+                    allEdges.AddRange(edges);
+                    allEdges.AddRange(obj2Shape.GetEdges());
+                    float minDistance = 9999.9f;
+                    int edgeCounter = 0;
+                    
+                    Vector2 Vector2;
+                    
+                    foreach (Edge e in allEdges)
                     {
-                        minDistance = distance;
-                        depth = minDistance;
-                        normal = axis;
+                        float obj1Min = 0.0f;
+                        float obj1Max = 0.0f;
+                        float obj2Min = 0.0f;
+                        float obj2Max = 0.0f;
+
+                        Vector2 v = e.GetNormalizedVector();
+                        Vector2 axis = new Vector2(-v.Y, v.X);
+
+                        LinearFunctions.ProjectShapeToAxis(
+                            axis,
+                            obj1Shape,
+                            ref obj1Min,
+                            ref obj1Max);
+
+                        LinearFunctions.ProjectShapeToAxis(
+                            axis,
+                            obj2Shape,
+                            ref obj2Min,
+                            ref obj2Max);
+
+                        float distance = LinearFunctions.IntervalDistance(obj1Min, obj1Max, obj2Min, obj2Max);
+
+                        if (distance < 0) //projection overlap
+                        {
+                            distance = Math.Abs(distance);
+                            if (Math.Abs(distance) < Math.Abs(minDistance)) //keep smallest collision vector
+                            {
+                                minDistance = distance;
+                                depth = minDistance;
+                                normal = axis;
+                            }
+                            edgeCounter++;
+
+                            if (edgeCounter == allEdges.Count())
+                            {
+                                collision = true;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            //no collision
+                            break;
+                        }
                     }
-                    edgeCounter++;
                 }
-                else
-                {
-                    //no collision
-                    return null;
-                }
+                
             }
 
             //collision
-            Vector2 obj2obj1_vector = obj2Transform.GetTranslation() - obj1Transform.GetTranslation();
-            obj2obj1_vector.Normalize();
-            normal.Normalize();
-
-            if (Vector2.Dot(normal, obj2obj1_vector) > 0)
+            if (collision)
             {
-                normal = normal * -1;
+                Vector2 obj2obj1_vector = obj2Transform.GetTranslation() - obj1Transform.GetTranslation();
+                obj2obj1_vector.Normalize();
+                normal.Normalize();
+
+                if (Vector2.Dot(normal, obj2obj1_vector) > 0)
+                {
+                    normal = normal * -1;
+                }
+
+                obj1Transform.SetTranslation(obj1Transform.GetTranslation() + normal * depth);
+
+                obj1BoundingBox.Collided = true;
+                obj2BoundingBox.Collided = true;
+                return new CollisionInfo(obj1, obj2, depth, normal);
             }
-
-            obj1Transform.SetTranslation(obj1Transform.GetTranslation() + normal * depth);
-
-            obj1BoundingBox.Collided = true;
-            obj2BoundingBox.Collided = true;
-            return new CollisionInfo(obj1, obj2, depth, normal);
+            else
+            {
+                return null;
+            }
         }
 
     }

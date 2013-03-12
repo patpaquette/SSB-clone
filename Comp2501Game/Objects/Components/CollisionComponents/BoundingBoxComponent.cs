@@ -11,38 +11,45 @@ namespace Comp2501Game.Objects.Components.CollisionComponents
     {
         public Boolean Active;
         public Boolean Collided;
-        private Shape _shape;
+        private List<Shape> _shapes;
 
 
-        public BoundingBoxComponent(GameObject parent, Shape shape, Boolean active)
+        public BoundingBoxComponent(GameObject parent, List<Shape> shapes, Boolean active)
             : base(parent)
         {
-            this._shape = shape;
+            this._shapes = shapes;
             this.Active = active;
         }
 
-        public Shape GetShape()
+        public List<Shape> GetShapes()
         {
-            return this._shape;
+            return this._shapes;
         }
 
-        public Shape GetTransformedShape()
+        public List<Shape> GetTransformedShapes()
         {
             Transform2DComponent transformComponent = (Transform2DComponent)ParentEntity.GetComponent(ComponentType.Transform2D);
 
             if (transformComponent != null)
             {
-                List<Vector2> transformedVertices = new List<Vector2>();
+                List<Shape> transformedShapes = new List<Shape>();
 
-                foreach (Vector2 v in this._shape.GetVertices())
+                foreach (Shape shape in this._shapes)
                 {
-                    transformedVertices.Add(new Vector2(v.X + transformComponent.GetTranslation().X, v.Y + transformComponent.GetTranslation().Y));
+                    List<Vector2> transformedVertices = new List<Vector2>();
+
+                    foreach (Vector2 v in shape.GetVertices())
+                    {
+                        transformedVertices.Add(new Vector2(v.X + transformComponent.GetTranslation().X, v.Y + transformComponent.GetTranslation().Y));
+                    }
+
+                    transformedShapes.Add(new Shape(transformedVertices));
                 }
 
-                return new Shape(transformedVertices);
+                return transformedShapes;
             }
 
-            return this._shape;
+            return this._shapes;
         }
 
         public override ComponentType GetType()
