@@ -48,7 +48,7 @@ namespace Comp2501Game.Systems
                      }
 
                      spriteComponent.milisecondsSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-                     if (spriteComponent.milisecondsSinceLastFrame >= (1000 / 
+                     if (spriteComponent.milisecondsSinceLastFrame >= (
                          ((framework[actList.actionList[actList.findAction(curAct)]].attackTimer) /
                          framework[actList.actionList[actList.findAction(curAct)]].numColumns)))
                      {

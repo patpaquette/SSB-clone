@@ -41,7 +41,7 @@ namespace Comp2501Game.Systems.Renderer
                 CurrentActionComponent actionComponent = (CurrentActionComponent)obj.GetComponent(ComponentType.Action);
 
                 Rectangle sourceFrame = new Rectangle(spriteComponent.curColumn * 200,
-                    spriteComponent.curRow * 200,
+                    (spriteComponent.curRow % 10) * 200,
                     200, 200);
                 SpriteEffects directionalFlip = SpriteEffects.None;
 
@@ -51,8 +51,8 @@ namespace Comp2501Game.Systems.Renderer
                     directionalFlip = SpriteEffects.FlipHorizontally;
                 }
 
-                double temp = spriteComponent.curRow;
-                //Console.WriteLine(transformComponent.position.X + " ");
+                int temp = spriteComponent.curRow;
+                //Console.WriteLine((int) Math.Floor(temp / 10.0) + " ");
                 this._spriteBatch.Draw(spriteComponent.spriteSheets[(int) Math.Floor(temp / 10.0)],
                     transformComponent.position, sourceFrame, Color.White,
                     transformComponent.GetRotationDeg(), new Vector2(0, 0), 1.0f, directionalFlip, 1.0f); 
