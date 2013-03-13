@@ -135,6 +135,15 @@ namespace Comp2501Game.Objects.Components
 
                 this.animationFrameWork.Add(actions.actionList[92], new AnimationDirectory(17, 8, 1500));
                 this.animationFrameWork.Add(actions.actionList[93], new AnimationDirectory(17, 8, 1500));
+
+                this.animationFrameWork.Add(actions.actionList[94], new AnimationDirectory(10, 4, 300));
+                this.animationFrameWork.Add(actions.actionList[95], new AnimationDirectory(10, 4, 300));
+                this.animationFrameWork.Add(actions.actionList[96], new AnimationDirectory(10, 4, 300));
+                this.animationFrameWork.Add(actions.actionList[97], new AnimationDirectory(10, 4, 300));
+                this.animationFrameWork.Add(actions.actionList[98], new AnimationDirectory(10, 4, 300));
+                this.animationFrameWork.Add(actions.actionList[99], new AnimationDirectory(10, 4, 300));
+                this.animationFrameWork.Add(actions.actionList[100], new AnimationDirectory(10, 4, 300));
+                this.animationFrameWork.Add(actions.actionList[101], new AnimationDirectory(10, 4, 300));
             }
                 //Console.WriteLine(this.animationFrameWork[new ActionComponent(DirectionalAction.Left, SecondaryAction.Stand, PrimaryAction.None)].attackTimer);
         }

@@ -53,7 +53,7 @@ namespace Comp2501Game.Systems
                             }
                             else if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.A))
                             {
-                                Console.WriteLine("This is C#");
+                                // Console.WriteLine("This is C#");
                                 actionComponent.curAction.primaryAction = PrimaryAction.Up_A;
                                 actionComponent.curAction.secondaryAction = SecondaryAction.Smash;
                                 spriteComponent.curColumn = 0;
