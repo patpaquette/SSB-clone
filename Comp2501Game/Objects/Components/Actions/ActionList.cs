@@ -11,7 +11,7 @@ namespace Comp2501Game.Objects.Components.Actions
 
         public ActionList()
         {
-            actionList = new ActionComponent [102];
+            actionList = new ActionComponent [104];
 
             actionList [0] = new ActionComponent(DirectionalAction.Left, SecondaryAction.Stand, PrimaryAction.None);
             actionList [1] = new ActionComponent(DirectionalAction.Left, SecondaryAction.Stand, PrimaryAction.A);
@@ -124,6 +124,10 @@ namespace Comp2501Game.Objects.Components.Actions
             actionList[99] = new ActionComponent(DirectionalAction.Left, SecondaryAction.Second_Falling, PrimaryAction.Drift_Right);
             actionList[100] = new ActionComponent(DirectionalAction.Right, SecondaryAction.Second_Falling, PrimaryAction.Drift_Left);
             actionList[101] = new ActionComponent(DirectionalAction.Right, SecondaryAction.Second_Falling, PrimaryAction.Drift_Right);
+
+            actionList[102] = new ActionComponent(DirectionalAction.Left, SecondaryAction.Falling, PrimaryAction.Backward_A);
+            actionList[103] = new ActionComponent(DirectionalAction.Right, SecondaryAction.Falling, PrimaryAction.Backward_A);
+
         }
 
         public int findAction(ActionComponent action)

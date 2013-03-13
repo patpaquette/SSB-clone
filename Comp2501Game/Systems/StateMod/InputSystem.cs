@@ -287,35 +287,43 @@ namespace Comp2501Game.Systems
                         if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.A))
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Up_A;
+                            spriteComponent.curColumn = 0;
                         }
                         else if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.B))
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Up_B;
+                            spriteComponent.curColumn = 0;
                         }
                         else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.A))
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Down_A;
+                            spriteComponent.curColumn = 0;
                         }
                         else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.B))
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Down_B;
+                            spriteComponent.curColumn = 0;
                         }
                         else if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.A))
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Forward_A;
+                            spriteComponent.curColumn = 0;
                         }
                         else if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.A))
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Backward_A;
+                            spriteComponent.curColumn = 0;
                         }
                         else if (state.IsKeyDown(Keys.A))
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.A;
+                            spriteComponent.curColumn = 0;
                         }
                         else if (state.IsKeyDown(Keys.Up) 
                             && actionComponent.curAction.secondaryAction != SecondaryAction.Second_Falling)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Second_Jump;
+                            spriteComponent.curColumn = 0;
                         }
                         else if (state.IsKeyDown(Keys.Right))
                         {
@@ -343,18 +351,22 @@ namespace Comp2501Game.Systems
                         if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.A))
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Up_A;
+                            spriteComponent.curColumn = 0;
                         }
                         else if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.B))
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Up_B;
+                            spriteComponent.curColumn = 0;
                         }
                         else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.A))
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Down_A;
+                            spriteComponent.curColumn = 0;
                         }
                         else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.B))
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Down_B;
+                            spriteComponent.curColumn = 0;
                         }
                         else if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.A))
                         {
@@ -363,15 +375,18 @@ namespace Comp2501Game.Systems
                         else if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.A))
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Backward_A;
+                            spriteComponent.curColumn = 0;
                         }
                         else if (state.IsKeyDown(Keys.A))
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.A;
+                            spriteComponent.curColumn = 0;
                         }
                         else if (state.IsKeyDown(Keys.Up) 
                             && actionComponent.curAction.secondaryAction != SecondaryAction.Second_Falling)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Second_Jump;
+                            spriteComponent.curColumn = 0;
                         }
                         else if (state.IsKeyDown(Keys.Right))
                         {
@@ -393,24 +408,24 @@ namespace Comp2501Game.Systems
 
 
 
-                    if (actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling
-                        || actionComponent.curAction.secondaryAction == SecondaryAction.Falling
-                        || actionComponent.curAction.secondaryAction == SecondaryAction.Jump 
-                        || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Jump)
-                    {
-                        if (state.IsKeyDown(Keys.Right))
-                        {
-                            actionComponent.curAction.drift = Drift.Right;
-                        }
-                        else if (state.IsKeyDown(Keys.Left))
-                        {
-                            actionComponent.curAction.drift = Drift.Left;
-                        }
-                    }
-                    else
-                    {
-                        actionComponent.curAction.drift = Drift.None;
-                    }
+                    //if (actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling
+                    //    || actionComponent.curAction.secondaryAction == SecondaryAction.Falling
+                    //    || actionComponent.curAction.secondaryAction == SecondaryAction.Jump 
+                    //    || actionComponent.curAction.secondaryAction == SecondaryAction.Second_Jump)
+                    //{
+                    //    if (state.IsKeyDown(Keys.Right))
+                    //    {
+                    //        actionComponent.curAction.drift = Drift.Right;
+                    //    }
+                    //    else if (state.IsKeyDown(Keys.Left))
+                    //    {
+                    //        actionComponent.curAction.drift = Drift.Left;
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    actionComponent.curAction.drift = Drift.None;
+                    //}
 
                 }
 
