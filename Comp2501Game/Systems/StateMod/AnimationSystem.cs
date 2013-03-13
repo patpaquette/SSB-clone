@@ -42,9 +42,11 @@ namespace Comp2501Game.Systems
                  ActionList actList = spriteComponent.actions;
                  if (playerComponent.PlayerNumber == this.playerNumber)
                  {
+                     Console.WriteLine(actionComponent.curAction.curDirection + " " + actionComponent.curAction.secondaryAction + " " + actionComponent.curAction.primaryAction);
                      if (spriteComponent.curColumn == 0)
                      {
                          spriteComponent.curRow = framework[actList.actionList[actList.findAction(curAct)]].rowNumber;
+                         spriteComponent.curColumn = 1;
                      }
 
                      spriteComponent.milisecondsSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
@@ -63,6 +65,11 @@ namespace Comp2501Game.Systems
                          if (actionComponent.curAction.secondaryAction == SecondaryAction.Jump)
                          {
                              actionComponent.curAction.secondaryAction = SecondaryAction.Falling;
+                             actionComponent.curAction.primaryAction = PrimaryAction.None;
+                         }
+                         else if (actionComponent.curAction.secondaryAction == SecondaryAction.Smash)
+                         {
+                             actionComponent.curAction.secondaryAction = SecondaryAction.Stand;
                              actionComponent.curAction.primaryAction = PrimaryAction.None;
                          }
                          else if (actionComponent.curAction.secondaryAction == SecondaryAction.Second_Jump)

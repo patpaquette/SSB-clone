@@ -73,6 +73,7 @@ namespace Comp2501Game.Systems.StateMod
                         && actionComponent.curAction.primaryAction == PrimaryAction.Roll_Left)
                     {
                         positionComponent.AddTranslation(new Vector2(1.0f, 0.0f));
+                        //positionComponent.position += new Vector2(-3.0f, 0.0f);
                     }
                     else if (actionComponent.curAction.secondaryAction == SecondaryAction.Shield
                         && actionComponent.curAction.primaryAction == PrimaryAction.Roll_Right)
