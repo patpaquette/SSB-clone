@@ -8,10 +8,10 @@ namespace Comp2501Game.Objects.Components
 {
     class Transform2DComponent : ObjectComponent
     {
+        public Matrix Transform;
         private float _rotation;
         private Vector2 _translation;
         private Vector2 _scale;
-        private TestObject testObject;
 
         public Transform2DComponent(GameObject parent, Vector2 translation, float rotationDeg, Vector2 scale)
             : base(parent)
@@ -20,6 +20,8 @@ namespace Comp2501Game.Objects.Components
             this._rotation = rotationDeg * (float)Math.PI / 180;
             this._translation = translation;
             this._scale = scale;
+
+            this.calculateTransform();
         }
 
         /*public Transform2DComponent()
@@ -29,17 +31,22 @@ namespace Comp2501Game.Objects.Components
 
         public Vector2 GetTranslation()
         {
-            return this._translation;
+            Vector3 translation = this.Transform.Translation;
+            return new Vector2(translation.X, translation.Y);
         }
 
         public void SetTranslation(Vector2 translation)
         {
             this._translation = translation;
+            this.calculateTransform();
         }
 
         public void AddTranslation(Vector2 translation)
         {
             this._translation += translation;
+            this.Transform = Matrix.Multiply(
+                this.Transform, Matrix.CreateTranslation(translation.X, translation.Y, 0.0f));
+
         }
 
         public float GetRotationDeg()
@@ -50,6 +57,13 @@ namespace Comp2501Game.Objects.Components
         public void SetRotationDeg(float deg)
         {
             this._rotation = deg * (float)Math.PI / 180;
+            this.calculateTransform();
+        }
+
+        public void SetScale(Vector2 scale)
+        {
+            this._scale = scale;
+            this.calculateTransform();
         }
 
         public Vector2 GetScale()
@@ -60,6 +74,15 @@ namespace Comp2501Game.Objects.Components
         public override ComponentType GetType()
         {
             return ComponentType.Transform2D;
+        }
+
+        private void calculateTransform()
+        {
+            this.Transform = Matrix.CreateRotationZ(this._rotation);
+            this.Transform = Matrix.Multiply(this.Transform, Matrix.CreateScale(this._scale.X, this._scale.Y, 1.0f));
+            this.Transform = Matrix.Multiply(
+                this.Transform,
+                Matrix.CreateTranslation(this._translation.X, this._translation.Y, 0.0f));
         }
     }
 }

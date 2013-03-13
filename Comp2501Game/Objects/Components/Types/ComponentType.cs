@@ -19,6 +19,7 @@ namespace Comp2501Game.Objects.Components
         BoundingBox,
         Speed,
         Transform2D,
-        Mesh
+        Mesh,
+        Gravity
     }
 }

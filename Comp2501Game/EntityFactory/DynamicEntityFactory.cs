@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Comp2501Game.Objects.Components;
 using Comp2501Game.Objects.Components.CollisionComponents;
 using Comp2501Game.Libs.Geometry;
+using Comp2501Game.Objects.Components.Physics;
 
 namespace Comp2501Game.EntityFactory
 {
@@ -35,12 +36,14 @@ namespace Comp2501Game.EntityFactory
             SpriteComponent sprite = new SpriteComponent(entity, spriteType, this._game);
             BoundingBoxComponent bbComponent = new BoundingBoxComponent(entity, boundingBoxes, true);
             CurrentActionComponent caComponent = new CurrentActionComponent(entity, new ActionComponent(DirectionalAction.Left, SecondaryAction.Stand, PrimaryAction.None));
+            GravityComponent gravComponent = new GravityComponent(entity, 1.0f);
 
             entity.AddComponent(playerComponent);
             entity.AddComponent(transformComponent);
             entity.AddComponent(sprite);
             entity.AddComponent(bbComponent);
             entity.AddComponent(caComponent);
+            entity.AddComponent(gravComponent);
 
             return entity;
         }

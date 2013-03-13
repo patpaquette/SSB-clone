@@ -142,6 +142,8 @@ namespace Comp2501Game.Libs.Geometry
 
             foreach (Vector2 v in vertices)
             {
+                Vector2 transformedVector = new Vector2(v.X, v.Y);
+
                 transformedVertices.Add(v + translation);
             }
 

@@ -37,6 +37,7 @@ namespace Comp2501Game
                 game.RegisterSystem(new MovementSystem(game, 1));
                 game.RegisterSystem(new SpriteRenderer(game));
                 game.RegisterSystem(new AnimationSystem(game, 1));
+                game.RegisterSystem(new PhysicsSystem(game));
                 //game.AddObject(
                 //  new PlayerObject(game, 1, Objects.Components.SpriteType.Yoshi));
                 game.AddObject(entityFactory.BuildPlayerControlledEntity(
@@ -46,7 +47,8 @@ namespace Comp2501Game
                     new List<Shape>
                         {
                             Shape.BuildRectangle(new Rectangle(45, 40, 90, 60)),
-                            Shape.BuildRectangle(new Rectangle(60, 100, 120, 60))
+                            Shape.BuildRectangle(new Rectangle(60, 100, 120, 60)),
+                            Shape.BuildRectangle(new Rectangle(125, 160, 40, 30))
                         }));
                         
                 game.RegisterSystem(new SpriteInitializationSystem(game, 1));
