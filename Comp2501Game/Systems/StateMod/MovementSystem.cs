@@ -34,6 +34,8 @@ namespace Comp2501Game.Systems.StateMod
 
                 if (actionComponent.curAction.curDirection == DirectionalAction.Left)
                 {
+                    positionComponent.SetScale(new Vector2(1.0f, 1.0f));
+
                     if (actionComponent.curAction.secondaryAction == SecondaryAction.Walk)
                     {
                         positionComponent.AddTranslation(new Vector2(-2.0f, 0f));
@@ -83,6 +85,8 @@ namespace Comp2501Game.Systems.StateMod
                 }
                 else
                 {
+                    positionComponent.SetScale(new Vector2(-1.0f, 1.0f));
+
                     if (actionComponent.curAction.secondaryAction == SecondaryAction.Walk)
                     {
                         positionComponent.AddTranslation(new Vector2(2.0f, 0f));

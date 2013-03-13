@@ -37,7 +37,7 @@ namespace Comp2501Game.Systems.Renderer
                 ColorComponent colorComponent = (ColorComponent)obj.GetComponent(ComponentType.Color);
                 List<Vector2> transformedVertices = LinearFunctions.GetTransformedVertices(
                     meshComponent.Vertices, 
-                    transformComponent.GetTranslation());
+                    transformComponent.Transform);
                 Vector2 vertexBuffer = transformedVertices[0];
 
                 for (int i = 1; i < transformedVertices.Count; i++)

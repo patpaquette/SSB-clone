@@ -78,8 +78,8 @@ namespace Comp2501Game.Objects.Components
 
         private void calculateTransform()
         {
-            this.Transform = Matrix.CreateRotationZ(this._rotation);
-            this.Transform = Matrix.Multiply(this.Transform, Matrix.CreateScale(this._scale.X, this._scale.Y, 1.0f));
+            this.Transform = Matrix.CreateScale(this._scale.X, this._scale.Y, 1.0f);
+            this.Transform = Matrix.Multiply(this.Transform, Matrix.CreateRotationZ(this._rotation));
             this.Transform = Matrix.Multiply(
                 this.Transform,
                 Matrix.CreateTranslation(this._translation.X, this._translation.Y, 0.0f));

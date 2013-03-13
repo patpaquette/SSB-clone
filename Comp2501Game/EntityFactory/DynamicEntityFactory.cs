@@ -32,7 +32,7 @@ namespace Comp2501Game.EntityFactory
                 entity, 
                 position, 
                 0.0f, 
-                Vector2.One);
+                new Vector2(1.0f, 1.0f));
             SpriteComponent sprite = new SpriteComponent(entity, spriteType, this._game);
             BoundingBoxComponent bbComponent = new BoundingBoxComponent(entity, boundingBoxes, true);
             CurrentActionComponent caComponent = new CurrentActionComponent(entity, new ActionComponent(DirectionalAction.Left, SecondaryAction.Stand, PrimaryAction.None));

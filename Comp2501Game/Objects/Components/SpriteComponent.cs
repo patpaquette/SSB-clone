@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections;
 using Microsoft.Xna.Framework.Graphics;
 using Comp2501Game.Objects.Components.Actions;
+using Microsoft.Xna.Framework;
 
 namespace Comp2501Game.Objects.Components
 {

@@ -136,15 +136,13 @@ namespace Comp2501Game.Libs.Geometry
             }
         }
 
-        public static List<Vector2> GetTransformedVertices(List<Vector2> vertices, Vector2 translation)
+        public static List<Vector2> GetTransformedVertices(List<Vector2> vertices, Matrix transform)
         {
             List<Vector2> transformedVertices = new List<Vector2>();
 
             foreach (Vector2 v in vertices)
             {
-                Vector2 transformedVector = new Vector2(v.X, v.Y);
-
-                transformedVertices.Add(v + translation);
+                transformedVertices.Add(Vector2.Transform(v, transform));
             }
 
             return transformedVertices;

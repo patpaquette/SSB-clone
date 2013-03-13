@@ -42,13 +42,13 @@ namespace Comp2501Game
                 //  new PlayerObject(game, 1, Objects.Components.SpriteType.Yoshi));
                 game.AddObject(entityFactory.BuildPlayerControlledEntity(
                     1,
-                    new Vector2(300,100),
+                    new Vector2(0,0),
                     SpriteType.Yoshi,
                     new List<Shape>
                         {
-                            Shape.BuildRectangle(new Rectangle(45, 40, 90, 60)),
-                            Shape.BuildRectangle(new Rectangle(60, 100, 120, 60)),
-                            Shape.BuildRectangle(new Rectangle(125, 160, 40, 30))
+                            Shape.BuildRectangle(new Rectangle(-55, -60, 90, 60)),
+                            Shape.BuildRectangle(new Rectangle(-40, 0, 120, 60)),
+                            Shape.BuildRectangle(new Rectangle(25, 60, 40, 30))
                         }));
                         
                 game.RegisterSystem(new SpriteInitializationSystem(game, 1));
