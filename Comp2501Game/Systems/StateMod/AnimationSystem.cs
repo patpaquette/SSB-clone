@@ -145,6 +145,12 @@ namespace Comp2501Game.Systems
                                  actionComponent.curAction.primaryAction = PrimaryAction.Left;
                              }
                          }
+                         else if (actionComponent.curAction.secondaryAction == SecondaryAction.Throw)
+                         {
+                             actionComponent.curAction.secondaryAction = SecondaryAction.Stand;
+                             actionComponent.curAction.primaryAction = PrimaryAction.None;
+
+                         }
                          else
                          {
                              actionComponent.curAction.primaryAction = PrimaryAction.None;

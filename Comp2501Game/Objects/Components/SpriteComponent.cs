@@ -162,8 +162,8 @@ namespace Comp2501Game.Objects.Components
                 this.animationFrameWork.Add(actions.actionList[1], new AnimationDirectory(2, 9, 500));
                 this.animationFrameWork.Add(actions.actionList[2], new AnimationDirectory(17, 8, 1500));
                 this.animationFrameWork.Add(actions.actionList[3], new AnimationDirectory(2, 9, 500)); // same as above
-                this.animationFrameWork.Add(actions.actionList[4], new AnimationDirectory(16, 8, 800));
-                this.animationFrameWork.Add(actions.actionList[5], new AnimationDirectory(15, 8, 800));
+                this.animationFrameWork.Add(actions.actionList[4], new AnimationDirectory(15, 8, 800));
+                this.animationFrameWork.Add(actions.actionList[5], new AnimationDirectory(16, 8, 3000));
                 this.animationFrameWork.Add(actions.actionList[6], new AnimationDirectory(6, 8, 1000));
                 this.animationFrameWork.Add(actions.actionList[7], new AnimationDirectory(5, 8, 1000));
                 this.animationFrameWork.Add(actions.actionList[8], new AnimationDirectory(7, 8, 1000));
@@ -182,9 +182,9 @@ namespace Comp2501Game.Objects.Components
                 this.animationFrameWork.Add(actions.actionList[21], new AnimationDirectory(10, 4, 300));
                 this.animationFrameWork.Add(actions.actionList[22], new AnimationDirectory(10, 4, 300));
                 this.animationFrameWork.Add(actions.actionList[23], new AnimationDirectory(13, 8, 1200));
-                this.animationFrameWork.Add(actions.actionList[24], new AnimationDirectory(16, 8, 800));
-                this.animationFrameWork.Add(actions.actionList[25], new AnimationDirectory(10, 7, 1000));
-                this.animationFrameWork.Add(actions.actionList[26], new AnimationDirectory(15, 8, 800));
+                this.animationFrameWork.Add(actions.actionList[24], new AnimationDirectory(15, 8, 800));
+                this.animationFrameWork.Add(actions.actionList[25], new AnimationDirectory(9, 8, 1000));
+                this.animationFrameWork.Add(actions.actionList[26], new AnimationDirectory(16, 8, 3000));
                 this.animationFrameWork.Add(actions.actionList[27], new AnimationDirectory(11, 8, 1200));
                 //TODO  spriteComponent.animationFrameWork.Add(new CurrentActionComponent (obj, DirectionalAction.Left, SecondaryAction.Falling , PrimaryAction.Backward_A), new AnimationDirectory( , , ));
                 this.animationFrameWork.Add(actions.actionList[28], new AnimationDirectory(12, 8, 1000));
@@ -193,9 +193,9 @@ namespace Comp2501Game.Objects.Components
                 this.animationFrameWork.Add(actions.actionList[31], new AnimationDirectory(10, 4, 300));
                 this.animationFrameWork.Add(actions.actionList[32], new AnimationDirectory(10, 4, 300));
                 this.animationFrameWork.Add(actions.actionList[33], new AnimationDirectory(13, 8, 1200));
-                this.animationFrameWork.Add(actions.actionList[34], new AnimationDirectory(16, 8, 800));
+                this.animationFrameWork.Add(actions.actionList[34], new AnimationDirectory(15, 8, 800));
                 this.animationFrameWork.Add(actions.actionList[35], new AnimationDirectory(10, 7, 1000));
-                this.animationFrameWork.Add(actions.actionList[36], new AnimationDirectory(15, 8, 800));
+                this.animationFrameWork.Add(actions.actionList[36], new AnimationDirectory(16, 8, 3000));
                 this.animationFrameWork.Add(actions.actionList[37], new AnimationDirectory(11, 8, 1200));
                 //spriteComponent.animationFrameWork.Add(new CurrentActionComponent (obj, DirectionalAction.Left, SecondaryAction.Second_Falling , PrimaryAction.Backward_A), new AnimationDirectory( , , ));
                 this.animationFrameWork.Add(actions.actionList[38], new AnimationDirectory(12, 8, 1000));
@@ -211,8 +211,8 @@ namespace Comp2501Game.Objects.Components
                 this.animationFrameWork.Add(actions.actionList[47], new AnimationDirectory(2, 9, 500));
                 this.animationFrameWork.Add(actions.actionList[48], new AnimationDirectory(17, 8, 1500));
                 this.animationFrameWork.Add(actions.actionList[49], new AnimationDirectory(2, 9, 500)); // same as above
-                this.animationFrameWork.Add(actions.actionList[50], new AnimationDirectory(16, 8, 800));
-                this.animationFrameWork.Add(actions.actionList[51], new AnimationDirectory(15, 8, 800));
+                this.animationFrameWork.Add(actions.actionList[50], new AnimationDirectory(15, 8, 800));
+                this.animationFrameWork.Add(actions.actionList[51], new AnimationDirectory(16, 8, 3000));
                 this.animationFrameWork.Add(actions.actionList[52], new AnimationDirectory(6, 8, 1000));
                 this.animationFrameWork.Add(actions.actionList[53], new AnimationDirectory(5, 8, 1000));
                 this.animationFrameWork.Add(actions.actionList[54], new AnimationDirectory(7, 8, 1000));
@@ -224,16 +224,16 @@ namespace Comp2501Game.Objects.Components
                 this.animationFrameWork.Add(actions.actionList[60], new AnimationDirectory(18, 8, 400));
                 this.animationFrameWork.Add(actions.actionList[61], new AnimationDirectory(26, 8, 500));
                 this.animationFrameWork.Add(actions.actionList[62], new AnimationDirectory(27, 8, 500));
-                this.animationFrameWork.Add(actions.actionList[63], new AnimationDirectory(22, 8, 400));
-                this.animationFrameWork.Add(actions.actionList[64], new AnimationDirectory(25, 8, 400));
-                this.animationFrameWork.Add(actions.actionList[65], new AnimationDirectory(23, 8, 400));
-                this.animationFrameWork.Add(actions.actionList[66], new AnimationDirectory(24, 8, 400));
+                this.animationFrameWork.Add(actions.actionList[63], new AnimationDirectory(22, 3, 400));
+                this.animationFrameWork.Add(actions.actionList[64], new AnimationDirectory(25, 3, 400));
+                this.animationFrameWork.Add(actions.actionList[65], new AnimationDirectory(23, 3, 400));
+                this.animationFrameWork.Add(actions.actionList[66], new AnimationDirectory(24, 3, 400));
                 this.animationFrameWork.Add(actions.actionList[67], new AnimationDirectory(10, 4, 300));
                 this.animationFrameWork.Add(actions.actionList[68], new AnimationDirectory(10, 4, 300));
                 this.animationFrameWork.Add(actions.actionList[69], new AnimationDirectory(13, 8, 1200));
-                this.animationFrameWork.Add(actions.actionList[70], new AnimationDirectory(16, 8, 800));
-                this.animationFrameWork.Add(actions.actionList[71], new AnimationDirectory(10, 7, 1000));
-                this.animationFrameWork.Add(actions.actionList[72], new AnimationDirectory(15, 8, 800));
+                this.animationFrameWork.Add(actions.actionList[70], new AnimationDirectory(15, 8, 800));
+                this.animationFrameWork.Add(actions.actionList[71], new AnimationDirectory(9, 8, 1000));
+                this.animationFrameWork.Add(actions.actionList[72], new AnimationDirectory(16, 8, 3000));
                 this.animationFrameWork.Add(actions.actionList[73], new AnimationDirectory(11, 8, 1200));
                 //TODO  spriteComponent.animationFrameWork.Add(new CurrentActionComponent (obj, DirectionalAction.Left, SecondaryAction.Falling , PrimaryAction.Backward_A), new AnimationDirectory( , , ));
                 this.animationFrameWork.Add(actions.actionList[74], new AnimationDirectory(12, 8, 1000));
@@ -242,22 +242,22 @@ namespace Comp2501Game.Objects.Components
                 this.animationFrameWork.Add(actions.actionList[77], new AnimationDirectory(10, 4, 300));
                 this.animationFrameWork.Add(actions.actionList[78], new AnimationDirectory(10, 4, 300));
                 this.animationFrameWork.Add(actions.actionList[79], new AnimationDirectory(13, 8, 1200));
-                this.animationFrameWork.Add(actions.actionList[80], new AnimationDirectory(16, 8, 800));
-                this.animationFrameWork.Add(actions.actionList[81], new AnimationDirectory(10, 7, 1000));
-                this.animationFrameWork.Add(actions.actionList[82], new AnimationDirectory(15, 8, 800));
+                this.animationFrameWork.Add(actions.actionList[80], new AnimationDirectory(15, 8, 800));
+                this.animationFrameWork.Add(actions.actionList[81], new AnimationDirectory(9, 7, 1000));
+                this.animationFrameWork.Add(actions.actionList[82], new AnimationDirectory(16, 8, 3000));
                 this.animationFrameWork.Add(actions.actionList[83], new AnimationDirectory(11, 8, 1200));
                 //spriteComponent.animationFrameWork.Add(new CurrentActionComponent (obj, DirectionalAction.Left, SecondaryAction.Second_Falling , PrimaryAction.Backward_A), new AnimationDirectory( , , ));
                 this.animationFrameWork.Add(actions.actionList[84], new AnimationDirectory(12, 8, 1000));
                 this.animationFrameWork.Add(actions.actionList[85], new AnimationDirectory(17, 8, 1000));
-                this.animationFrameWork.Add(actions.actionList[86], new AnimationDirectory(22, 8, 400));
-                this.animationFrameWork.Add(actions.actionList[87], new AnimationDirectory(25, 8, 400));
-                this.animationFrameWork.Add(actions.actionList[88], new AnimationDirectory(23, 8, 400));
-                this.animationFrameWork.Add(actions.actionList[89], new AnimationDirectory(24, 8, 400));
+                this.animationFrameWork.Add(actions.actionList[86], new AnimationDirectory(22, 3, 400));
+                this.animationFrameWork.Add(actions.actionList[87], new AnimationDirectory(25, 3, 400));
+                this.animationFrameWork.Add(actions.actionList[88], new AnimationDirectory(23, 3, 400));
+                this.animationFrameWork.Add(actions.actionList[89], new AnimationDirectory(24, 3, 400));
                 this.animationFrameWork.Add(actions.actionList[90], new AnimationDirectory(26, 8, 500));
                 this.animationFrameWork.Add(actions.actionList[91], new AnimationDirectory(27, 8, 500));
 
-                this.animationFrameWork.Add(actions.actionList[92], new AnimationDirectory(17, 8, 1500));
-                this.animationFrameWork.Add(actions.actionList[93], new AnimationDirectory(17, 8, 1500));
+                this.animationFrameWork.Add(actions.actionList[92], new AnimationDirectory(30, 4, 500));
+                this.animationFrameWork.Add(actions.actionList[93], new AnimationDirectory(30, 4, 500));
 
                 this.animationFrameWork.Add(actions.actionList[94], new AnimationDirectory(10, 4, 300));
                 this.animationFrameWork.Add(actions.actionList[95], new AnimationDirectory(10, 4, 300));
@@ -271,8 +271,21 @@ namespace Comp2501Game.Objects.Components
                 this.animationFrameWork.Add(actions.actionList[102], new AnimationDirectory(29, 8, 1200));
                 this.animationFrameWork.Add(actions.actionList[103], new AnimationDirectory(29, 8, 1200));
 
-                this.animationFrameWork.Add(actions.actionList[104], new AnimationDirectory(17, 8, 1500));
-                this.animationFrameWork.Add(actions.actionList[105], new AnimationDirectory(17, 8, 1500));
+                this.animationFrameWork.Add(actions.actionList[104], new AnimationDirectory(30, 4, 500));
+                this.animationFrameWork.Add(actions.actionList[105], new AnimationDirectory(30, 4, 500));
+
+                this.animationFrameWork.Add(actions.actionList[106], new AnimationDirectory(31, 6, 500));
+                this.animationFrameWork.Add(actions.actionList[107], new AnimationDirectory(32, 10, 800));
+                this.animationFrameWork.Add(actions.actionList[108], new AnimationDirectory(32, 10, 800));
+                this.animationFrameWork.Add(actions.actionList[109], new AnimationDirectory(31, 6, 500));
+
+                this.animationFrameWork.Add(actions.actionList[110], new AnimationDirectory(29, 8, 1200));
+                this.animationFrameWork.Add(actions.actionList[111], new AnimationDirectory(29, 8, 1200));
+
+                this.animationFrameWork.Add(actions.actionList[112], new AnimationDirectory(31, 1, 10));
+                this.animationFrameWork.Add(actions.actionList[113], new AnimationDirectory(31, 1, 10));
+                this.animationFrameWork.Add(actions.actionList[114], new AnimationDirectory(31, 1, 10));
+                this.animationFrameWork.Add(actions.actionList[115], new AnimationDirectory(31, 1, 10));
             }
                 //Console.WriteLine(this.animationFrameWork[new ActionComponent(DirectionalAction.Left, SecondaryAction.Stand, PrimaryAction.None)].attackTimer);
         }

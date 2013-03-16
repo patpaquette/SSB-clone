@@ -32,7 +32,9 @@ namespace Comp2501Game.Objects.Components
         Thrown_Object,
         Second_Hit,
         Landing,
-        Throw
+        Throw,
+        Grab,
+        Grabbed
     }
 
     public enum PrimaryAction

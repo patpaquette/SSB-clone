@@ -29,7 +29,7 @@ namespace Comp2501Game
 
                 game.RegisterSystem(new SATCollisionSystem(game));
                 game.RegisterSystem(new CollisionRenderSystem(game));
-                game.RegisterSystem(new PlayerInputSystem(game, 1));
+                //game.RegisterSystem(new PlayerInputSystem(game, 1));
                 //game.RegisterSystem(new TimerSystem(game));
                 //game.RegisterSystem(new TimerRenderSystem(game));
                 game.RegisterSystem(new LinebatchMeshRenderSystem(game));

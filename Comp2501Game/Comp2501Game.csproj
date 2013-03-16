@@ -155,7 +155,9 @@
     <Compile Include="Systems\StateMod\AnimationSystem.cs" />
     <Compile Include="Systems\StateMod\HealthSystem.cs" />
     <Compile Include="Systems\StateMod\InputSystem.cs" />
-    <Compile Include="Systems\StateMod\MovementSystem.cs" />
+    <Compile Include="Systems\StateMod\MovementSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Systems\StateMod\PhysicsSystem.cs" />
     <Compile Include="Systems\StateMod\PlayerInputSystem.cs" />
     <Compile Include="Systems\Initializer\SpriteInitializationSystem.cs" />
