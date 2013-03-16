@@ -43,7 +43,7 @@ namespace Comp2501Game
                 game.AddObject(entityFactory.BuildPlayerControlledEntity(
                     1,
                     new Vector2(0,0),
-                    SpriteType.Yoshi,
+                    SpriteType.Kirby,
                     new List<Shape>
                         {
                             Shape.BuildRectangle(new Rectangle(-55, -60, 90, 60)),

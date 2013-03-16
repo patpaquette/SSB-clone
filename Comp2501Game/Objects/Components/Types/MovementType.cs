@@ -31,7 +31,8 @@ namespace Comp2501Game.Objects.Components
         Second_Flying, // same as flying jsut with no jumps left (used both already or used a jump after being hit and has not touched gorund)
         Thrown_Object,
         Second_Hit,
-        Landing
+        Landing,
+        Throw
     }
 
     public enum PrimaryAction

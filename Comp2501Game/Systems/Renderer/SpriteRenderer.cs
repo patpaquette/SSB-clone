@@ -45,8 +45,7 @@ namespace Comp2501Game.Systems.Renderer
                     200, 200);
                 SpriteEffects directionalFlip = SpriteEffects.None;
 
-                if (spriteComponent.CharacterType == SpriteType.Yoshi 
-                    && actionComponent.curAction.curDirection == DirectionalAction.Right)
+                if (actionComponent.curAction.curDirection == DirectionalAction.Right)
                 {
                     directionalFlip = SpriteEffects.FlipHorizontally;
                 }
