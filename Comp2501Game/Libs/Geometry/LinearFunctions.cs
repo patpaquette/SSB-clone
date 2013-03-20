@@ -147,5 +147,11 @@ namespace Comp2501Game.Libs.Geometry
 
             return transformedVertices;
         }
+
+        public static Shape GetTransformedShape(Shape shape, Matrix transform)
+        {
+            Shape newShape = new Shape(LinearFunctions.GetTransformedVertices(shape.GetVertices(), transform));
+            return newShape;
+        }
     }
 }

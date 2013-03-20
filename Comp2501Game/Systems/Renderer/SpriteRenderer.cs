@@ -32,6 +32,8 @@ namespace Comp2501Game.Systems.Renderer
 
         public override void Update(GameTime gameTime)
         {
+            this.setupRenderingState();
+
             this._spriteBatch.Begin();
 
             foreach (GameObject obj in this._objects)
@@ -45,7 +47,8 @@ namespace Comp2501Game.Systems.Renderer
                     200, 200);
                 SpriteEffects directionalFlip = SpriteEffects.None;
 
-                if (actionComponent.curAction.curDirection == DirectionalAction.Right)
+                //if (actionComponent.curAction.curDirection == DirectionalAction.Right)
+                if (transformComponent.GetScale().X == -1)
                 {
                     directionalFlip = SpriteEffects.FlipHorizontally;
                 }
@@ -72,6 +75,11 @@ namespace Comp2501Game.Systems.Renderer
         {
             return SystemType.Renderer;
         }
-        
+
+        private void setupRenderingState()
+        {
+            this._game.GraphicsDevice.RasterizerState = RasterizerState.CullNone;
+            this._game.GraphicsDevice.DepthStencilState = DepthStencilState.None;
+        }
     }
 }

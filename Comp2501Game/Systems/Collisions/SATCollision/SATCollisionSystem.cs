@@ -57,8 +57,8 @@ namespace Comp2501Game.Systems.Collisions
             BoundingBoxComponent obj1BoundingBox = (BoundingBoxComponent)obj1.GetComponent(ComponentType.BoundingBox);
             Transform2DComponent obj2Transform = (Transform2DComponent)obj2.GetComponent(ComponentType.Transform2D);
             BoundingBoxComponent obj2BoundingBox = (BoundingBoxComponent)obj2.GetComponent(ComponentType.BoundingBox);
-            List<Shape> obj1ColShapes = obj1BoundingBox.GetTransformedShapes();
-            List<Shape> obj2ColShapes = obj2BoundingBox.GetTransformedShapes();
+            List<Shape> obj1ColShapes = obj1BoundingBox.GetShapes();
+            List<Shape> obj2ColShapes = obj2BoundingBox.GetShapes();
             bool collision = false;
             Vector2 normal = new Vector2(0.0f, 0.0f);
             Edge edge;
@@ -92,13 +92,13 @@ namespace Comp2501Game.Systems.Collisions
 
                         LinearFunctions.ProjectShapeToAxis(
                             axis,
-                            obj1Shape,
+                            LinearFunctions.GetTransformedShape(obj1Shape, obj1Transform.Transform),
                             ref obj1Min,
                             ref obj1Max);
 
                         LinearFunctions.ProjectShapeToAxis(
                             axis,
-                            obj2Shape,
+                            LinearFunctions.GetTransformedShape(obj2Shape, obj2Transform.Transform),
                             ref obj2Min,
                             ref obj2Max);
 

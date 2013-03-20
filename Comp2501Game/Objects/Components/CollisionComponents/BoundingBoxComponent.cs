@@ -25,33 +25,7 @@ namespace Comp2501Game.Objects.Components.CollisionComponents
         {
             return this._shapes;
         }
-
-        public List<Shape> GetTransformedShapes()
-        {
-            Transform2DComponent transformComponent = (Transform2DComponent)ParentEntity.GetComponent(ComponentType.Transform2D);
-
-            if (transformComponent != null)
-            {
-                List<Shape> transformedShapes = new List<Shape>();
-
-                foreach (Shape shape in this._shapes)
-                {
-                    List<Vector2> transformedVertices = new List<Vector2>();
-
-                    foreach (Vector2 v in shape.GetVertices())
-                    {
-                        transformedVertices.Add(new Vector2(v.X + transformComponent.GetTranslation().X, v.Y + transformComponent.GetTranslation().Y));
-                    }
-
-                    transformedShapes.Add(new Shape(transformedVertices));
-                }
-
-                return transformedShapes;
-            }
-
-            return this._shapes;
-        }
-
+ 
         public override ComponentType GetType()
         {
             return ComponentType.BoundingBox;

@@ -22,28 +22,48 @@ namespace Comp2501Game.EntityFactory
         public GameObject BuildPlayerControlledEntity(
             int playerNumber,
             Vector2 position,
+            float rotation,
+            Vector2 scale,
+            SpriteType spriteType,
+            List<Shape> boundingBoxes)
+        {
+            GameObject entity = this.BuildDynamicEntity(position, rotation, scale, spriteType, boundingBoxes);
+
+            PlayerComponent playerComponent = new PlayerComponent(entity, playerNumber);
+
+            entity.AddComponent(playerComponent);
+
+            return entity;
+        }
+
+        public GameObject BuildDynamicEntity(
+            Vector2 position,
+            float rotation,
+            Vector2 scale,
             SpriteType spriteType,
             List<Shape> boundingBoxes)
         {
             GameObject entity = new GameObject(this._game);
 
-            PlayerComponent playerComponent = new PlayerComponent(entity, playerNumber);
+            
             Transform2DComponent transformComponent = new Transform2DComponent(
-                entity, 
-                position, 
-                0.0f, 
-                new Vector2(1.0f, 1.0f));
+                entity,
+                position,
+                rotation,
+                scale);
             SpriteComponent sprite = new SpriteComponent(entity, spriteType, this._game);
             BoundingBoxComponent bbComponent = new BoundingBoxComponent(entity, boundingBoxes, true);
             CurrentActionComponent caComponent = new CurrentActionComponent(entity, new ActionComponent(DirectionalAction.Left, SecondaryAction.Stand, PrimaryAction.None));
             GravityComponent gravComponent = new GravityComponent(entity, 1.0f);
+            MotionPropertiesComponent motionComponent = new MotionPropertiesComponent(entity, 1.0f);
 
-            entity.AddComponent(playerComponent);
+            
             entity.AddComponent(transformComponent);
             entity.AddComponent(sprite);
             entity.AddComponent(bbComponent);
             entity.AddComponent(caComponent);
             entity.AddComponent(gravComponent);
+            entity.AddComponent(motionComponent);
 
             return entity;
         }

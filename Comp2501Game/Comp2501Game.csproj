@@ -127,7 +127,9 @@
     <Compile Include="Objects\Components\Actions\CurrentActionComponent.cs" />
     <Compile Include="Objects\Components\Holder\AnimationDirectory.cs" />
     <Compile Include="Objects\Components\MeshComponent.cs" />
+    <Compile Include="Objects\Components\Physics\Impulse.cs" />
     <Compile Include="Objects\Components\Physics\GravityComponent.cs" />
+    <Compile Include="Objects\Components\Physics\MotionPropertiesComponent.cs" />
     <Compile Include="Objects\Components\PositionComponent.cs" />
     <Compile Include="Objects\Components\Transform2DComponent.cs" />
     <Compile Include="Objects\Components\Types\ComponentType.cs" />

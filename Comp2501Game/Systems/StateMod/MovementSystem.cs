@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Comp2501Game.Objects.Components;
 using Microsoft.Xna.Framework;
+using Comp2501Game.Objects.Components.Physics;
 
 namespace Comp2501Game.Systems.StateMod
 {
@@ -14,9 +15,9 @@ namespace Comp2501Game.Systems.StateMod
         public MovementSystem(Game1 game, int playerNum)
             : base(game)
         {
-            this._componentDependencies.Add(ComponentType.Player);
             this._componentDependencies.Add(ComponentType.Action);
             this._componentDependencies.Add(ComponentType.Transform2D);
+            this._componentDependencies.Add(ComponentType.MotionProperties);
             this.playerNumber = playerNum;
         }
 
@@ -25,16 +26,17 @@ namespace Comp2501Game.Systems.StateMod
             //Console.WriteLine("here3");
             foreach (GameObject obj in this._objects)
             {
-                //Console.WriteLine("here4");
-                PlayerComponent playerComponent = (PlayerComponent)obj.GetComponent(ComponentType.Player);
+                //Console.WriteLine("here4")
                 CurrentActionComponent actionComponent = (CurrentActionComponent)obj.GetComponent(ComponentType.Action);
                 Transform2DComponent positionComponent = (Transform2DComponent)obj.GetComponent(ComponentType.Transform2D);
+                MotionPropertiesComponent motionComponent = (MotionPropertiesComponent)obj.GetComponent(ComponentType.MotionProperties);
 
                 Vector2 tbAdded = new Vector2(0, 0);
 
                 if (actionComponent.curAction.secondaryAction == SecondaryAction.Walk)
                 {
                     tbAdded += new Vector2(-2, 0);
+                    positionComponent.SetScale(new Vector2(1.0f, 1.0f));
                 }
                 
                 if (actionComponent.curAction.primaryAction == PrimaryAction.Roll_Right)
@@ -70,13 +72,10 @@ namespace Comp2501Game.Systems.StateMod
                 }
 
 
-
-
-
-
                 if (actionComponent.curAction.curDirection == DirectionalAction.Right)
                 {
                     tbAdded.X = -tbAdded.X;
+                    positionComponent.SetScale(new Vector2(-1.0f, 1.0f));
                 }
 
                 if (actionComponent.curAction.drift == Drift.Left)
@@ -90,6 +89,9 @@ namespace Comp2501Game.Systems.StateMod
 
                 positionComponent.AddTranslation(tbAdded);
 
+                positionComponent.AddTranslation(motionComponent.VelocityVector * gameTime.ElapsedGameTime.Milliseconds / 1000.0f);
+
+                motionComponent.ResetForces();
                 //if (actionComponent.curAction.curDirection == DirectionalAction.Left)
                 //{
                 //    positionComponent.SetScale(new Vector2(1.0f, 1.0f));

@@ -15,7 +15,7 @@ namespace Comp2501Game.Systems
         public SpriteInitializationSystem(Game1 game, int num)
             :base(game)
         {
-            this._componentDependencies.Add(ComponentType.Player);
+            //this._componentDependencies.Add(ComponentType.Player);
             this._componentDependencies.Add(ComponentType.Sprite);
             this.playerNumber = num;
         }
@@ -29,11 +29,11 @@ namespace Comp2501Game.Systems
         {
             foreach (GameObject obj in this._objects)
             {
-                PlayerComponent playerComponent = (PlayerComponent)obj.GetComponent(ComponentType.Player);
+                //PlayerComponent playerComponent = (PlayerComponent)obj.GetComponent(ComponentType.Player);
                 SpriteComponent spriteComponent = (SpriteComponent)obj.GetComponent(ComponentType.Sprite);
 
-                if (playerComponent.PlayerNumber == this.playerNumber)
-                {
+                //if (playerComponent.PlayerNumber == this.playerNumber)
+                //{
                     if (spriteComponent.CharacterType == SpriteType.Yoshi)
                     {
                         spriteComponent.spriteSheets[0] = this.Game.Content.Load<Texture2D>(@"Images/Yoshi_Sprite_Sheet1");
@@ -50,7 +50,7 @@ namespace Comp2501Game.Systems
                         spriteComponent.spriteSheets[3] = this.Game.Content.Load<Texture2D>(@"Images/Kirby_Sprite_Sheet4");
                     }
                       
-                }
+                //}
                 base.Initialize();
             }
         }

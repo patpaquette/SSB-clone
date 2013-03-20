@@ -34,23 +34,35 @@ namespace Comp2501Game
                 //game.RegisterSystem(new TimerRenderSystem(game));
                 game.RegisterSystem(new LinebatchMeshRenderSystem(game));
                 game.RegisterSystem(new InputSystem(game, 1));
-                game.RegisterSystem(new MovementSystem(game, 1));
                 game.RegisterSystem(new SpriteRenderer(game));
                 game.RegisterSystem(new AnimationSystem(game, 1));
                 game.RegisterSystem(new PhysicsSystem(game));
+                game.RegisterSystem(new MovementSystem(game, 1));
                 //game.AddObject(
                 //  new PlayerObject(game, 1, Objects.Components.SpriteType.Yoshi));
                 game.AddObject(entityFactory.BuildPlayerControlledEntity(
                     1,
-                    new Vector2(0,0),
-                    SpriteType.Kirby,
+                    new Vector2(100,0),
+                    0.0f,
+                    new Vector2(1.0f, 1.0f),
+                    SpriteType.Yoshi,
                     new List<Shape>
                         {
                             Shape.BuildRectangle(new Rectangle(-55, -60, 90, 60)),
                             Shape.BuildRectangle(new Rectangle(-40, 0, 120, 60)),
                             Shape.BuildRectangle(new Rectangle(25, 60, 40, 30))
                         }));
-                        
+
+                game.AddObject(entityFactory.BuildDynamicEntity(
+                    new Vector2(500, 0),
+                    0.0f,
+                    new Vector2(1.0f, 1.0f),
+                    SpriteType.Kirby,
+                    new List<Shape>
+                        {
+                            Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
+                        }));
+
                 game.RegisterSystem(new SpriteInitializationSystem(game, 1));
 
                 //game.AddObject(new TestObject(game, new Vector2(300, 300), 100, 100, Color.Red, 1, true));

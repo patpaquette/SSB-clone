@@ -15,7 +15,7 @@ namespace Comp2501Game.Systems.StateMod
         public PhysicsSystem(Game1 game)
             : base(game)
         {
-            this._componentDependencies.Add(ComponentType.Transform2D);
+            this._componentDependencies.Add(ComponentType.MotionProperties);
             this.GravityForce = 300.0f;
         }
 
@@ -28,16 +28,20 @@ namespace Comp2501Game.Systems.StateMod
         {
             foreach (GameObject obj in this._objects)
             {
-                Transform2DComponent transformComponent = (Transform2DComponent)obj.GetComponent(ComponentType.Transform2D);
+                MotionPropertiesComponent motionComponent = (MotionPropertiesComponent)obj.GetComponent(ComponentType.MotionProperties);
+
                 if (obj.HasComponent(ComponentType.Gravity))
                 {
                     GravityComponent gravComponent = (GravityComponent)obj.GetComponent(ComponentType.Gravity);
-                    transformComponent.AddTranslation(
+
+                    motionComponent.AddForce(
                         new Vector2(
                             0.0f, 
-                            gameTime.ElapsedGameTime.Milliseconds * this.GravityForce * gravComponent.StrengthFactor / 1000.0f));
-                    
+                            this.GravityForce * gravComponent.StrengthFactor
+                    ));
                 }
+
+                this.resolveForces(motionComponent, gameTime.ElapsedGameTime.Milliseconds);
             }
 
             base.Update(gameTime);
@@ -46,6 +50,14 @@ namespace Comp2501Game.Systems.StateMod
         public override SystemType GetType()
         {
             return SystemType.StateModifier;
+        }
+
+        private void resolveForces(MotionPropertiesComponent motionComponent, int timestep)
+        {
+            motionComponent.AccelerationVector = 
+                motionComponent.AggregateForcesVector / motionComponent.Mass;
+            motionComponent.VelocityVector += 
+                motionComponent.AccelerationVector * timestep / 1000.0f;
         }
     }
 }

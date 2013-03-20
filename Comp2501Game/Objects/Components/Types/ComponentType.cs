@@ -20,6 +20,7 @@ namespace Comp2501Game.Objects.Components
         Speed,
         Transform2D,
         Mesh,
-        Gravity
+        Gravity,
+        MotionProperties
     }
 }
