@@ -6,8 +6,12 @@ using Comp2501Game.Objects.Components.CollisionComponents;
 
 namespace Comp2501Game.Systems.Collisions
 {
+    public delegate void CollisionHandler(CollisionInfo colInfo, float timestep);
+
     abstract class CollisionSystem : GameSystem
     {
+        public static event CollisionHandler PhysicalCollision;
+
         protected List<CollisionInfo> _collisions;
 
         public CollisionSystem(Game1 game)
@@ -19,6 +23,11 @@ namespace Comp2501Game.Systems.Collisions
         public List<CollisionInfo> GetCollisions()
         {
             return this._collisions;
+        }
+
+        protected void triggerPhysicalCollision(CollisionInfo colInfo, float timestep)
+        {
+            PhysicalCollision(colInfo, timestep);
         }
     }
 }

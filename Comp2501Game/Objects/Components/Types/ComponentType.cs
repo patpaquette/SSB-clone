@@ -21,6 +21,8 @@ namespace Comp2501Game.Objects.Components
         Transform2D,
         Mesh,
         Gravity,
-        MotionProperties
+        MotionProperties,
+        PhysicsCollisionResponse,
+        PhysicalProperties
     }
 }

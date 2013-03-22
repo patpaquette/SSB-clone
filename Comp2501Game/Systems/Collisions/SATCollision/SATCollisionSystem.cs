@@ -6,6 +6,7 @@ using Comp2501Game.Objects.Components;
 using Comp2501Game.Objects.Components.CollisionComponents;
 using Comp2501Game.Libs.Geometry;
 using Microsoft.Xna.Framework;
+using Comp2501Game.Objects.Components.Physics;
 
 namespace Comp2501Game.Systems.Collisions
 {
@@ -33,12 +34,11 @@ namespace Comp2501Game.Systems.Collisions
                     if (obj1 != obj2 && 
                         ((BoundingBoxComponent)obj1.GetComponent(ComponentType.BoundingBox)).Active)
                     {
-                        CollisionInfo collision = this.checkCollision(obj1, obj2);
-
-                        if (collision != null)
-                        {
-                            this._collisions.Add(collision);
-                        }
+                        this.checkCollision(
+                            obj1, 
+                            obj2, 
+                            gameTime.ElapsedGameTime.Milliseconds/1000.0f
+                        );
                     }
                 }
             }
@@ -51,14 +51,23 @@ namespace Comp2501Game.Systems.Collisions
             return SystemType.StateModifier;
         }
 
-        private CollisionInfo checkCollision(GameObject obj1, GameObject obj2)
+        private void checkCollision(GameObject obj1, GameObject obj2, float timestep)
         {
-            Transform2DComponent obj1Transform = (Transform2DComponent)obj1.GetComponent(ComponentType.Transform2D);
-            BoundingBoxComponent obj1BoundingBox = (BoundingBoxComponent)obj1.GetComponent(ComponentType.BoundingBox);
-            Transform2DComponent obj2Transform = (Transform2DComponent)obj2.GetComponent(ComponentType.Transform2D);
-            BoundingBoxComponent obj2BoundingBox = (BoundingBoxComponent)obj2.GetComponent(ComponentType.BoundingBox);
-            List<Shape> obj1ColShapes = obj1BoundingBox.GetShapes();
-            List<Shape> obj2ColShapes = obj2BoundingBox.GetShapes();
+            Transform2DComponent obj1TransformComponent =
+                (Transform2DComponent)obj1.GetComponent(ComponentType.Transform2D);
+            BoundingBoxComponent obj1BoundingBoxComponent =
+                (BoundingBoxComponent)obj1.GetComponent(ComponentType.BoundingBox);
+            MotionPropertiesComponent obj1MotionComponent =
+                (MotionPropertiesComponent)obj1.GetComponent(ComponentType.MotionProperties);
+            Transform2DComponent obj2TransformComponent =
+                (Transform2DComponent)obj2.GetComponent(ComponentType.Transform2D);
+            BoundingBoxComponent obj2BoundingBoxComponent =
+                (BoundingBoxComponent)obj2.GetComponent(ComponentType.BoundingBox);
+            MotionPropertiesComponent obj2MotionComponent =
+                (MotionPropertiesComponent)obj2.GetComponent(ComponentType.MotionProperties);
+
+            List<Shape> obj1ColShapes = obj1BoundingBoxComponent.GetShapes();
+            List<Shape> obj2ColShapes = obj2BoundingBoxComponent.GetShapes();
             bool collision = false;
             Vector2 normal = new Vector2(0.0f, 0.0f);
             Edge edge;
@@ -67,7 +76,7 @@ namespace Comp2501Game.Systems.Collisions
             foreach (Shape obj1Shape in obj1ColShapes)
             {
                 if (collision) break;
-                
+
                 List<Edge> edges = obj1Shape.GetEdges();
 
                 foreach (Shape obj2Shape in obj2ColShapes)
@@ -77,9 +86,9 @@ namespace Comp2501Game.Systems.Collisions
                     allEdges.AddRange(obj2Shape.GetEdges());
                     float minDistance = 9999.9f;
                     int edgeCounter = 0;
-                    
+
                     Vector2 Vector2;
-                    
+
                     foreach (Edge e in allEdges)
                     {
                         float obj1Min = 0.0f;
@@ -90,15 +99,45 @@ namespace Comp2501Game.Systems.Collisions
                         Vector2 v = e.GetNormalizedVector();
                         Vector2 axis = new Vector2(-v.Y, v.X);
 
+                        Matrix obj1Transform = obj1TransformComponent.Transform;
+                        Matrix obj2Transform = obj2TransformComponent.Transform;
+
+                        if (obj1MotionComponent != null)
+                        {
+                            Vector2 velocityVector = obj1MotionComponent.GetVelocity() * timestep;
+                            obj1Transform = Matrix.Multiply(
+                                obj1Transform,
+                                Matrix.CreateTranslation(
+                                    velocityVector.X,
+                                    velocityVector.Y,
+                                    0.0f
+                                )
+                            );
+                        }
+
+                        if (obj2MotionComponent != null)
+                        {
+                            Vector2 velocityVector = obj2MotionComponent.GetVelocity() * timestep;
+                            obj2Transform = Matrix.Multiply(
+                                obj2Transform,
+                                Matrix.CreateTranslation(
+                                    velocityVector.X,
+                                    velocityVector.Y,
+                                    0.0f
+                                )
+                            );
+                        }
+
+
                         LinearFunctions.ProjectShapeToAxis(
                             axis,
-                            LinearFunctions.GetTransformedShape(obj1Shape, obj1Transform.Transform),
+                            LinearFunctions.GetTransformedShape(obj1Shape, obj1Transform),
                             ref obj1Min,
                             ref obj1Max);
 
                         LinearFunctions.ProjectShapeToAxis(
                             axis,
-                            LinearFunctions.GetTransformedShape(obj2Shape, obj2Transform.Transform),
+                            LinearFunctions.GetTransformedShape(obj2Shape, obj2Transform),
                             ref obj2Min,
                             ref obj2Max);
 
@@ -128,30 +167,18 @@ namespace Comp2501Game.Systems.Collisions
                         }
                     }
                 }
-                
+
             }
 
             //collision
             if (collision)
             {
-                Vector2 obj2obj1_vector = obj2Transform.GetTranslation() - obj1Transform.GetTranslation();
-                obj2obj1_vector.Normalize();
-                normal.Normalize();
 
-                if (Vector2.Dot(normal, obj2obj1_vector) > 0)
-                {
-                    normal = normal * -1;
-                }
+                this.triggerPhysicalCollision(
+                    new CollisionInfo(obj1, obj2, depth, normal),
+                    timestep
+            );
 
-                obj1Transform.SetTranslation(obj1Transform.GetTranslation() + normal * depth);
-
-                obj1BoundingBox.Collided = true;
-                obj2BoundingBox.Collided = true;
-                return new CollisionInfo(obj1, obj2, depth, normal);
-            }
-            else
-            {
-                return null;
             }
         }
 

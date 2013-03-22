@@ -23,6 +23,7 @@ namespace Comp2501Game
         Texture2D[] yoshiSpriteSheets;
         List<GameSystem> _systems;
         List<GameObject> _objects;
+        List<int> _systemsCallOrder;
 
         public Game1()
         {
@@ -30,6 +31,7 @@ namespace Comp2501Game
             Content.RootDirectory = "Content";
             this._systems = new List<GameSystem>();
             this._objects = new List<GameObject>();
+            this._systemsCallOrder = new List<int>();
         }
 
         /// <summary>
@@ -94,11 +96,20 @@ namespace Comp2501Game
                 this.Exit();
 
 
+            /*
             foreach (GameSystem system in this._systems)
             {
                 if (system.GetType() == SystemType.StateModifier)
                 {
                     system.Update(gameTime);
+                }
+            }*/
+
+            foreach (int systemID in this._systemsCallOrder)
+            {
+                if (this._systems[systemID].GetType() == SystemType.StateModifier)
+                {
+                    this._systems[systemID].Update(gameTime);
                 }
             }
 
@@ -113,11 +124,19 @@ namespace Comp2501Game
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            foreach (GameSystem system in this._systems)
+            /*foreach (GameSystem system in this._systems)
             {
                 if (system.GetType() == SystemType.Renderer)
                 {
                     system.Update(gameTime);
+                }
+            }*/
+
+            foreach (int systemID in this._systemsCallOrder)
+            {
+                if (this._systems[systemID].GetType() == SystemType.Renderer)
+                {
+                    this._systems[systemID].Update(gameTime);
                 }
             }
 
@@ -126,7 +145,7 @@ namespace Comp2501Game
 
         //Registers a system to the game
         //Update calls will be in the registration order
-        public void RegisterSystem(GameSystem system)
+        public int RegisterSystem(GameSystem system)
         {
             this._systems.Add(system);
 
@@ -134,6 +153,13 @@ namespace Comp2501Game
             {
                 system.TryRegisterObject(obj);
             }
+
+            return this._systems.Count - 1;
+        }
+
+        public void SetSystemCallOrder(List<int> order)
+        {
+            this._systemsCallOrder = order;
         }
 
         public void AddObject(GameObject obj)

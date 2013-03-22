@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Comp2501Game.Objects.Components;
 using Comp2501Game.Objects.Components.CollisionComponents;
 using Comp2501Game.Libs.Geometry;
+using Comp2501Game.Objects.Components.Physics;
 
 namespace Comp2501Game.EntityFactory
 {
@@ -18,7 +19,11 @@ namespace Comp2501Game.EntityFactory
             this._game = game;
         }
 
-        public GameObject BuildStaticRectangularObstacle(Vector2 translation, Rectangle rect, Color color)
+        public GameObject BuildStaticRectangularObstacle(
+            Vector2 translation, 
+            Rectangle rect,
+            float friction,
+            Color color)
         {
             GameObject obstacle = new GameObject(this._game);
 
@@ -41,12 +46,15 @@ namespace Comp2501Game.EntityFactory
                 new List<Shape>{
                     new Shape(vertices)
                 }, 
-                false); 
+                false);
+            PhysicalPropertiesComponent physicsPropertiesComponent =
+                new PhysicalPropertiesComponent(obstacle, friction);
 
             obstacle.AddComponent(transformComponent);
             obstacle.AddComponent(meshComponent);
             obstacle.AddComponent(colorComponent);
             obstacle.AddComponent(boundingBoxComponent);
+            obstacle.AddComponent(physicsPropertiesComponent);
 
             return obstacle;
         }

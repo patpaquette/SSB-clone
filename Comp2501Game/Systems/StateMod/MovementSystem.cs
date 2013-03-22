@@ -23,6 +23,7 @@ namespace Comp2501Game.Systems.StateMod
 
         public override void Update(GameTime gameTime)
         {
+            float timestep = gameTime.ElapsedGameTime.Milliseconds / 1000.0f;
             //Console.WriteLine("here3");
             foreach (GameObject obj in this._objects)
             {
@@ -35,7 +36,7 @@ namespace Comp2501Game.Systems.StateMod
 
                 if (actionComponent.curAction.secondaryAction == SecondaryAction.Walk)
                 {
-                    tbAdded += new Vector2(-2, 0);
+                    tbAdded += new Vector2(-1500, 0);
                     positionComponent.SetScale(new Vector2(1.0f, 1.0f));
                 }
                 
@@ -56,7 +57,8 @@ namespace Comp2501Game.Systems.StateMod
                 else if (actionComponent.curAction.secondaryAction == SecondaryAction.Jump ||
                     actionComponent.curAction.secondaryAction == SecondaryAction.Second_Jump)
                 {
-                    tbAdded += new Vector2(0, -10);
+                    //Added += new Vector2(0, -10);
+                    motionComponent.AddVelocity(new Vector2(0.0f, -20.0f));
                 }
 
                 if (actionComponent.curAction.primaryAction == PrimaryAction.Fall_Faster)
@@ -87,11 +89,9 @@ namespace Comp2501Game.Systems.StateMod
                     tbAdded += new Vector2(1, 0);
                 }
 
-                positionComponent.AddTranslation(tbAdded);
-
-                positionComponent.AddTranslation(motionComponent.VelocityVector * gameTime.ElapsedGameTime.Milliseconds / 1000.0f);
-
-                motionComponent.ResetForces();
+                motionComponent.AddForce(tbAdded);
+                
+                
                 //if (actionComponent.curAction.curDirection == DirectionalAction.Left)
                 //{
                 //    positionComponent.SetScale(new Vector2(1.0f, 1.0f));

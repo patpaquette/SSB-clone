@@ -11,6 +11,8 @@ namespace Comp2501Game.Objects.Components.CollisionComponents
     {
         public Boolean Active;
         public Boolean Collided;
+        public String Group;
+
         private List<Shape> _shapes;
 
 

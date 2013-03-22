@@ -7,7 +7,7 @@ using Comp2501Game.Libs.Geometry;
 
 namespace Comp2501Game.Objects.Components.CollisionComponents
 {
-    class CollisionInfo
+    public class CollisionInfo
     {
         public GameObject Entity1;
         public GameObject Entity2;

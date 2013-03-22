@@ -24,10 +24,11 @@ namespace Comp2501Game.EntityFactory
             Vector2 position,
             float rotation,
             Vector2 scale,
+            float maxSpeed,
             SpriteType spriteType,
             List<Shape> boundingBoxes)
         {
-            GameObject entity = this.BuildDynamicEntity(position, rotation, scale, spriteType, boundingBoxes);
+            GameObject entity = this.BuildDynamicEntity(position, rotation, scale, maxSpeed, spriteType, boundingBoxes);
 
             PlayerComponent playerComponent = new PlayerComponent(entity, playerNumber);
 
@@ -40,6 +41,7 @@ namespace Comp2501Game.EntityFactory
             Vector2 position,
             float rotation,
             Vector2 scale,
+            float maxSpeed,
             SpriteType spriteType,
             List<Shape> boundingBoxes)
         {
@@ -55,7 +57,7 @@ namespace Comp2501Game.EntityFactory
             BoundingBoxComponent bbComponent = new BoundingBoxComponent(entity, boundingBoxes, true);
             CurrentActionComponent caComponent = new CurrentActionComponent(entity, new ActionComponent(DirectionalAction.Left, SecondaryAction.Stand, PrimaryAction.None));
             GravityComponent gravComponent = new GravityComponent(entity, 1.0f);
-            MotionPropertiesComponent motionComponent = new MotionPropertiesComponent(entity, 1.0f);
+            MotionPropertiesComponent motionComponent = new MotionPropertiesComponent(entity, 1.0f, maxSpeed);
 
             
             entity.AddComponent(transformComponent);

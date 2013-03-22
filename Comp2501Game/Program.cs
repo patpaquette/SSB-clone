@@ -27,17 +27,37 @@ namespace Comp2501Game
 
                 Rectangle clientBounds = game.Window.ClientBounds;
 
-                game.RegisterSystem(new SATCollisionSystem(game));
-                game.RegisterSystem(new CollisionRenderSystem(game));
+                
+                
                 //game.RegisterSystem(new PlayerInputSystem(game, 1));
                 //game.RegisterSystem(new TimerSystem(game));
                 //game.RegisterSystem(new TimerRenderSystem(game));
-                game.RegisterSystem(new LinebatchMeshRenderSystem(game));
-                game.RegisterSystem(new InputSystem(game, 1));
-                game.RegisterSystem(new SpriteRenderer(game));
-                game.RegisterSystem(new AnimationSystem(game, 1));
-                game.RegisterSystem(new PhysicsSystem(game));
-                game.RegisterSystem(new MovementSystem(game, 1));
+
+                int spriteInitSystemID = game.RegisterSystem(new SpriteInitializationSystem(game, 1));
+                int inputSystemID = game.RegisterSystem(new InputSystem(game, 1));
+                int animationSystemID = game.RegisterSystem(new AnimationSystem(game, 1));
+                int movementSystemID = game.RegisterSystem(new MovementSystem(game, 1));
+                int physicsSystemID = game.RegisterSystem(new PhysicsSystem(game));
+                int collisionSystemID = game.RegisterSystem(new SATCollisionSystem(game));
+                int meshRendererID = game.RegisterSystem(new LinebatchMeshRenderSystem(game));
+                int collisionRendererID = game.RegisterSystem(new CollisionRenderSystem(game));
+                int spriteRendererID = game.RegisterSystem(new SpriteRenderer(game));
+                int transformResolverID = game.RegisterSystem(new PhysicsTransformResolverSystem(game));
+
+                game.SetSystemCallOrder(new List<int>
+                {
+                    spriteInitSystemID,
+                    inputSystemID,
+                    animationSystemID,
+                    movementSystemID,
+                    physicsSystemID,
+                    collisionSystemID,
+                    transformResolverID,
+                    //physicsSystemID,
+                    meshRendererID,
+                    collisionRendererID,
+                    spriteRendererID
+                });
                 //game.AddObject(
                 //  new PlayerObject(game, 1, Objects.Components.SpriteType.Yoshi));
                 game.AddObject(entityFactory.BuildPlayerControlledEntity(
@@ -45,6 +65,7 @@ namespace Comp2501Game
                     new Vector2(100,0),
                     0.0f,
                     new Vector2(1.0f, 1.0f),
+                    300,
                     SpriteType.Yoshi,
                     new List<Shape>
                         {
@@ -57,18 +78,20 @@ namespace Comp2501Game
                     new Vector2(500, 0),
                     0.0f,
                     new Vector2(1.0f, 1.0f),
+                    300,
                     SpriteType.Kirby,
                     new List<Shape>
                         {
                             Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
                         }));
-
-                game.RegisterSystem(new SpriteInitializationSystem(game, 1));
+                
+                
 
                 //game.AddObject(new TestObject(game, new Vector2(300, 300), 100, 100, Color.Red, 1, true));
                 game.AddObject(envFactory.BuildStaticRectangularObstacle(
                     new Vector2(clientBounds.Width / 2, 450),
                     new Rectangle(-clientBounds.Width / 2, -10, clientBounds.Width, 20),
+                    1000.0f,
                     Color.Red));
                 game.AddObject(new TimeObject(game, new Vector2 (0, 0), Color.Black));
 
