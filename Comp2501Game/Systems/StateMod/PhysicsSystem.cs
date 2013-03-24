@@ -94,6 +94,8 @@ namespace Comp2501Game.Systems.StateMod
                 (Transform2DComponent)obj1.GetComponent(ComponentType.Transform2D);
             BoundingBoxComponent obj1BoundingBoxComponent =
                 (BoundingBoxComponent)obj1.GetComponent(ComponentType.BoundingBox);
+            CurrentActionComponent obj1CurActionComponent =
+                (CurrentActionComponent)obj1.GetComponent(ComponentType.Action);
             Transform2DComponent obj2TransformComponent =
                 (Transform2DComponent)obj2.GetComponent(ComponentType.Transform2D);
             BoundingBoxComponent obj2BoundingBoxComponent =
@@ -110,6 +112,14 @@ namespace Comp2501Game.Systems.StateMod
 
             Vector2 velocityCorrection = normal * depth * (float)(1.0f / timestep);
             obj1MotionComponent.AddVelocity(velocityCorrection);
+
+            if (velocityCorrection.Y != 0.0f)
+            {
+                if (obj1CurActionComponent != null)
+                {
+                    obj1CurActionComponent.curAction.secondaryAction = SecondaryAction.Stand;
+                }
+            }
 
             //friction
             if(obj2.HasComponent(ComponentType.PhysicalProperties))
@@ -134,6 +144,8 @@ namespace Comp2501Game.Systems.StateMod
                     }
                 }
             }
+
+
 
         }
     }

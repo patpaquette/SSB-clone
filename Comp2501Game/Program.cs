@@ -44,6 +44,7 @@ namespace Comp2501Game
                 int meshRendererID = game.RegisterSystem(new LinebatchMeshRenderSystem(game));
                 int collisionRendererID = game.RegisterSystem(new CollisionRenderSystem(game));
                 int spriteRendererID = game.RegisterSystem(new SpriteRenderer(game));
+                int uiRendererID = game.RegisterSystem(new UIRenderer(game));
                 int transformResolverID = game.RegisterSystem(new PhysicsTransformResolverSystem(game));
                 int lifetimeSystemID = game.RegisterSystem(new LifetimeSystem(game));
 
@@ -64,12 +65,14 @@ namespace Comp2501Game
                     meshRendererID,
                     collisionRendererID,
                     spriteRendererID,
+                    uiRendererID
                 });
                 //game.AddObject(
                 //  new PlayerObject(game, 1, Objects.Components.SpriteType.Yoshi));
                 GameObject yoshi = DynamicEntityFactory.BuildPlayerControlledEntity(
                     game,
                     1,
+                    Color.Green,
                     new Vector2(100, 0),
                     0.0f,
                     new Vector2(1.0f, 1.0f),
@@ -81,42 +84,14 @@ namespace Comp2501Game
                             Shape.BuildRectangle(new Rectangle(-40, 0, 120, 60)),
                             Shape.BuildRectangle(new Rectangle(25, 60, 40, 30))
                         },
-                    new Dictionary<ActionDefinition, ActionInfo>()
-                    {
-                        {
-                            new ActionDefinition(
-                                DirectionalAction.Left,
-                                PrimaryAction.A,
-                                SecondaryAction.Stand
-                            ),
-                            new ActionInfoProjectile(
-                                new Vector2(-2000.0f, -2000.0f),
-                                100,
-                                new Vector2(-500.0f, -500.0f),
-                                20,
-                                new Rectangle(-25, 80, 50, 50)
-                            )
-                        },
-                         {
-                            new ActionDefinition(
-                                DirectionalAction.Right,
-                                PrimaryAction.A,
-                                SecondaryAction.Stand
-                            ),
-                            new ActionInfoProjectile(
-                                new Vector2(2000.0f, -2000.0f),
-                                100,
-                                new Vector2(500.0f, 500.0f),
-                                20,
-                                new Rectangle(-25, 80, 50, 50)
-                            )
-                        }
-                    }
+                    MoveDefinitions.GetYoshiMoves()
                 );
                 game.AddObject(yoshi);
 
-                GameObject kirby = DynamicEntityFactory.BuildDynamicEntity(
+                GameObject kirby = DynamicEntityFactory.BuildPlayerControlledEntity(
                     game,
+                    2,
+                    Color.Pink,
                     new Vector2(500, 0),
                     0.0f,
                     new Vector2(1.0f, 1.0f),
@@ -125,7 +100,9 @@ namespace Comp2501Game
                     new List<Shape>
                         {
                             Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
-                });
+                        },
+                    MoveDefinitions.GetKirbyMoves()
+                );
 
                 //kirby.AddComponent(new LifetimeComponent(kirby, 5000));
                 //kirby.SetParent(yoshi);
@@ -135,7 +112,7 @@ namespace Comp2501Game
 
                 //game.AddObject(new TestObject(game, new Vector2(300, 300), 100, 100, Color.Red, 1, true));
                 game.AddObject(envFactory.BuildStaticRectangularObstacle(
-                    new Vector2(clientBounds.Width / 2, 450),
+                    new Vector2(clientBounds.Width / 2, clientBounds.Height),
                     new Rectangle(-clientBounds.Width / 2, -10, clientBounds.Width, 20),
                     1000.0f,
                     Color.Red));

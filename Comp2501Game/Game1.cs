@@ -34,6 +34,7 @@ namespace Comp2501Game
             this._systemsCallOrder = new List<int>();
             this.graphics.PreferredBackBufferWidth = 1440;
             this.graphics.PreferredBackBufferHeight = 900;
+            this.graphics.ApplyChanges();
         }
 
         /// <summary>

@@ -9,6 +9,7 @@ using Comp2501Game.Libs.Geometry;
 using Comp2501Game.Objects.Components.Physics;
 using Comp2501Game.Objects.Components.Actions;
 using Comp2501Game.Objects.Components.EntityProperties;
+using Comp2501Game.Objects.Components.Health_Components;
 
 namespace Comp2501Game.EntityFactory
 {
@@ -17,6 +18,7 @@ namespace Comp2501Game.EntityFactory
         public static GameObject BuildPlayerControlledEntity(
             Game1 game,
             int playerNumber,
+            Color playerColor,
             Vector2 position,
             float rotation,
             Vector2 scale,
@@ -28,11 +30,15 @@ namespace Comp2501Game.EntityFactory
             GameObject entity = DynamicEntityFactory.BuildDynamicEntity(game, position, rotation, scale, maxSpeed, spriteType, boundingBoxes);
 
             PlayerComponent playerComponent = new PlayerComponent(entity, playerNumber);
+            HealthComponent healthComponent = new HealthComponent(entity);
+            ColorComponent colorComponent = new ColorComponent(entity, playerColor);
 
             CurrentActionComponent curActionComponent = (CurrentActionComponent)entity.GetComponent(ComponentType.Action);
             curActionComponent.SetActionInfoList(actionsInformationList);
 
             entity.AddComponent(playerComponent);
+            entity.AddComponent(healthComponent);
+            entity.AddComponent(colorComponent);
 
             return entity;
         }

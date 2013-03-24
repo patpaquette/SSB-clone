@@ -63,7 +63,8 @@ namespace Comp2501Game.Systems.StateMod
 
                 if (actionComponent.curAction.primaryAction == PrimaryAction.Fall_Faster)
                 {
-                    tbAdded += new Vector2(0, 2);
+                    //tbAdded += new Vector2(0, 2);
+                    motionComponent.AddForce(new Vector2(0.0f, 200.0f));
                 }
 
                 if (actionComponent.curAction.primaryAction == PrimaryAction.Down_B &&

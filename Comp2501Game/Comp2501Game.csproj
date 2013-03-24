@@ -110,6 +110,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="EntityFactory\EnvironmentFactory.cs" />
     <Compile Include="EntityFactory\DynamicEntityFactory.cs" />
+    <Compile Include="EntityFactory\MoveDefinitions.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameSystem.cs" />
     <Compile Include="Lib.cs" />
@@ -148,7 +149,7 @@
     <Compile Include="Objects\Components\Transform2DComponent.cs" />
     <Compile Include="Objects\Components\Types\ArrowType.cs" />
     <Compile Include="Objects\Components\Types\ComponentType.cs" />
-    <Compile Include="Objects\Components\Not Yet Implemented\Health Components\Health.cs" />
+    <Compile Include="Objects\Components\Not Yet Implemented\Health Components\HealthComponent.cs" />
     <Compile Include="Objects\Components\Types\MovementType.cs" />
     <Compile Include="Objects\Components\PlayerComponent.cs" />
     <Compile Include="Objects\Components\Not Yet Implemented\Score.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="Systems\Renderer\AABBCollisionRenderSystem.cs" />
     <Compile Include="Systems\Renderer\LinebatchMeshRenderSystem.cs" />
     <Compile Include="Systems\Renderer\SpriteRenderer.cs" />
+    <Compile Include="Systems\Renderer\UIRenderer.cs" />
     <Compile Include="Systems\StateMod\AABBCollisionSystem.cs" />
     <Compile Include="Systems\StateMod\ActionSystem.cs" />
     <Compile Include="Systems\StateMod\AnimationSystem.cs" />
