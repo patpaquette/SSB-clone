@@ -42,11 +42,11 @@ namespace Comp2501Game.Systems.StateMod
                 
                 if (actionComponent.curAction.primaryAction == PrimaryAction.Roll_Right)
                 {
-                    tbAdded += new Vector2(-4, 0);
+                    tbAdded += new Vector2(-3000, 0);
                 }
                 else if (actionComponent.curAction.primaryAction == PrimaryAction.Roll_Left)
                 {
-                    tbAdded += new Vector2(-4, 0);
+                    tbAdded += new Vector2(-3000, 0);
                 }
 
                 if (actionComponent.curAction.secondaryAction == SecondaryAction.Falling ||
@@ -79,14 +79,18 @@ namespace Comp2501Game.Systems.StateMod
                     tbAdded.X = -tbAdded.X;
                     positionComponent.SetScale(new Vector2(-1.0f, 1.0f));
                 }
+                else
+                {
+                    positionComponent.SetScale(new Vector2(1.0f, 1.0f));
+                }
 
                 if (actionComponent.curAction.drift == Drift.Left)
                 {
-                    tbAdded += new Vector2(-1, 0);
+                    tbAdded += new Vector2(-500, 0);
                 }
                 else if (actionComponent.curAction.drift == Drift.Right)
                 {
-                    tbAdded += new Vector2(1, 0);
+                    tbAdded += new Vector2(500, 0);
                 }
 
                 motionComponent.AddForce(tbAdded);

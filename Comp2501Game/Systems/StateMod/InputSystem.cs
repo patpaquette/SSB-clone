@@ -277,21 +277,13 @@ namespace Comp2501Game.Systems
                             && arrowComponent.keyPressed == KeyType.Z)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Roll_Right;
-
-                            if (actionComponent.curAction.curDirection == DirectionalAction.Left)
-                            {
-                                actionComponent.curAction.curDirection = DirectionalAction.Right;
-                            }
+                            actionComponent.curAction.curDirection = DirectionalAction.Right;
                         }
                         else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Left
                             && arrowComponent.keyPressed == KeyType.Z)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Roll_Left;
-
-                            if (actionComponent.curAction.curDirection == DirectionalAction.Right)
-                            {
-                                actionComponent.curAction.curDirection = DirectionalAction.Left;
-                            }
+                            actionComponent.curAction.curDirection = DirectionalAction.Left;
                         }
                         else if (state.IsKeyDown(Keys.A)
                             && arrowComponent.keyPressed == KeyType.Z)
