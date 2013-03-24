@@ -64,6 +64,8 @@ namespace Comp2501Game.EntityFactory
             MotionPropertiesComponent motionComponent = new MotionPropertiesComponent(entity, 1.0f, maxSpeed);
             IsPhysicalComponent isPhysicalComponent = new IsPhysicalComponent(entity, true);
             IsCharacterComponent isCharComponent = new IsCharacterComponent(entity);
+            SoundComponent soundComponent = new SoundComponent(entity);
+            ArrowComponent arrowComponent = new ArrowComponent(entity);
 
             
             entity.AddComponent(transformComponent);
@@ -74,7 +76,8 @@ namespace Comp2501Game.EntityFactory
             entity.AddComponent(motionComponent);
             entity.AddComponent(isPhysicalComponent);
             entity.AddComponent(isCharComponent);
-
+            entity.AddComponent(soundComponent);
+            entity.AddComponent(arrowComponent);
             return entity;
         }
 

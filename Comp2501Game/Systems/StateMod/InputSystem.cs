@@ -5,6 +5,7 @@ using System.Text;
 using Comp2501Game.Objects.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Comp2501Game.Objects.Components.Types;
 
 
 namespace Comp2501Game.Systems
@@ -19,6 +20,7 @@ namespace Comp2501Game.Systems
             this._componentDependencies.Add(ComponentType.Action);
             this._componentDependencies.Add(ComponentType.Player);
             this._componentDependencies.Add(ComponentType.Sprite);
+            this._componentDependencies.Add(ComponentType.Arrow);
             this.PlayerNumber = playerNumber;
         }
 
@@ -37,87 +39,100 @@ namespace Comp2501Game.Systems
                 PlayerComponent playerComponent = (PlayerComponent)obj.GetComponent(ComponentType.Player);
                 CurrentActionComponent actionComponent = (CurrentActionComponent)obj.GetComponent(ComponentType.Action);
                 SpriteComponent spriteComponent = (SpriteComponent)obj.GetComponent(ComponentType.Sprite);
+                SoundComponent soundComponent = (SoundComponent)obj.GetComponent(ComponentType.Sound);
+                ArrowComponent arrowComponent = (ArrowComponent)obj.GetComponent(ComponentType.Arrow);
+
+
                 if (playerComponent.PlayerNumber == this.PlayerNumber)
                 {
 
-                    if (actionComponent.curAction.curDirection == DirectionalAction.Left 
-                        && actionComponent.curAction.secondaryAction == SecondaryAction.Stand 
+                    if (actionComponent.curAction.curDirection == DirectionalAction.Left
+                        && actionComponent.curAction.secondaryAction == SecondaryAction.Stand
                         && actionComponent.curAction.primaryAction == PrimaryAction.None)
                     {
-                        if (state.IsKeyDown(Keys.Up))
+                        if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Up)
                         {
-                            if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.B))
+                            if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Up
+                                && arrowComponent.keyPressed == KeyType.B)
                             {
                                 actionComponent.curAction.secondaryAction = SecondaryAction.Stand;
                                 actionComponent.curAction.primaryAction = PrimaryAction.Up_B;
                             }
-                            else if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.A))
+                            else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Up
+                                && arrowComponent.keyPressed == KeyType.A)
                             {
                                 // Console.WriteLine("This is C#");
                                 actionComponent.curAction.primaryAction = PrimaryAction.Up_A;
                                 actionComponent.curAction.secondaryAction = SecondaryAction.Smash;
                                 spriteComponent.curColumn = 0;
                             }
-                            else if (state.IsKeyDown(Keys.Up))
+                            else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Up && arrowComponent.keyTimer > 200)
                             {
                                 actionComponent.curAction.secondaryAction = SecondaryAction.Jump;
                                 actionComponent.curAction.primaryAction = PrimaryAction.None;
                             }
                         }
-                        else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.B))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Down
+                            && arrowComponent.keyPressed == KeyType.B)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Stand;
                             actionComponent.curAction.primaryAction = PrimaryAction.Down_B;
                         }
-                        else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.A))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Down
+                            && arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Smash;
                             actionComponent.curAction.primaryAction = PrimaryAction.Down_A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.A))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Left
+                            && arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Smash;
                             actionComponent.curAction.primaryAction = PrimaryAction.Forward_A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.A))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Right
+                            && arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.curDirection = DirectionalAction.Right;
                             actionComponent.curAction.secondaryAction = SecondaryAction.Smash;
                             actionComponent.curAction.primaryAction = PrimaryAction.Forward_A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Right))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Right && arrowComponent.keyTimer > 200)
                         {
                             actionComponent.curAction.curDirection = DirectionalAction.Right;
                         }
-                        else if (state.IsKeyDown(Keys.Left))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Left && arrowComponent.keyTimer > 200)
                         {
                             //Console.WriteLine("This is C#");
                             actionComponent.curAction.secondaryAction = SecondaryAction.Walk;
                             actionComponent.curAction.primaryAction = PrimaryAction.None;
                         }
-                        else if (state.IsKeyDown(Keys.A))
+                        else if (arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.A;
                         }
-                        else if (state.IsKeyDown(Keys.B))
+                        else if (arrowComponent.keyPressed == KeyType.B)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.B;
                         }
-                        else if (state.IsKeyDown(Keys.R))
+                        else if (arrowComponent.keyPressed == KeyType.R)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Grab;
                         }
-                        else if (state.IsKeyDown(Keys.Z))
+                        else if (arrowComponent.keyPressed == KeyType.Z)
                         {
-                            actionComponent.curAction.secondaryAction = SecondaryAction.Shield; 
+                            actionComponent.curAction.secondaryAction = SecondaryAction.Shield;
+                            soundComponent.actionSoundList[6].Play();
                         }
                     }
                     else if (actionComponent.curAction.primaryAction == PrimaryAction.Down_B)
                     {
-                        if ((state.IsKeyDown(Keys.A) || state.IsKeyDown(Keys.B)) && spriteComponent.curColumn >  3 && spriteComponent.CharacterType == SpriteType.Kirby)
+                        if (arrowComponent.keyPressed == KeyType.A
+                            || arrowComponent.keyPressed == KeyType.B
+                            && spriteComponent.curColumn > 3 && spriteComponent.CharacterType == SpriteType.Kirby)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.None;
                             actionComponent.curAction.secondaryAction = SecondaryAction.Jump;
@@ -128,89 +143,97 @@ namespace Comp2501Game.Systems
                         && actionComponent.curAction.primaryAction == PrimaryAction.None)
                     {
 
-                        if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.B))
+                        if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Up
+                            && arrowComponent.keyPressed == KeyType.B)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Stand;
                             actionComponent.curAction.primaryAction = PrimaryAction.Up_B;
                         }
-                        else if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.A))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Up
+                            && arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Smash;
                             actionComponent.curAction.primaryAction = PrimaryAction.Up_A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.B))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Down
+                            && arrowComponent.keyPressed == KeyType.B)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Stand;
                             actionComponent.curAction.primaryAction = PrimaryAction.Down_B;
                         }
-                        else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.A))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Down
+                            && arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Smash;
                             actionComponent.curAction.primaryAction = PrimaryAction.Down_A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.A))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Right
+                            && arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Smash;
                             actionComponent.curAction.primaryAction = PrimaryAction.Forward_A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.A))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Left
+                            && arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.curDirection = DirectionalAction.Left;
                             actionComponent.curAction.secondaryAction = SecondaryAction.Smash;
                             actionComponent.curAction.primaryAction = PrimaryAction.Forward_A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Left))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Left && arrowComponent.keyTimer > 200)
                         {
                             actionComponent.curAction.curDirection = DirectionalAction.Left;
                         }
-                        else if (state.IsKeyDown(Keys.Right))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Right && arrowComponent.keyTimer > 200)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Walk;
                             actionComponent.curAction.primaryAction = PrimaryAction.None;
                         }
-                        else if (state.IsKeyDown(Keys.Up))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Up && arrowComponent.keyTimer > 200)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Jump;
                             actionComponent.curAction.primaryAction = PrimaryAction.None;
                         }
-                        else if (state.IsKeyDown(Keys.A))
+                        else if (arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.A;
-                            actionComponent.curAction.secondaryAction = SecondaryAction.Stand;
                         }
-                        else if (state.IsKeyDown(Keys.B))
+                        else if (arrowComponent.keyPressed == KeyType.B)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.B;
                         }
-                        else if (state.IsKeyDown(Keys.R))
+                        else if (arrowComponent.keyPressed == KeyType.R)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Grab;
                         }
-                        else if (state.IsKeyDown(Keys.Z))
+                        else if (arrowComponent.keyPressed == KeyType.Z)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Shield;
+                            soundComponent.actionSoundList[6].Play();
                         }
                     }
                     else if (actionComponent.curAction.curDirection == DirectionalAction.Right
                         && actionComponent.curAction.secondaryAction == SecondaryAction.Walk
                         && actionComponent.curAction.primaryAction == PrimaryAction.None)
                     {
-                        if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.A))
+                        if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Right
+                            && arrowComponent.keyPressed == KeyType.A)
                         {
                             //Console.WriteLine("pressed");  
                             actionComponent.curAction.secondaryAction = SecondaryAction.Walk;
                             actionComponent.curAction.primaryAction = PrimaryAction.Forward_A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.Z))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Right
+                            && arrowComponent.keyPressed == KeyType.Z)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Shield;
                         }
-                        else if (state.IsKeyDown(Keys.Right))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Right)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Walk;
                         }
@@ -223,18 +246,20 @@ namespace Comp2501Game.Systems
                         && actionComponent.curAction.secondaryAction == SecondaryAction.Walk
                         && actionComponent.curAction.primaryAction == PrimaryAction.None)
                     {
-                        if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.A))
+                        if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Left
+                            && arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Walk;
                             actionComponent.curAction.primaryAction = PrimaryAction.Forward_A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.Z))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Left
+                            && arrowComponent.keyPressed == KeyType.Z)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Shield;
                             actionComponent.curAction.primaryAction = PrimaryAction.None;
                         }
-                        else if (state.IsKeyDown(Keys.Left))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Left)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Walk;
                         }
@@ -248,7 +273,8 @@ namespace Comp2501Game.Systems
                         && actionComponent.curAction.primaryAction == PrimaryAction.None)
                     {
 
-                        if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.Z))
+                        if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Right
+                            && arrowComponent.keyPressed == KeyType.Z)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Roll_Right;
 
@@ -257,7 +283,8 @@ namespace Comp2501Game.Systems
                                 actionComponent.curAction.curDirection = DirectionalAction.Right;
                             }
                         }
-                        else if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.Z))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Left
+                            && arrowComponent.keyPressed == KeyType.Z)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Roll_Left;
 
@@ -266,17 +293,19 @@ namespace Comp2501Game.Systems
                                 actionComponent.curAction.curDirection = DirectionalAction.Left;
                             }
                         }
-                        else if (state.IsKeyDown(Keys.A) && state.IsKeyDown(Keys.Z))
+                        else if (state.IsKeyDown(Keys.A)
+                            && arrowComponent.keyPressed == KeyType.Z)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Grab;
                             actionComponent.curAction.secondaryAction = SecondaryAction.Shield;
                         }
-                        else if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.Z))
+                        else if (state.IsKeyDown(Keys.Up)
+                            && arrowComponent.keyPressed == KeyType.Z)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Jump;
                             actionComponent.curAction.primaryAction = PrimaryAction.None;
                         }
-                        else if (state.IsKeyDown(Keys.Z))
+                        else if (arrowComponent.keyPressed == KeyType.Z)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Shield;
                             actionComponent.curAction.primaryAction = PrimaryAction.None;
@@ -293,56 +322,62 @@ namespace Comp2501Game.Systems
                         && (actionComponent.curAction.primaryAction == PrimaryAction.None
                         || actionComponent.curAction.primaryAction == PrimaryAction.Fall_Faster))
                     {
-                        if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.A))
+                        if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Up
+                            && arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Up_A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.B))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Up
+                            && arrowComponent.keyPressed == KeyType.B)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Up_B;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.A))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Down
+                            && arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Down_A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.B))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Down
+                            && arrowComponent.keyPressed == KeyType.B)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Down_B;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.A))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Left
+                            && arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Forward_A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.A))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Right
+                            && arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Backward_A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.A))
+                        else if (arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Up)
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Up && arrowComponent.keyTimer > 200
                             && actionComponent.curAction.secondaryAction != SecondaryAction.Second_Falling)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Second_Jump;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Right))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Right && arrowComponent.keyTimer > 200)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Drift_Right;
                         }
-                        else if (state.IsKeyDown(Keys.Left))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Left && arrowComponent.keyTimer > 200)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Drift_Left;
                         }
-                        else if (state.IsKeyDown(Keys.Down))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Down && arrowComponent.keyTimer > 200)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Fall_Faster;
                         }
@@ -357,55 +392,61 @@ namespace Comp2501Game.Systems
                        && (actionComponent.curAction.primaryAction == PrimaryAction.None
                         || actionComponent.curAction.primaryAction == PrimaryAction.Fall_Faster))
                     {
-                        if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.A))
+                        if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Up
+                            && arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Up_A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Up) && state.IsKeyDown(Keys.B))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Up
+                            && arrowComponent.keyPressed == KeyType.B)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Up_B;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.A))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Down
+                            && arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Down_A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Down) && state.IsKeyDown(Keys.B))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Down
+                            && arrowComponent.keyPressed == KeyType.B)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Down_B;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.A))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Right
+                            && arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Forward_A;
                         }
-                        else if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.A))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Left
+                            && arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Backward_A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.A))
+                        else if (arrowComponent.keyPressed == KeyType.A)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.A;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Up)
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Up && arrowComponent.keyTimer > 200
                             && actionComponent.curAction.secondaryAction != SecondaryAction.Second_Falling)
                         {
                             actionComponent.curAction.secondaryAction = SecondaryAction.Second_Jump;
                             spriteComponent.curColumn = 0;
                         }
-                        else if (state.IsKeyDown(Keys.Right))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Right && arrowComponent.keyTimer > 200)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Drift_Right;
                         }
-                        else if (state.IsKeyDown(Keys.Left))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Left && arrowComponent.keyTimer > 200)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Drift_Left;
                         }
-                        else if (state.IsKeyDown(Keys.Down))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Down && arrowComponent.keyTimer > 200)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Fall_Faster;
                         }
@@ -416,12 +457,12 @@ namespace Comp2501Game.Systems
                     }
                     else if (actionComponent.curAction.secondaryAction == SecondaryAction.Grab)
                     {
-                        if (state.IsKeyDown(Keys.Left))
+                        if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Left)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Left;
                             actionComponent.curAction.secondaryAction = SecondaryAction.Throw;
                         }
-                        else if (state.IsKeyDown(Keys.Right))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Right)
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.Right;
                             actionComponent.curAction.secondaryAction = SecondaryAction.Throw;
@@ -438,11 +479,11 @@ namespace Comp2501Game.Systems
                         && actionComponent.curAction.primaryAction != PrimaryAction.Up_B
                         && actionComponent.curAction.primaryAction != PrimaryAction.B)
                     {
-                        if (state.IsKeyDown(Keys.Right))
+                        if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Right)
                         {
                             actionComponent.curAction.drift = Drift.Right;
                         }
-                        else if (state.IsKeyDown(Keys.Left))
+                        else if (arrowComponent.arrowKey == Objects.Components.Types.ArrowType.Left)
                         {
                             actionComponent.curAction.drift = Drift.Left;
                         }

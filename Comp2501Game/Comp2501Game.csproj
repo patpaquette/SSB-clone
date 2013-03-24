@@ -126,6 +126,7 @@
     <Compile Include="Objects\Components\Actions\ActionList.cs" />
     <Compile Include="Objects\Components\Actions\ActionType.cs" />
     <Compile Include="Objects\Components\Actions\ActionDefinition.cs" />
+    <Compile Include="Objects\Components\ArrowComponent.cs" />
     <Compile Include="Objects\Components\CollisionComponents\AABB.cs" />
     <Compile Include="Objects\Components\CollisionComponents\AABBCollisionComponent.cs" />
     <Compile Include="Objects\Components\CollisionComponents\BoundingBoxComponent.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Objects\Components\ColorComponent.cs" />
     <Compile Include="Objects\Components\Actions\CurrentActionComponent.cs" />
     <Compile Include="Objects\Components\Holder\AnimationDirectory.cs" />
+    <Compile Include="Objects\Components\Holder\SoundDirectory.cs" />
     <Compile Include="Objects\Components\LifetimeComponent.cs" />
     <Compile Include="Objects\Components\MeshComponent.cs" />
     <Compile Include="Objects\Components\Physics\Impulse.cs" />
@@ -142,7 +144,9 @@
     <Compile Include="Objects\Components\Physics\MotionPropertiesComponent.cs" />
     <Compile Include="Objects\Components\Physics\PhysicalPropertiesComponent.cs" />
     <Compile Include="Objects\Components\PositionComponent.cs" />
+    <Compile Include="Objects\Components\SoundComponent.cs" />
     <Compile Include="Objects\Components\Transform2DComponent.cs" />
+    <Compile Include="Objects\Components\Types\ArrowType.cs" />
     <Compile Include="Objects\Components\Types\ComponentType.cs" />
     <Compile Include="Objects\Components\Not Yet Implemented\Health Components\Health.cs" />
     <Compile Include="Objects\Components\Types\MovementType.cs" />
@@ -168,6 +172,8 @@
     <Compile Include="Systems\StateMod\AABBCollisionSystem.cs" />
     <Compile Include="Systems\StateMod\ActionSystem.cs" />
     <Compile Include="Systems\StateMod\AnimationSystem.cs" />
+    <Compile Include="Systems\StateMod\ArrowInputSystem.cs" />
+    <Compile Include="Systems\StateMod\ControllerInputSystem.cs" />
     <Compile Include="Systems\StateMod\HealthSystem.cs" />
     <Compile Include="Systems\StateMod\InputSystem.cs" />
     <Compile Include="Systems\StateMod\LifetimeSystem.cs" />

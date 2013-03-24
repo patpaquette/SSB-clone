@@ -27,6 +27,8 @@ namespace Comp2501Game.Objects.Components
         Lifetime,
         IsPhysical,
         IsAction,
-        IsCharacter
+        IsCharacter,
+        Arrow,
+        Sound
     }
 }

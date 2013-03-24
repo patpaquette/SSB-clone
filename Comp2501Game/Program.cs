@@ -33,6 +33,8 @@ namespace Comp2501Game
                 //game.RegisterSystem(new TimerRenderSystem(game));
 
                 int spriteInitSystemID = game.RegisterSystem(new SpriteInitializationSystem(game, 1));
+                //int arrowInputSystemID = game.RegisterSystem(new ArrowInputSystem(game, 1));
+                int controllerInputSystemID = game.RegisterSystem(new ControllerInputSystem(game, 1));
                 int inputSystemID = game.RegisterSystem(new InputSystem(game, 1));
                 int animationSystemID = game.RegisterSystem(new AnimationSystem(game, 1));
                 int movementSystemID = game.RegisterSystem(new MovementSystem(game, 1));
@@ -48,6 +50,8 @@ namespace Comp2501Game
                 game.SetSystemCallOrder(new List<int>
                 {
                     spriteInitSystemID,
+                    //arrowInputSystemID,
+                    controllerInputSystemID,
                     inputSystemID,
                     animationSystemID,
                     movementSystemID,

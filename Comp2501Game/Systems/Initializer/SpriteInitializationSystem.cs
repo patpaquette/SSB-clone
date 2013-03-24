@@ -5,6 +5,7 @@ using System.Text;
 using Comp2501Game.Objects.Components;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Comp2501Game.Systems
 {
@@ -17,6 +18,7 @@ namespace Comp2501Game.Systems
         {
             //this._componentDependencies.Add(ComponentType.Player);
             this._componentDependencies.Add(ComponentType.Sprite);
+            this._componentDependencies.Add(ComponentType.Sound);
             this.playerNumber = num;
         }
 
@@ -31,6 +33,7 @@ namespace Comp2501Game.Systems
             {
                 //PlayerComponent playerComponent = (PlayerComponent)obj.GetComponent(ComponentType.Player);
                 SpriteComponent spriteComponent = (SpriteComponent)obj.GetComponent(ComponentType.Sprite);
+                SoundComponent soundComponent = (SoundComponent)obj.GetComponent(ComponentType.Sound);
 
                 //if (playerComponent.PlayerNumber == this.playerNumber)
                 //{
@@ -49,6 +52,37 @@ namespace Comp2501Game.Systems
                         spriteComponent.spriteSheets[2] = this.Game.Content.Load<Texture2D>(@"Images/Kirby_Sprite_Sheet3");
                         spriteComponent.spriteSheets[3] = this.Game.Content.Load<Texture2D>(@"Images/Kirby_Sprite_Sheet4");
                     }
+
+
+                    soundComponent.actionSoundList[0] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/8");
+                    soundComponent.actionSoundList[1] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/9");
+                    soundComponent.actionSoundList[2] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/14");
+                    soundComponent.actionSoundList[3] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/16");
+                    soundComponent.actionSoundList[4] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/22");
+                    soundComponent.actionSoundList[5] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/28");
+                    soundComponent.actionSoundList[6] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/29");
+                    soundComponent.actionSoundList[7] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/31");
+                    soundComponent.actionSoundList[8] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/32");
+                    soundComponent.actionSoundList[9] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/33");
+                    soundComponent.actionSoundList[10] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/36");
+                    soundComponent.actionSoundList[11] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/37");
+                    soundComponent.actionSoundList[12] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/39");
+                    soundComponent.actionSoundList[13] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/53");
+                    soundComponent.actionSoundList[14] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/109");
+                    soundComponent.actionSoundList[15] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/111");
+                    soundComponent.actionSoundList[16] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/112");
+                    soundComponent.actionSoundList[17] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/116");
+                    soundComponent.actionSoundList[18] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/122");
+                    soundComponent.actionSoundList[19] = this.Game.Content.Load<SoundEffect>(@"Sounds/ActionSounds/123");
+
+                    soundComponent.voiceSoundList[0] = this.Game.Content.Load<SoundEffect>(@"Sounds/CharacterSounds/34");
+                    soundComponent.voiceSoundList[1] = this.Game.Content.Load<SoundEffect>(@"Sounds/CharacterSounds/36");
+                    soundComponent.voiceSoundList[2] = this.Game.Content.Load<SoundEffect>(@"Sounds/CharacterSounds/38");
+                    soundComponent.voiceSoundList[3] = this.Game.Content.Load<SoundEffect>(@"Sounds/CharacterSounds/42");
+                    soundComponent.voiceSoundList[4] = this.Game.Content.Load<SoundEffect>(@"Sounds/CharacterSounds/43");
+                    soundComponent.voiceSoundList[5] = this.Game.Content.Load<SoundEffect>(@"Sounds/CharacterSounds/49");
+                    soundComponent.voiceSoundList[6] = this.Game.Content.Load<SoundEffect>(@"Sounds/CharacterSounds/50");
+                    soundComponent.voiceSoundList[7] = this.Game.Content.Load<SoundEffect>(@"Sounds/CharacterSounds/51");
                       
                 //}
                 base.Initialize();
