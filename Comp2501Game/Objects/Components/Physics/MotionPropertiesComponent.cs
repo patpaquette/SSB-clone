@@ -54,7 +54,6 @@ namespace Comp2501Game.Objects.Components.Physics
             {
                 this._velocityVector = this._velocityVector * this.MaxSpeed / length;
             }
-            
         }
 
         public void AddForce(Vector2 force)
@@ -72,14 +71,9 @@ namespace Comp2501Game.Objects.Components.Physics
             this.Impulses.Add(impulse);
         }
 
-        
-
-        
-
         public override ComponentType GetType()
         {
             return ComponentType.MotionProperties;
         }
-
     }
 }

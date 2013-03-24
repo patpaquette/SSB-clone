@@ -36,6 +36,11 @@ namespace Comp2501Game
             return true;
         }
 
+        public void UnregisterObject(GameObject objToRemove)
+        {
+            this._objects.Remove(objToRemove);
+        }
+
         public abstract SystemType GetType();
     }
 }

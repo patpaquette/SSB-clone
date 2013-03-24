@@ -10,11 +10,35 @@ namespace Comp2501Game
     public class GameObject : GameComponent
     {
         protected Dictionary<ComponentType, ObjectComponent> _components;
+        protected GameObject _parent;
+        public List<GameObject> Children;
 
         public GameObject(Game game)
+            : this(game, null)
+        {
+        }
+
+        public GameObject(Game game, GameObject parent)
             : base(game)
         {
             this._components = new Dictionary<ComponentType, ObjectComponent>();
+            this.Children = new List<GameObject>();
+            this.SetParent(parent);
+        }
+
+        public void SetParent(GameObject parent)
+        {
+            this._parent = parent;
+
+            if (parent != null)
+            {
+                parent.Children.Add(this);
+            }
+        }
+
+        public GameObject GetParent()
+        {
+            return this._parent;
         }
 
         public void AddComponent(ObjectComponent component)
@@ -45,6 +69,18 @@ namespace Comp2501Game
             {
                 return true;
             }
+            return false;
+        }
+
+        public static bool AreRelated(GameObject obj1, GameObject obj2)
+        {
+            if (obj1._parent == obj2 ||
+                obj2._parent == obj1 ||
+                obj1 == obj2)
+            {
+                return true;
+            }
+
             return false;
         }
     }

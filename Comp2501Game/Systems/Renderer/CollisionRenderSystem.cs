@@ -80,7 +80,7 @@ namespace Comp2501Game.Systems
                     {
                         List<Vector2> transformedVertices = LinearFunctions.GetTransformedVertices(
                             shape.GetVertices(),
-                            transformComponent.Transform);
+                            transformComponent.GetCompoundTransform());
                         Vector2 vertexBuffer = transformedVertices[0];
 
                         for (int i = 1; i < transformedVertices.Count; i++)

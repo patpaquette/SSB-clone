@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.cs" />
     <Compile Include="EntityFactory\EnvironmentFactory.cs" />
     <Compile Include="EntityFactory\DynamicEntityFactory.cs" />
     <Compile Include="GameObject.cs" />
@@ -119,13 +120,22 @@
     <Compile Include="Libs\Geometry\Types.cs" />
     <Compile Include="ObjectComponent.cs" />
     <Compile Include="Objects\Components\Actions\ActionComponent.cs" />
+    <Compile Include="Objects\Components\Actions\ActionInfo.cs" />
+    <Compile Include="Objects\Components\Actions\ActionInfoMovement.cs" />
+    <Compile Include="Objects\Components\Actions\ActionInfoProjectile.cs" />
     <Compile Include="Objects\Components\Actions\ActionList.cs" />
+    <Compile Include="Objects\Components\Actions\ActionType.cs" />
+    <Compile Include="Objects\Components\Actions\ActionDefinition.cs" />
     <Compile Include="Objects\Components\CollisionComponents\AABB.cs" />
     <Compile Include="Objects\Components\CollisionComponents\AABBCollisionComponent.cs" />
     <Compile Include="Objects\Components\CollisionComponents\BoundingBoxComponent.cs" />
+    <Compile Include="Objects\Components\EntityProperties\IsActionComponent.cs" />
+    <Compile Include="Objects\Components\EntityProperties\IsCharacterComponent.cs" />
+    <Compile Include="Objects\Components\EntityProperties\IsPhysicalComponent.cs" />
     <Compile Include="Objects\Components\ColorComponent.cs" />
     <Compile Include="Objects\Components\Actions\CurrentActionComponent.cs" />
     <Compile Include="Objects\Components\Holder\AnimationDirectory.cs" />
+    <Compile Include="Objects\Components\LifetimeComponent.cs" />
     <Compile Include="Objects\Components\MeshComponent.cs" />
     <Compile Include="Objects\Components\Physics\Impulse.cs" />
     <Compile Include="Objects\Components\Physics\GravityComponent.cs" />
@@ -156,9 +166,11 @@
     <Compile Include="Systems\Renderer\LinebatchMeshRenderSystem.cs" />
     <Compile Include="Systems\Renderer\SpriteRenderer.cs" />
     <Compile Include="Systems\StateMod\AABBCollisionSystem.cs" />
+    <Compile Include="Systems\StateMod\ActionSystem.cs" />
     <Compile Include="Systems\StateMod\AnimationSystem.cs" />
     <Compile Include="Systems\StateMod\HealthSystem.cs" />
     <Compile Include="Systems\StateMod\InputSystem.cs" />
+    <Compile Include="Systems\StateMod\LifetimeSystem.cs" />
     <Compile Include="Systems\StateMod\MovementSystem.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -180,6 +180,7 @@ namespace Comp2501Game.Systems
                         else if (state.IsKeyDown(Keys.A))
                         {
                             actionComponent.curAction.primaryAction = PrimaryAction.A;
+                            actionComponent.curAction.secondaryAction = SecondaryAction.Stand;
                         }
                         else if (state.IsKeyDown(Keys.B))
                         {

@@ -23,6 +23,10 @@ namespace Comp2501Game.Objects.Components
         Gravity,
         MotionProperties,
         PhysicsCollisionResponse,
-        PhysicalProperties
+        PhysicalProperties,
+        Lifetime,
+        IsPhysical,
+        IsAction,
+        IsCharacter
     }
 }

@@ -49,12 +49,14 @@ namespace Comp2501Game.EntityFactory
                 false);
             PhysicalPropertiesComponent physicsPropertiesComponent =
                 new PhysicalPropertiesComponent(obstacle, friction);
+            IsPhysicalComponent isPhysicalComponent = new IsPhysicalComponent(obstacle, false);
 
             obstacle.AddComponent(transformComponent);
             obstacle.AddComponent(meshComponent);
             obstacle.AddComponent(colorComponent);
             obstacle.AddComponent(boundingBoxComponent);
             obstacle.AddComponent(physicsPropertiesComponent);
+            obstacle.AddComponent(isPhysicalComponent);
 
             return obstacle;
         }

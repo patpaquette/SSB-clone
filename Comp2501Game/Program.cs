@@ -9,6 +9,7 @@ using Comp2501Game.Systems.StateMod;
 using Comp2501Game.Objects.Components;
 using Comp2501Game.Libs.Geometry;
 using System.Collections.Generic;
+using Comp2501Game.Objects.Components.Actions;
 
 namespace Comp2501Game
 {
@@ -23,8 +24,6 @@ namespace Comp2501Game
             using (Game1 game = new Game1())
             {
                 EnvironmentFactory envFactory = new EnvironmentFactory(game);
-                DynamicEntityFactory entityFactory = new DynamicEntityFactory(game);
-
                 Rectangle clientBounds = game.Window.ClientBounds;
 
                 
@@ -37,12 +36,14 @@ namespace Comp2501Game
                 int inputSystemID = game.RegisterSystem(new InputSystem(game, 1));
                 int animationSystemID = game.RegisterSystem(new AnimationSystem(game, 1));
                 int movementSystemID = game.RegisterSystem(new MovementSystem(game, 1));
+                int actionSystemID = game.RegisterSystem(new ActionSystem(game));
                 int physicsSystemID = game.RegisterSystem(new PhysicsSystem(game));
                 int collisionSystemID = game.RegisterSystem(new SATCollisionSystem(game));
                 int meshRendererID = game.RegisterSystem(new LinebatchMeshRenderSystem(game));
                 int collisionRendererID = game.RegisterSystem(new CollisionRenderSystem(game));
                 int spriteRendererID = game.RegisterSystem(new SpriteRenderer(game));
                 int transformResolverID = game.RegisterSystem(new PhysicsTransformResolverSystem(game));
+                int lifetimeSystemID = game.RegisterSystem(new LifetimeSystem(game));
 
                 game.SetSystemCallOrder(new List<int>
                 {
@@ -50,19 +51,22 @@ namespace Comp2501Game
                     inputSystemID,
                     animationSystemID,
                     movementSystemID,
+                    actionSystemID,
                     physicsSystemID,
                     collisionSystemID,
                     transformResolverID,
+                    lifetimeSystemID,
                     //physicsSystemID,
                     meshRendererID,
                     collisionRendererID,
-                    spriteRendererID
+                    spriteRendererID,
                 });
                 //game.AddObject(
                 //  new PlayerObject(game, 1, Objects.Components.SpriteType.Yoshi));
-                game.AddObject(entityFactory.BuildPlayerControlledEntity(
+                GameObject yoshi = DynamicEntityFactory.BuildPlayerControlledEntity(
+                    game,
                     1,
-                    new Vector2(100,0),
+                    new Vector2(100, 0),
                     0.0f,
                     new Vector2(1.0f, 1.0f),
                     300,
@@ -72,9 +76,43 @@ namespace Comp2501Game
                             Shape.BuildRectangle(new Rectangle(-55, -60, 90, 60)),
                             Shape.BuildRectangle(new Rectangle(-40, 0, 120, 60)),
                             Shape.BuildRectangle(new Rectangle(25, 60, 40, 30))
-                        }));
+                        },
+                    new Dictionary<ActionDefinition, ActionInfo>()
+                    {
+                        {
+                            new ActionDefinition(
+                                DirectionalAction.Left,
+                                PrimaryAction.A,
+                                SecondaryAction.Stand
+                            ),
+                            new ActionInfoProjectile(
+                                new Vector2(-2000.0f, -2000.0f),
+                                100,
+                                new Vector2(-500.0f, -500.0f),
+                                20,
+                                new Rectangle(-25, 80, 50, 50)
+                            )
+                        },
+                         {
+                            new ActionDefinition(
+                                DirectionalAction.Right,
+                                PrimaryAction.A,
+                                SecondaryAction.Stand
+                            ),
+                            new ActionInfoProjectile(
+                                new Vector2(2000.0f, -2000.0f),
+                                100,
+                                new Vector2(500.0f, 500.0f),
+                                20,
+                                new Rectangle(-25, 80, 50, 50)
+                            )
+                        }
+                    }
+                );
+                game.AddObject(yoshi);
 
-                game.AddObject(entityFactory.BuildDynamicEntity(
+                GameObject kirby = DynamicEntityFactory.BuildDynamicEntity(
+                    game,
                     new Vector2(500, 0),
                     0.0f,
                     new Vector2(1.0f, 1.0f),
@@ -83,7 +121,11 @@ namespace Comp2501Game
                     new List<Shape>
                         {
                             Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
-                        }));
+                });
+
+                //kirby.AddComponent(new LifetimeComponent(kirby, 5000));
+                //kirby.SetParent(yoshi);
+                game.AddObject(kirby);
                 
                 
 

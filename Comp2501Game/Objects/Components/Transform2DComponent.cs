@@ -8,7 +8,7 @@ namespace Comp2501Game.Objects.Components
 {
     class Transform2DComponent : ObjectComponent
     {
-        public Matrix Transform;
+        private Matrix _transform;
         private float _rotation;
         private Vector2 _translation;
         private Vector2 _scale;
@@ -29,9 +29,32 @@ namespace Comp2501Game.Objects.Components
             // TODO: Complete member initialization
         }*/
 
+        public Matrix GetTransform()
+        {
+            return this._transform;
+        }
+
+        public Matrix GetCompoundTransform()
+        {
+            if (this.ParentEntity.GetParent() != null)
+            {
+                Transform2DComponent parentTransformComponent =
+                    (Transform2DComponent)this.ParentEntity.GetParent().GetComponent(ComponentType.Transform2D);
+
+                return Matrix.Multiply(parentTransformComponent.GetTransform(), this._transform);
+            }
+
+            return this._transform;
+        }
+
+        public void SetTransform(Matrix transform)
+        {
+            this._transform = transform;
+        }
+
         public Vector2 GetTranslation()
         {
-            Vector3 translation = this.Transform.Translation;
+            Vector3 translation = this.GetTransform().Translation;
             return new Vector2(translation.X, translation.Y);
         }
 
@@ -44,8 +67,9 @@ namespace Comp2501Game.Objects.Components
         public void AddTranslation(Vector2 translation)
         {
             this._translation += translation;
-            this.Transform = Matrix.Multiply(
-                this.Transform, Matrix.CreateTranslation(translation.X, translation.Y, 0.0f));
+            this.SetTransform(Matrix.Multiply(
+                this._transform, Matrix.CreateTranslation(translation.X, translation.Y, 0.0f))
+            );
 
         }
 
@@ -78,10 +102,10 @@ namespace Comp2501Game.Objects.Components
 
         private void calculateTransform()
         {
-            this.Transform = Matrix.CreateScale(this._scale.X, this._scale.Y, 1.0f);
-            this.Transform = Matrix.Multiply(this.Transform, Matrix.CreateRotationZ(this._rotation));
-            this.Transform = Matrix.Multiply(
-                this.Transform,
+            this._transform = Matrix.CreateScale(this._scale.X, this._scale.Y, 1.0f);
+            this._transform = Matrix.Multiply(this._transform, Matrix.CreateRotationZ(this._rotation));
+            this._transform = Matrix.Multiply(
+                this._transform,
                 Matrix.CreateTranslation(this._translation.X, this._translation.Y, 0.0f));
         }
     }

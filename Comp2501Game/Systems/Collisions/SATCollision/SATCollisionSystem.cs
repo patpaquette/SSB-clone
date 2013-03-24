@@ -31,14 +31,19 @@ namespace Comp2501Game.Systems.Collisions
             {
                 foreach (GameObject obj2 in this._objects)
                 {
-                    if (obj1 != obj2 && 
+                    if (!GameObject.AreRelated(obj1, obj2) && 
                         ((BoundingBoxComponent)obj1.GetComponent(ComponentType.BoundingBox)).Active)
                     {
-                        this.checkCollision(
+                        CollisionInfo colInfo = this.checkCollision(
                             obj1, 
                             obj2, 
                             gameTime.ElapsedGameTime.Milliseconds/1000.0f
                         );
+
+                        if (colInfo != null)
+                        {
+                            this.triggerCollisionEvent(colInfo, gameTime.ElapsedGameTime.Milliseconds / 1000.0f);
+                        }
                     }
                 }
             }
@@ -51,7 +56,7 @@ namespace Comp2501Game.Systems.Collisions
             return SystemType.StateModifier;
         }
 
-        private void checkCollision(GameObject obj1, GameObject obj2, float timestep)
+        private CollisionInfo checkCollision(GameObject obj1, GameObject obj2, float timestep)
         {
             Transform2DComponent obj1TransformComponent =
                 (Transform2DComponent)obj1.GetComponent(ComponentType.Transform2D);
@@ -99,8 +104,8 @@ namespace Comp2501Game.Systems.Collisions
                         Vector2 v = e.GetNormalizedVector();
                         Vector2 axis = new Vector2(-v.Y, v.X);
 
-                        Matrix obj1Transform = obj1TransformComponent.Transform;
-                        Matrix obj2Transform = obj2TransformComponent.Transform;
+                        Matrix obj1Transform = obj1TransformComponent.GetCompoundTransform();
+                        Matrix obj2Transform = obj2TransformComponent.GetCompoundTransform();
 
                         if (obj1MotionComponent != null)
                         {
@@ -173,13 +178,10 @@ namespace Comp2501Game.Systems.Collisions
             //collision
             if (collision)
             {
-
-                this.triggerPhysicalCollision(
-                    new CollisionInfo(obj1, obj2, depth, normal),
-                    timestep
-            );
-
+                return new CollisionInfo(obj1, obj2, depth, normal);
             }
+
+            return null;
         }
 
     }

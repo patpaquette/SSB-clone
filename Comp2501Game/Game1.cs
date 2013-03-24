@@ -32,6 +32,8 @@ namespace Comp2501Game
             this._systems = new List<GameSystem>();
             this._objects = new List<GameObject>();
             this._systemsCallOrder = new List<int>();
+            this.graphics.PreferredBackBufferWidth = 1440;
+            this.graphics.PreferredBackBufferHeight = 900;
         }
 
         /// <summary>
@@ -155,6 +157,14 @@ namespace Comp2501Game
             }
 
             return this._systems.Count - 1;
+        }
+
+        public void RemoveObject(GameObject obj)
+        {
+            foreach (GameSystem system in this._systems)
+            {
+                system.UnregisterObject(obj);
+            }
         }
 
         public void SetSystemCallOrder(List<int> order)

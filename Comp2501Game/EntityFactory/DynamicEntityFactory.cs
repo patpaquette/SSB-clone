@@ -7,37 +7,38 @@ using Comp2501Game.Objects.Components;
 using Comp2501Game.Objects.Components.CollisionComponents;
 using Comp2501Game.Libs.Geometry;
 using Comp2501Game.Objects.Components.Physics;
+using Comp2501Game.Objects.Components.Actions;
+using Comp2501Game.Objects.Components.EntityProperties;
 
 namespace Comp2501Game.EntityFactory
 {
-    class DynamicEntityFactory
+    static class DynamicEntityFactory
     {
-        private Game1 _game;
-
-        public DynamicEntityFactory(Game1 game)
-        {
-            this._game = game;
-        }
-
-        public GameObject BuildPlayerControlledEntity(
+        public static GameObject BuildPlayerControlledEntity(
+            Game1 game,
             int playerNumber,
             Vector2 position,
             float rotation,
             Vector2 scale,
             float maxSpeed,
             SpriteType spriteType,
-            List<Shape> boundingBoxes)
+            List<Shape> boundingBoxes,
+            Dictionary<ActionDefinition, ActionInfo> actionsInformationList)
         {
-            GameObject entity = this.BuildDynamicEntity(position, rotation, scale, maxSpeed, spriteType, boundingBoxes);
+            GameObject entity = DynamicEntityFactory.BuildDynamicEntity(game, position, rotation, scale, maxSpeed, spriteType, boundingBoxes);
 
             PlayerComponent playerComponent = new PlayerComponent(entity, playerNumber);
+
+            CurrentActionComponent curActionComponent = (CurrentActionComponent)entity.GetComponent(ComponentType.Action);
+            curActionComponent.SetActionInfoList(actionsInformationList);
 
             entity.AddComponent(playerComponent);
 
             return entity;
         }
 
-        public GameObject BuildDynamicEntity(
+        public static GameObject BuildDynamicEntity(
+            Game1 game,
             Vector2 position,
             float rotation,
             Vector2 scale,
@@ -45,7 +46,7 @@ namespace Comp2501Game.EntityFactory
             SpriteType spriteType,
             List<Shape> boundingBoxes)
         {
-            GameObject entity = new GameObject(this._game);
+            GameObject entity = new GameObject(game);
 
             
             Transform2DComponent transformComponent = new Transform2DComponent(
@@ -53,11 +54,16 @@ namespace Comp2501Game.EntityFactory
                 position,
                 rotation,
                 scale);
-            SpriteComponent sprite = new SpriteComponent(entity, spriteType, this._game);
+            SpriteComponent sprite = new SpriteComponent(entity, spriteType, game);
             BoundingBoxComponent bbComponent = new BoundingBoxComponent(entity, boundingBoxes, true);
-            CurrentActionComponent caComponent = new CurrentActionComponent(entity, new ActionComponent(DirectionalAction.Left, SecondaryAction.Stand, PrimaryAction.None));
+            CurrentActionComponent caComponent = new CurrentActionComponent(
+                entity, 
+                new ActionComponent(DirectionalAction.Left, SecondaryAction.Stand, PrimaryAction.None),
+                new Dictionary<ActionDefinition, ActionInfo>());
             GravityComponent gravComponent = new GravityComponent(entity, 1.0f);
             MotionPropertiesComponent motionComponent = new MotionPropertiesComponent(entity, 1.0f, maxSpeed);
+            IsPhysicalComponent isPhysicalComponent = new IsPhysicalComponent(entity, true);
+            IsCharacterComponent isCharComponent = new IsCharacterComponent(entity);
 
             
             entity.AddComponent(transformComponent);
@@ -66,6 +72,46 @@ namespace Comp2501Game.EntityFactory
             entity.AddComponent(caComponent);
             entity.AddComponent(gravComponent);
             entity.AddComponent(motionComponent);
+            entity.AddComponent(isPhysicalComponent);
+            entity.AddComponent(isCharComponent);
+
+            return entity;
+        }
+
+        public static GameObject BuildActionProjectile(
+            Game1 game,
+            GameObject parent,
+            ActionInfo actInfo,
+            Vector2 position,
+            Vector2 velocity,
+            int lifetime,
+            List<Shape> boundingBoxes)
+        {
+            GameObject entity = new GameObject(game);
+            entity.SetParent(parent);
+
+            Transform2DComponent transformComponent = new Transform2DComponent(
+                entity,
+                position,
+                0.0f,
+                Vector2.One);
+
+            BoundingBoxComponent bbComponent = new BoundingBoxComponent(entity, boundingBoxes, true);
+            CurrentActionComponent caComponent = new CurrentActionComponent(
+                entity,
+                new ActionComponent(DirectionalAction.Left, SecondaryAction.Stand, PrimaryAction.None),
+                new Dictionary<ActionDefinition, ActionInfo>());
+            LifetimeComponent lifetimeComponent = new LifetimeComponent(entity, lifetime);
+            IsActionComponent isActionComponent = new IsActionComponent(entity, actInfo);
+            MotionPropertiesComponent motionComponent = new MotionPropertiesComponent(entity, 1.0f);
+            motionComponent.SetVelocity(velocity);
+
+            entity.AddComponent(transformComponent);
+            entity.AddComponent(bbComponent);
+            entity.AddComponent(caComponent);
+            entity.AddComponent(motionComponent);
+            entity.AddComponent(lifetimeComponent);
+            entity.AddComponent(isActionComponent);
 
             return entity;
         }
