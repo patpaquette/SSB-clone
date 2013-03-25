@@ -22,12 +22,13 @@ namespace Comp2501Game.EntityFactory
             Vector2 position,
             float rotation,
             Vector2 scale,
-            float maxSpeed,
+            float maxGroundSpeed,
+            float maxAirSpeed,
             SpriteType spriteType,
             List<Shape> boundingBoxes,
             Dictionary<ActionDefinition, ActionInfo> actionsInformationList)
         {
-            GameObject entity = DynamicEntityFactory.BuildDynamicEntity(game, position, rotation, scale, maxSpeed, spriteType, boundingBoxes);
+            GameObject entity = DynamicEntityFactory.BuildDynamicEntity(game, position, rotation, scale, maxGroundSpeed, maxAirSpeed, spriteType, boundingBoxes);
 
             PlayerComponent playerComponent = new PlayerComponent(entity, playerNumber);
             HealthComponent healthComponent = new HealthComponent(entity);
@@ -48,7 +49,8 @@ namespace Comp2501Game.EntityFactory
             Vector2 position,
             float rotation,
             Vector2 scale,
-            float maxSpeed,
+            float maxGroundSpeed,
+            float maxAirSpeed,
             SpriteType spriteType,
             List<Shape> boundingBoxes)
         {
@@ -67,7 +69,8 @@ namespace Comp2501Game.EntityFactory
                 new ActionComponent(DirectionalAction.Left, SecondaryAction.Stand, PrimaryAction.None),
                 new Dictionary<ActionDefinition, ActionInfo>());
             GravityComponent gravComponent = new GravityComponent(entity, 1.0f);
-            MotionPropertiesComponent motionComponent = new MotionPropertiesComponent(entity, 1.0f, maxSpeed);
+            MotionPropertiesComponent motionComponent = new MotionPropertiesComponent(
+                entity, 1.0f, maxGroundSpeed, maxAirSpeed);
             IsPhysicalComponent isPhysicalComponent = new IsPhysicalComponent(entity, true);
             IsCharacterComponent isCharComponent = new IsCharacterComponent(entity);
             SoundComponent soundComponent = new SoundComponent(entity);

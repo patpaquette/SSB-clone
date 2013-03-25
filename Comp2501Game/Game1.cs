@@ -23,6 +23,7 @@ namespace Comp2501Game
         Texture2D[] yoshiSpriteSheets;
         List<GameSystem> _systems;
         List<GameObject> _objects;
+        Dictionary<string, GameSystem> _services;
         List<int> _systemsCallOrder;
 
         public Game1()
@@ -31,9 +32,10 @@ namespace Comp2501Game
             Content.RootDirectory = "Content";
             this._systems = new List<GameSystem>();
             this._objects = new List<GameObject>();
+            this._services = new Dictionary<string, GameSystem>();
             this._systemsCallOrder = new List<int>();
-            this.graphics.PreferredBackBufferWidth = 1440;
-            this.graphics.PreferredBackBufferHeight = 900;
+            this.graphics.PreferredBackBufferWidth = 1200;
+            this.graphics.PreferredBackBufferHeight = 800;
             this.graphics.ApplyChanges();
         }
 
@@ -152,12 +154,27 @@ namespace Comp2501Game
         {
             this._systems.Add(system);
 
+            if (system.GetType() == SystemType.Service)
+            {
+                this._services.Add(system.GetName(), system);
+            }
+
             foreach (GameObject obj in this._objects)
             {
                 system.TryRegisterObject(obj);
             }
 
             return this._systems.Count - 1;
+        }
+
+        public GameSystem GetService(string name)
+        {
+            if (this._services.ContainsKey(name))
+            {
+                return this._services[name];
+            }
+
+            return null;
         }
 
         public void RemoveObject(GameObject obj)

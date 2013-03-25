@@ -17,9 +17,9 @@ namespace Comp2501Game.EntityFactory
                         {
                             new ActionDefinition(DirectionalAction.Left, PrimaryAction.A, SecondaryAction.Stand),
                             new ActionInfoProjectile(
-                                new Vector2(-2000.0f, -2000.0f),
+                                new Vector2(-1000.0f, -1000.0f),
                                 100,
-                                new Vector2(-500.0f, -500.0f),
+                                new Vector2(0.0f, -5.0f),
                                 20,
                                 new Rectangle(-25, 80, 50, 50)
                             )
@@ -27,9 +27,9 @@ namespace Comp2501Game.EntityFactory
                          {
                             new ActionDefinition(DirectionalAction.Right, PrimaryAction.A, SecondaryAction.Stand),
                             new ActionInfoProjectile(
-                                new Vector2(2000.0f, -2000.0f),
+                                new Vector2(1000.0f, -1000.0f),
                                 100,
-                                new Vector2(500.0f, 500.0f),
+                                new Vector2(0.0f, -5.0f),
                                 20,
                                 new Rectangle(-25, 80, 50, 50)
                             )
@@ -37,9 +37,9 @@ namespace Comp2501Game.EntityFactory
                         {
                             new ActionDefinition(DirectionalAction.Right, PrimaryAction.Forward_A, SecondaryAction.Smash),
                             new ActionInfoProjectile(
-                                new Vector2(2000.0f, 0.0f),
+                                new Vector2(1000.0f, 0.0f),
                                 70,
-                                new Vector2(1000.0f, 1000.0f),
+                                new Vector2(20.0f, -20.0f),
                                 50,
                                 new Rectangle(-50, -50, 100, 100)
                             )
@@ -47,9 +47,9 @@ namespace Comp2501Game.EntityFactory
                         {
                             new ActionDefinition(DirectionalAction.Left, PrimaryAction.Forward_A, SecondaryAction.Smash),
                             new ActionInfoProjectile(
-                                new Vector2(-2000.0f, 0.0f),
+                                new Vector2(-1000.0f, 0.0f),
                                 70,
-                                new Vector2(-1000.0f, 1000.0f),
+                                new Vector2(-20.0f, -20.0f),
                                 50,
                                 new Rectangle(-50, -50, 100, 100)
                             )

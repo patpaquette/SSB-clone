@@ -12,8 +12,8 @@ namespace Comp2501Game.Systems.Collisions
 {
     class SATCollisionSystem : CollisionSystem
     {
-        public SATCollisionSystem(Game1 game)
-            : base(game)
+        public SATCollisionSystem(Game1 game, string name)
+            : base(game, name)
         {
             this._componentDependencies.Add(Objects.Components.ComponentType.Transform2D);
             this._componentDependencies.Add(Objects.Components.ComponentType.BoundingBox);
@@ -31,18 +31,21 @@ namespace Comp2501Game.Systems.Collisions
             {
                 foreach (GameObject obj2 in this._objects)
                 {
-                    if (!GameObject.AreRelated(obj1, obj2) && 
-                        ((BoundingBoxComponent)obj1.GetComponent(ComponentType.BoundingBox)).Active)
+                    if(this.MustCheckCollision(obj1, obj2))
                     {
-                        CollisionInfo colInfo = this.checkCollision(
-                            obj1, 
-                            obj2, 
-                            gameTime.ElapsedGameTime.Milliseconds/1000.0f
-                        );
-
-                        if (colInfo != null)
+                        if (!GameObject.AreRelated(obj1, obj2) && 
+                            ((BoundingBoxComponent)obj1.GetComponent(ComponentType.BoundingBox)).Active)
                         {
-                            this.triggerCollisionEvent(colInfo, gameTime.ElapsedGameTime.Milliseconds / 1000.0f);
+                            CollisionInfo colInfo = this.checkCollision(
+                                obj1, 
+                                obj2, 
+                                gameTime.ElapsedGameTime.Milliseconds/1000.0f
+                            );
+
+                            if (colInfo != null)
+                            {
+                                this.triggerCollisionEvent(colInfo, gameTime.ElapsedGameTime.Milliseconds / 1000.0f);
+                            }
                         }
                     }
                 }
@@ -51,10 +54,7 @@ namespace Comp2501Game.Systems.Collisions
             base.Update(gameTime);
         }
 
-        public override SystemType GetType()
-        {
-            return SystemType.StateModifier;
-        }
+        
 
         private CollisionInfo checkCollision(GameObject obj1, GameObject obj2, float timestep)
         {

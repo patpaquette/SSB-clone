@@ -7,6 +7,8 @@ namespace Comp2501Game.Systems.Collisions
 {
     enum CollisionType
     {
-        Physical
+        All,
+        Physical,
+        Action
     }
 }

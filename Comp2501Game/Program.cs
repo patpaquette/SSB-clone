@@ -40,7 +40,8 @@ namespace Comp2501Game
                 int movementSystemID = game.RegisterSystem(new MovementSystem(game, 1));
                 int actionSystemID = game.RegisterSystem(new ActionSystem(game));
                 int physicsSystemID = game.RegisterSystem(new PhysicsSystem(game));
-                int collisionSystemID = game.RegisterSystem(new SATCollisionSystem(game));
+                int boundsSystemID = game.RegisterSystem(new BoundsSystem(game));
+                int collisionSystemID = game.RegisterSystem(new SATCollisionSystem(game, "Collision"));
                 int meshRendererID = game.RegisterSystem(new LinebatchMeshRenderSystem(game));
                 int collisionRendererID = game.RegisterSystem(new CollisionRenderSystem(game));
                 int spriteRendererID = game.RegisterSystem(new SpriteRenderer(game));
@@ -60,6 +61,7 @@ namespace Comp2501Game
                     physicsSystemID,
                     collisionSystemID,
                     transformResolverID,
+                    boundsSystemID,
                     lifetimeSystemID,
                     //physicsSystemID,
                     meshRendererID,
@@ -77,6 +79,7 @@ namespace Comp2501Game
                     0.0f,
                     new Vector2(1.0f, 1.0f),
                     300,
+                    10000,
                     SpriteType.Yoshi,
                     new List<Shape>
                         {
@@ -96,6 +99,7 @@ namespace Comp2501Game
                     0.0f,
                     new Vector2(1.0f, 1.0f),
                     300,
+                    10000,
                     SpriteType.Kirby,
                     new List<Shape>
                         {

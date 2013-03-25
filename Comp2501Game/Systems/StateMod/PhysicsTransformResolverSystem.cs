@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Comp2501Game.Objects.Components;
 using Comp2501Game.Objects.Components.Physics;
+using Microsoft.Xna.Framework;
 
 namespace Comp2501Game.Systems.StateMod
 {
@@ -30,8 +31,25 @@ namespace Comp2501Game.Systems.StateMod
                 MotionPropertiesComponent motionComponent =
                     (MotionPropertiesComponent)obj.GetComponent(ComponentType.MotionProperties);
 
+                Vector2 objVelocity = motionComponent.GetVelocity();
+
+                if (motionComponent.State == MotionState.Ground)
+                {
+                    if (objVelocity.Length() > motionComponent.MaxGroundSpeed)
+                    {
+                        objVelocity = objVelocity * motionComponent.MaxGroundSpeed / objVelocity.Length();
+                    }
+                }
+                else if (motionComponent.State == MotionState.Air)
+                {
+                    if (objVelocity.Length() > motionComponent.MaxAirSpeed)
+                    {
+                        objVelocity = objVelocity * motionComponent.MaxAirSpeed / objVelocity.Length();
+                    }
+                }
+
                 transformComponent.AddTranslation(
-                    motionComponent.GetVelocity() * gameTime.ElapsedGameTime.Milliseconds / 1000.0f
+                    objVelocity * gameTime.ElapsedGameTime.Milliseconds / 1000.0f
                 );
             }
 

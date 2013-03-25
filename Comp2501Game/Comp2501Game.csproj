@@ -143,6 +143,7 @@
     <Compile Include="Objects\Components\Physics\Impulse.cs" />
     <Compile Include="Objects\Components\Physics\GravityComponent.cs" />
     <Compile Include="Objects\Components\Physics\MotionPropertiesComponent.cs" />
+    <Compile Include="Objects\Components\Physics\MotionState.cs" />
     <Compile Include="Objects\Components\Physics\PhysicalPropertiesComponent.cs" />
     <Compile Include="Objects\Components\PositionComponent.cs" />
     <Compile Include="Objects\Components\SoundComponent.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="Systems\StateMod\ActionSystem.cs" />
     <Compile Include="Systems\StateMod\AnimationSystem.cs" />
     <Compile Include="Systems\StateMod\ArrowInputSystem.cs" />
+    <Compile Include="Systems\StateMod\BoundsSystem.cs" />
     <Compile Include="Systems\StateMod\ControllerInputSystem.cs" />
     <Compile Include="Systems\StateMod\HealthSystem.cs" />
     <Compile Include="Systems\StateMod\InputSystem.cs" />

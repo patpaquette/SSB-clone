@@ -58,6 +58,7 @@ namespace Comp2501Game.Systems.StateMod
                 motionComponent.ResetForces();
             }
 
+            ((CollisionSystem)this._game.GetService("Collision")).CheckCollisions(CollisionType.Physical, gameTime);
             base.Update(gameTime);
         }
 
@@ -115,10 +116,15 @@ namespace Comp2501Game.Systems.StateMod
 
             if (velocityCorrection.Y != 0.0f)
             {
+                obj1MotionComponent.State = MotionState.Ground;
                 if (obj1CurActionComponent != null)
                 {
                     obj1CurActionComponent.curAction.secondaryAction = SecondaryAction.Stand;
                 }
+            }
+            else
+            {
+                obj1MotionComponent.State = MotionState.Air;
             }
 
             //friction

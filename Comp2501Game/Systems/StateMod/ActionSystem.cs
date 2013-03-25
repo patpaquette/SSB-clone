@@ -72,6 +72,8 @@ namespace Comp2501Game.Systems.StateMod
                 this._game.AddObject(obj);
             }
 
+            ((CollisionSystem)this._game.GetService("Collision")).CheckCollisions(CollisionType.Action, gameTime);
+
             base.Update(gameTime);
         }
 
@@ -91,13 +93,16 @@ namespace Comp2501Game.Systems.StateMod
             if (!obj2.HasComponent(ComponentType.MotionProperties)) return;
 
             IsActionComponent obj1ActionComponent = (IsActionComponent)obj1.GetComponent(ComponentType.IsAction);
+            LifetimeComponent obj1LifetimeComponent = (LifetimeComponent)obj1.GetComponent(ComponentType.Lifetime);
             HealthComponent obj2HealthComponent = (HealthComponent)obj2.GetComponent(ComponentType.Health);
             MotionPropertiesComponent obj2MotionComponent = (MotionPropertiesComponent)obj2.GetComponent(ComponentType.MotionProperties);
             ActionInfoProjectile actionInfo = (ActionInfoProjectile)obj1ActionComponent.ActionInfo;
 
             obj2HealthComponent.AddDmg(actionInfo.OnHitDamage);
-            Vector2 velocityFinal = actionInfo.OnHitForce * obj2HealthComponent.getCurrDmg() / obj2MotionComponent.Mass;
-            //obj2MotionComponent.AddVelocity(velocityFinal);
+            Vector2 forceFinal = actionInfo.OnHitForce * obj2HealthComponent.getCurrDmg() / obj2MotionComponent.Mass;
+            obj2MotionComponent.AddForce(forceFinal);
+            obj1LifetimeComponent.Lifetime = 0;
+            
         }
     }
 }

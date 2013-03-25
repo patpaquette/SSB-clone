@@ -49,7 +49,17 @@ namespace Comp2501Game.Objects.Components
 
         public void SetTransform(Matrix transform)
         {
+            Vector3 scale = new Vector3();
+            Quaternion rotation = new Quaternion();
+            Vector3 translation = new Vector3();
+
             this._transform = transform;
+
+            this._transform.Decompose(out scale, out rotation, out translation);
+            this._scale = new Vector2(scale.X, scale.Y);
+            this._rotation = rotation.Z;
+            this._translation.X = translation.X;
+            this._translation.Y = translation.Y;
         }
 
         public Vector2 GetTranslation()
