@@ -8,6 +8,7 @@ namespace Comp2501Game.Objects.Components
     public enum SpriteType
     {
         Yoshi,
-        Kirby
+        Kirby,
+        None
     }
 }

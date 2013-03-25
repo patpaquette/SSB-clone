@@ -136,9 +136,11 @@
     <Compile Include="Objects\Components\EntityProperties\IsPhysicalComponent.cs" />
     <Compile Include="Objects\Components\ColorComponent.cs" />
     <Compile Include="Objects\Components\Actions\CurrentActionComponent.cs" />
+    <Compile Include="Objects\Components\HandComponent.cs" />
     <Compile Include="Objects\Components\Holder\AnimationDirectory.cs" />
     <Compile Include="Objects\Components\Holder\SoundDirectory.cs" />
     <Compile Include="Objects\Components\LifetimeComponent.cs" />
+    <Compile Include="Objects\Components\MapComponent.cs" />
     <Compile Include="Objects\Components\MeshComponent.cs" />
     <Compile Include="Objects\Components\Physics\Impulse.cs" />
     <Compile Include="Objects\Components\Physics\GravityComponent.cs" />
@@ -146,6 +148,7 @@
     <Compile Include="Objects\Components\Physics\MotionState.cs" />
     <Compile Include="Objects\Components\Physics\PhysicalPropertiesComponent.cs" />
     <Compile Include="Objects\Components\PositionComponent.cs" />
+    <Compile Include="Objects\Components\SelectComponent.cs" />
     <Compile Include="Objects\Components\SoundComponent.cs" />
     <Compile Include="Objects\Components\Transform2DComponent.cs" />
     <Compile Include="Objects\Components\Types\ArrowType.cs" />
@@ -156,20 +159,29 @@
     <Compile Include="Objects\Components\Not Yet Implemented\Score.cs" />
     <Compile Include="Objects\Components\SpriteComponent.cs" />
     <Compile Include="Objects\Components\Types\SpriteType.cs" />
+    <Compile Include="Objects\HandObject.cs" />
     <Compile Include="Objects\PlayerObject.cs" />
+    <Compile Include="Objects\SceneObject.cs" />
+    <Compile Include="Objects\Screens\CharacterSelectScreen.cs" />
+    <Compile Include="Objects\Screens\GameScreen.cs" />
     <Compile Include="Objects\TestObject.cs" />
     <Compile Include="Objects\Components\TimerComponent.cs" />
     <Compile Include="Objects\TimeObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Objects\Screens\StartScreen.cs" />
     <Compile Include="Systems\Collisions\CollisionType.cs" />
+    <Compile Include="Systems\Physics\Initializer\HandInitSystem.cs" />
+    <Compile Include="Systems\Physics\Initializer\ScreenInitializationSystem.cs" />
     <Compile Include="Systems\Renderer\CollisionRenderSystem.cs" />
     <Compile Include="Systems\Collisions\CollisionSystem.cs" />
     <Compile Include="Systems\Collisions\SATCollision\SATCollisionSystem.cs" />
     <Compile Include="Systems\Physics\CollisionInfo.cs" />
     <Compile Include="Systems\Renderer\AABBCollisionRenderSystem.cs" />
+    <Compile Include="Systems\Renderer\HandRenderer.cs" />
     <Compile Include="Systems\Renderer\LinebatchMeshRenderSystem.cs" />
+    <Compile Include="Systems\Renderer\MapRenderer.cs" />
     <Compile Include="Systems\Renderer\SpriteRenderer.cs" />
     <Compile Include="Systems\Renderer\UIRenderer.cs" />
     <Compile Include="Systems\StateMod\AABBCollisionSystem.cs" />
@@ -186,12 +198,15 @@
     </Compile>
     <Compile Include="Systems\StateMod\PhysicsSystem.cs" />
     <Compile Include="Systems\StateMod\PlayerInputSystem.cs" />
-    <Compile Include="Systems\Initializer\SpriteInitializationSystem.cs" />
+    <Compile Include="Systems\Physics\Initializer\SpriteInitializationSystem.cs" />
     <Compile Include="Systems\StateMod\PhysicsTransformResolverSystem.cs" />
+    <Compile Include="Systems\StateMod\ScreenInputSystem.cs" />
+    <Compile Include="Systems\StateMod\SelectInputSystem.cs" />
     <Compile Include="Systems\Types\SystemType.cs" />
     <Compile Include="Systems\Renderer\TestRenderSystem.cs" />
     <Compile Include="Systems\Renderer\TimerRenderSystem.cs" />
     <Compile Include="Systems\StateMod\TimerSystem.cs" />
+    <Compile Include="Types\ScreenType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

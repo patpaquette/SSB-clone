@@ -29,6 +29,9 @@ namespace Comp2501Game.Objects.Components
         IsAction,
         IsCharacter,
         Arrow,
-        Sound
+        Sound,
+        Map,
+        Hand,
+        Select
     }
 }

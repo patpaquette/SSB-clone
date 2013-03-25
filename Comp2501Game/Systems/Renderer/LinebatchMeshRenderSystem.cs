@@ -24,7 +24,7 @@ namespace Comp2501Game.Systems.Renderer
         public override void Initialize()
         {
             this._spriteBatch = new SpriteBatch(this._game.GraphicsDevice);
-            base.Initialize();
+            //base.Initialize();
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
