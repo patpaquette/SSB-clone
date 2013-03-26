@@ -49,10 +49,10 @@ namespace Comp2501Game.Objects.Components
             this.soundFrameWork.Add(actions.actionList[14], new SoundDirectory(39, 0, 0, 39));
             this.soundFrameWork.Add(actions.actionList[15], new SoundDirectory(0, 0, 0, 0));
             this.soundFrameWork.Add(actions.actionList[16], new SoundDirectory(0, 0, 0, 0));
-            this.soundFrameWork.Add(actions.actionList[17], new SoundDirectory(0, 38, 51, 0));
-            this.soundFrameWork.Add(actions.actionList[18], new SoundDirectory(0, 38, 51, 0));
-            this.soundFrameWork.Add(actions.actionList[19], new SoundDirectory(0, 38, 51, 0));
-            this.soundFrameWork.Add(actions.actionList[20], new SoundDirectory(0, 38, 51, 0));
+            this.soundFrameWork.Add(actions.actionList[17], new SoundDirectory(9, 38, 51, 9));
+            this.soundFrameWork.Add(actions.actionList[18], new SoundDirectory(9, 38, 51, 9));
+            this.soundFrameWork.Add(actions.actionList[19], new SoundDirectory(9, 38, 51, 9));
+            this.soundFrameWork.Add(actions.actionList[20], new SoundDirectory(9, 38, 51, 9));
             this.soundFrameWork.Add(actions.actionList[21], new SoundDirectory(0, 0, 0, 0));
             this.soundFrameWork.Add(actions.actionList[22], new SoundDirectory(0, 0, 0, 0));
             this.soundFrameWork.Add(actions.actionList[23], new SoundDirectory(36, 43, 49, 116));
@@ -74,10 +74,10 @@ namespace Comp2501Game.Objects.Components
             this.soundFrameWork.Add(actions.actionList[37], new SoundDirectory(36, 43, 0, 116));
             this.soundFrameWork.Add(actions.actionList[38], new SoundDirectory(16, 43, 49, 16));
             this.soundFrameWork.Add(actions.actionList[39], new SoundDirectory(109, 36, 0, 123));
-            this.soundFrameWork.Add(actions.actionList[40], new SoundDirectory(0, 38, 51, 0));
-            this.soundFrameWork.Add(actions.actionList[41], new SoundDirectory(0, 38, 51, 0));
-            this.soundFrameWork.Add(actions.actionList[42], new SoundDirectory(0, 38, 51, 0));
-            this.soundFrameWork.Add(actions.actionList[43], new SoundDirectory(0, 38, 51, 0));
+            this.soundFrameWork.Add(actions.actionList[40], new SoundDirectory(9, 38, 51, 9));
+            this.soundFrameWork.Add(actions.actionList[41], new SoundDirectory(9, 38, 51, 9));
+            this.soundFrameWork.Add(actions.actionList[42], new SoundDirectory(9, 38, 51, 9));
+            this.soundFrameWork.Add(actions.actionList[43], new SoundDirectory(9, 38, 51, 9));
             this.soundFrameWork.Add(actions.actionList[44], new SoundDirectory(0, 0, 0, 0));
             this.soundFrameWork.Add(actions.actionList[45], new SoundDirectory(0, 0, 0, 0));
 
@@ -98,10 +98,10 @@ namespace Comp2501Game.Objects.Components
             this.soundFrameWork.Add(actions.actionList[60], new SoundDirectory(39, 0, 0, 39));
             this.soundFrameWork.Add(actions.actionList[61], new SoundDirectory(0, 0, 0, 0));
             this.soundFrameWork.Add(actions.actionList[62], new SoundDirectory(0, 0, 0, 0));
-            this.soundFrameWork.Add(actions.actionList[63], new SoundDirectory(0, 38, 51, 0));
-            this.soundFrameWork.Add(actions.actionList[64], new SoundDirectory(0, 38, 51, 0));
-            this.soundFrameWork.Add(actions.actionList[65], new SoundDirectory(0, 38, 51, 0));
-            this.soundFrameWork.Add(actions.actionList[66], new SoundDirectory(0, 38, 51, 0));
+            this.soundFrameWork.Add(actions.actionList[63], new SoundDirectory(9, 38, 51, 9));
+            this.soundFrameWork.Add(actions.actionList[64], new SoundDirectory(9, 38, 51, 9));
+            this.soundFrameWork.Add(actions.actionList[65], new SoundDirectory(9, 38, 51, 9));
+            this.soundFrameWork.Add(actions.actionList[66], new SoundDirectory(9, 38, 51, 9));
             this.soundFrameWork.Add(actions.actionList[67], new SoundDirectory(0, 0, 0, 0));
             this.soundFrameWork.Add(actions.actionList[68], new SoundDirectory(0, 0, 0, 0));
             this.soundFrameWork.Add(actions.actionList[69], new SoundDirectory(36, 43, 49, 116));
@@ -123,10 +123,10 @@ namespace Comp2501Game.Objects.Components
             this.soundFrameWork.Add(actions.actionList[83], new SoundDirectory(36, 43, 0, 116));
             this.soundFrameWork.Add(actions.actionList[84], new SoundDirectory(16, 43, 49, 16));
             this.soundFrameWork.Add(actions.actionList[85], new SoundDirectory(109, 36, 0, 123));
-            this.soundFrameWork.Add(actions.actionList[86], new SoundDirectory(0, 38, 51, 0));
-            this.soundFrameWork.Add(actions.actionList[87], new SoundDirectory(0, 38, 51, 0));
-            this.soundFrameWork.Add(actions.actionList[88], new SoundDirectory(0, 38, 51, 0));
-            this.soundFrameWork.Add(actions.actionList[89], new SoundDirectory(0, 38, 51, 0));
+            this.soundFrameWork.Add(actions.actionList[86], new SoundDirectory(9, 38, 51, 9));
+            this.soundFrameWork.Add(actions.actionList[87], new SoundDirectory(9, 38, 51, 9));
+            this.soundFrameWork.Add(actions.actionList[88], new SoundDirectory(9, 38, 51, 9));
+            this.soundFrameWork.Add(actions.actionList[89], new SoundDirectory(9, 38, 51, 9));
             this.soundFrameWork.Add(actions.actionList[90], new SoundDirectory(0, 0, 0, 0));
             this.soundFrameWork.Add(actions.actionList[91], new SoundDirectory(0, 0, 0, 0));
 
