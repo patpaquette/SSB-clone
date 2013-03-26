@@ -162,6 +162,7 @@
     <Compile Include="Objects\Components\Types\ArrowType.cs" />
     <Compile Include="Objects\Components\Types\ComponentType.cs" />
     <Compile Include="Objects\Components\Not Yet Implemented\Health Components\HealthComponent.cs" />
+    <Compile Include="Objects\Components\Types\MapTypes.cs" />
     <Compile Include="Objects\Components\Types\MovementType.cs" />
     <Compile Include="Objects\Components\PlayerComponent.cs" />
     <Compile Include="Objects\Components\Not Yet Implemented\Score.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="Systems\StateMod\screens\MouseInputsystem.cs" />
     <Compile Include="Systems\StateMod\screens\ScreenInputSystem.cs" />
     <Compile Include="Systems\StateMod\screens\SelectInputSystem.cs" />
+    <Compile Include="Systems\Types\GameTypes.cs" />
     <Compile Include="Systems\Types\SystemType.cs" />
     <Compile Include="Systems\Renderer\TestRenderSystem.cs" />
     <Compile Include="Systems\Renderer\TimerRenderSystem.cs" />

@@ -12,6 +12,7 @@ using Comp2501Game.Systems;
 using Comp2501Game.Systems.AI.Pathfinding;
 using Comp2501Game.Types;
 using Comp2501Game.Objects.Components;
+using Comp2501Game.Objects.Components.Types;
 
 namespace Comp2501Game
 {
@@ -36,6 +37,7 @@ namespace Comp2501Game
         public SpriteType play1, play2;
         public GameTypes gameType;
         public int LivesOrTime;
+        public MapType mapType;
 
         public Game1()
         {
@@ -55,6 +57,7 @@ namespace Comp2501Game
 
             gameType = GameTypes.None;
             LivesOrTime = 0;
+            this.mapType = MapType.None;
         }
 
         /// <summary>
