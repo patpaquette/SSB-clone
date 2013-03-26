@@ -29,6 +29,11 @@ namespace Comp2501Game.Objects.Components.Health_Components
             this.currentDmg += dmg;
         }
 
+        public void ResetDmg()
+        {
+            this.currentDmg = 0;
+        }
+
 //        public void addDamage(float inDmg)
 //        {
 //            this.currentDmg += inDmg;

@@ -108,15 +108,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
+    <Compile Include="EntityFactory\BehaviourFactory.cs" />
     <Compile Include="EntityFactory\EnvironmentFactory.cs" />
     <Compile Include="EntityFactory\DynamicEntityFactory.cs" />
     <Compile Include="EntityFactory\MoveDefinitions.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameSystem.cs" />
     <Compile Include="Lib.cs" />
+    <Compile Include="Libs\DataStructure\PriorityQueue.cs" />
     <Compile Include="Libs\Drawing.cs" />
     <Compile Include="Libs\Geometry\Edge.cs" />
+    <Compile Include="Libs\Geometry\IPosition2D.cs" />
     <Compile Include="Libs\Geometry\LinearFunctions.cs" />
+    <Compile Include="Libs\Geometry\QuadTree.cs" />
     <Compile Include="Libs\Geometry\Shape.cs" />
     <Compile Include="Libs\Geometry\Types.cs" />
     <Compile Include="ObjectComponent.cs" />
@@ -127,6 +131,10 @@
     <Compile Include="Objects\Components\Actions\ActionList.cs" />
     <Compile Include="Objects\Components\Actions\ActionType.cs" />
     <Compile Include="Objects\Components\Actions\ActionDefinition.cs" />
+    <Compile Include="Objects\Components\AI\AIControllerComponent.cs" />
+    <Compile Include="Objects\Components\AI\BehaviourComponent.cs" />
+    <Compile Include="Objects\Components\AI\Pathfinding\AStarComponent.cs" />
+    <Compile Include="Objects\Components\AI\Pathfinding\AStarGraphComponent.cs" />
     <Compile Include="Objects\Components\ArrowComponent.cs" />
     <Compile Include="Objects\Components\CollisionComponents\AABB.cs" />
     <Compile Include="Objects\Components\CollisionComponents\AABBCollisionComponent.cs" />
@@ -163,7 +171,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Systems\AI\AISystem.cs" />
+    <Compile Include="Systems\AI\BehaviourNodeState.cs" />
+    <Compile Include="Systems\AI\BehaviourNodes\ActionAttackNode.cs" />
+    <Compile Include="Systems\AI\BehaviourNodes\ActionMoveNode.cs" />
+    <Compile Include="Systems\AI\BehaviourNodes\ActionMoveToPlayerNode.cs" />
+    <Compile Include="Systems\AI\BehaviourNodes\CondEntityProximityNode.cs" />
+    <Compile Include="Systems\AI\BehaviourNodes\PrioritySelectorNode.cs" />
+    <Compile Include="Systems\AI\BehaviourNodes\SequenceSelectorNode.cs" />
+    <Compile Include="Systems\AI\BehaviourState.cs" />
+    <Compile Include="Systems\AI\BehaviourTreeNode.cs" />
+    <Compile Include="Systems\AI\BehaviourNodeType.cs" />
+    <Compile Include="Systems\AI\Pathfinding\AStarGraph.cs" />
+    <Compile Include="Systems\AI\Pathfinding\AStarNode.cs" />
+    <Compile Include="Systems\AI\Pathfinding\IPosition.cs" />
     <Compile Include="Systems\Collisions\CollisionType.cs" />
+    <Compile Include="Systems\Renderer\AStarPathfindingRenderer.cs" />
+    <Compile Include="Systems\Renderer\AStarPathRenderer.cs" />
     <Compile Include="Systems\Renderer\CollisionRenderSystem.cs" />
     <Compile Include="Systems\Collisions\CollisionSystem.cs" />
     <Compile Include="Systems\Collisions\SATCollision\SATCollisionSystem.cs" />
@@ -177,6 +201,7 @@
     <Compile Include="Systems\StateMod\AnimationSystem.cs" />
     <Compile Include="Systems\StateMod\ArrowInputSystem.cs" />
     <Compile Include="Systems\StateMod\BoundsSystem.cs" />
+    <Compile Include="Systems\StateMod\AStarPathfindingSystem.cs" />
     <Compile Include="Systems\StateMod\ControllerInputSystem.cs" />
     <Compile Include="Systems\StateMod\HealthSystem.cs" />
     <Compile Include="Systems\StateMod\InputSystem.cs" />

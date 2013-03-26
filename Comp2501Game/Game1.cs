@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Comp2501Game.Systems;
+using Comp2501Game.Systems.AI.Pathfinding;
 
 namespace Comp2501Game
 {
@@ -17,6 +18,9 @@ namespace Comp2501Game
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+        public AStarGraph CurrentPathfindingGraph;
+        public GameObject Character1;
+        public GameObject Character2;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteFont spriteFont;
@@ -37,6 +41,7 @@ namespace Comp2501Game
             this.graphics.PreferredBackBufferWidth = 1200;
             this.graphics.PreferredBackBufferHeight = 800;
             this.graphics.ApplyChanges();
+            this.CurrentPathfindingGraph = new AStarGraph(this, new List<AStarNode>());
         }
 
         /// <summary>

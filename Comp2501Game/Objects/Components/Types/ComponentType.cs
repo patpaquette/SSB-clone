@@ -29,6 +29,10 @@ namespace Comp2501Game.Objects.Components
         IsAction,
         IsCharacter,
         Arrow,
-        Sound
+        Sound,
+        AStar,
+        AStarGraph,
+        AIController,
+        Behaviour
     }
 }

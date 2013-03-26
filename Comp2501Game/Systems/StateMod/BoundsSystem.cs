@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Comp2501Game.Objects.Components;
 using Microsoft.Xna.Framework;
+using Comp2501Game.Objects.Components.Health_Components;
+using Comp2501Game.Objects.Components.Physics;
 
 namespace Comp2501Game.Systems.StateMod
 {
@@ -14,6 +16,8 @@ namespace Comp2501Game.Systems.StateMod
         {
             this._componentDependencies.Add(ComponentType.IsCharacter);
             this._componentDependencies.Add(ComponentType.Transform2D);
+            this._componentDependencies.Add(ComponentType.Health);
+            this._componentDependencies.Add(ComponentType.MotionProperties);
         }
 
         public override void Initialize()
@@ -26,6 +30,8 @@ namespace Comp2501Game.Systems.StateMod
             foreach (GameObject obj in this._objects)
             {
                 Transform2DComponent transformComponent = (Transform2DComponent)obj.GetComponent(ComponentType.Transform2D);
+                HealthComponent healthComponent = (HealthComponent)obj.GetComponent(ComponentType.Health);
+                MotionPropertiesComponent motionComponent = (MotionPropertiesComponent)obj.GetComponent(ComponentType.MotionProperties);
 
                 Vector3 translation = transformComponent.GetTransform().Translation;
 
@@ -42,6 +48,10 @@ namespace Comp2501Game.Systems.StateMod
                                 1.0f
                             )
                     ));
+
+                    motionComponent.ResetForces();
+                    motionComponent.SetVelocity(Vector2.Zero);
+                    healthComponent.ResetDmg();
                 }
             }
 

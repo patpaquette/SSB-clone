@@ -10,11 +10,58 @@ using Comp2501Game.Objects.Components.Physics;
 using Comp2501Game.Objects.Components.Actions;
 using Comp2501Game.Objects.Components.EntityProperties;
 using Comp2501Game.Objects.Components.Health_Components;
+using Comp2501Game.Objects.Components.AI;
+using Comp2501Game.Objects.Components.AI.Pathfinding;
 
 namespace Comp2501Game.EntityFactory
 {
     static class DynamicEntityFactory
     {
+        public static GameObject BuildComputerControlledEntity(
+            Game1 game,
+            Color playerColor,
+            Vector2 position,
+            float rotation,
+            Vector2 scale,
+            float maxGroundSpeed,
+            float maxAirSpeed,
+            SpriteType spriteType,
+            List<Shape> boundingBoxes,
+            Dictionary<ActionDefinition, ActionInfo> actionsInformationList,
+            GameObject opponent)
+        {
+            GameObject entity = DynamicEntityFactory.BuildPlayerControlledEntity(
+                game,
+                2,
+                playerColor,
+                position,
+                rotation,
+                scale,
+                maxGroundSpeed,
+                maxAirSpeed,
+                spriteType,
+                boundingBoxes,
+                actionsInformationList
+                );
+
+            AIControllerComponent aiComponent = new AIControllerComponent(entity);
+            AStarComponent aStarComponent = new AStarComponent(entity);
+            BehaviourComponent behaviourComponent = new BehaviourComponent(
+                entity, 
+                BehaviourFactory.Easy(
+                    game,
+                    entity,
+                    opponent
+                ));
+
+
+            entity.AddComponent(aiComponent);
+            entity.AddComponent(aStarComponent);
+            entity.AddComponent(behaviourComponent);
+
+            return entity;
+        }
+
         public static GameObject BuildPlayerControlledEntity(
             Game1 game,
             int playerNumber,

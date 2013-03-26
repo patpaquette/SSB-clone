@@ -7,9 +7,9 @@ namespace Comp2501Game.Objects.Components.Actions
 {
     struct ActionDefinition
     {
-        DirectionalAction DirectionalAction;
-        PrimaryAction PrimaryAction;
-        SecondaryAction SecondaryAction;
+        public DirectionalAction DirectionalAction;
+        public PrimaryAction PrimaryAction;
+        public SecondaryAction SecondaryAction;
 
         public ActionDefinition(
             DirectionalAction dirAction,

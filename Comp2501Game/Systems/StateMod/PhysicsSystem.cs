@@ -112,7 +112,18 @@ namespace Comp2501Game.Systems.StateMod
             }
 
             Vector2 velocityCorrection = normal * depth * (float)(1.0f / timestep);
-            obj1MotionComponent.AddVelocity(velocityCorrection);
+
+            if (obj2.HasComponent(ComponentType.MotionProperties))
+            {
+                MotionPropertiesComponent obj2MotionComponent =
+                    (MotionPropertiesComponent)obj2.GetComponent(ComponentType.MotionProperties);
+                obj1MotionComponent.AddVelocity(velocityCorrection);
+
+            }
+            else
+            {
+                obj1MotionComponent.AddVelocity(velocityCorrection);
+            }
 
             if (velocityCorrection.Y != 0.0f)
             {

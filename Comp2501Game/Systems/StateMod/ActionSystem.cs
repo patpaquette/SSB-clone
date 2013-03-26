@@ -86,6 +86,7 @@ namespace Comp2501Game.Systems.StateMod
         {
             GameObject obj1 = colInfo.Entity1;
             GameObject obj2 = colInfo.Entity2;
+            GameObject obj1Parent = obj1.GetParent();
 
             if (!obj1.HasComponent(ComponentType.IsAction)) return;
             if (!obj2.HasComponent(ComponentType.IsCharacter)) return;
@@ -102,6 +103,12 @@ namespace Comp2501Game.Systems.StateMod
             Vector2 forceFinal = actionInfo.OnHitForce * obj2HealthComponent.getCurrDmg() / obj2MotionComponent.Mass;
             obj2MotionComponent.AddForce(forceFinal);
             obj1LifetimeComponent.Lifetime = 0;
+
+            if (obj1Parent != null)
+            {
+                CurrentActionComponent obj1ParentCurAction =
+                    (CurrentActionComponent)obj1Parent.GetComponent(ComponentType.Action);
+            }
             
         }
     }
