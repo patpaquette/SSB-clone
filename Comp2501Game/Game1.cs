@@ -27,8 +27,11 @@ namespace Comp2501Game
         List<GameObject> _objects;
         Dictionary<string, GameSystem> _services;
         List<int> _systemsCallOrder;
+        
         public ScreenType curScreen;
         public SpriteType play1, play2;
+        public GameTypes gameType;
+        public int LivesOrTime;
 
         public Game1()
         {
@@ -44,6 +47,9 @@ namespace Comp2501Game
             this.graphics.ApplyChanges();
             this.play1 = SpriteType.None;
             this.play2 = SpriteType.None;
+
+            gameType = GameTypes.None;
+            LivesOrTime = 0;
         }
 
         /// <summary>

@@ -32,6 +32,7 @@ namespace Comp2501Game.Objects.Components
         Sound,
         Map,
         Hand,
-        Select
+        Select,
+        Text
     }
 }

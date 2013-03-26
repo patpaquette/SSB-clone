@@ -36,6 +36,14 @@ namespace Comp2501Game.Systems.Physics.Initializer
                 {
                     mapComponent.map = this.Game.Content.Load<Texture2D>(@"Images/Screens/CharacterSelectScreen"); 
                 }
+                else if (mapComponent.screenType == ScreenType.Mode)
+                {
+                    mapComponent.map = this.Game.Content.Load<Texture2D>(@"Images/Screens/ModeScreen");
+                }
+                else if (mapComponent.screenType == ScreenType.Map)
+                {
+                    mapComponent.map = this.Game.Content.Load<Texture2D>(@"Images/Screens/MapSelect");
+                }
             }
 
             base.Initialize();

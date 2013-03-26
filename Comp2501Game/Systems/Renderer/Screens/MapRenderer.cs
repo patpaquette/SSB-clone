@@ -11,13 +11,11 @@ namespace Comp2501Game.Systems.Renderer
     class MapRenderer : GameSystem
     {
         private SpriteBatch _spriteBatch;
-        private Game1 _game;
 
         public MapRenderer(Game1 game)
             : base(game)
         {
             this._componentDependencies.Add(ComponentType.Map);
-            this._game = game;
         }
 
         public override void Initialize()

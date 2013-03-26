@@ -38,11 +38,12 @@ namespace Comp2501Game.Systems.StateMod
             {
                 if (state.GetPressedKeys().Length > 0 || gamePadState1.IsButtonDown(Buttons.Start) || gamePadState2.IsButtonDown(Buttons.Start))
                 {
-                        this._game.curScreen = ScreenType.Character;
+                        this._game.curScreen = ScreenType.Mode;
                         this._game.RemoveAllSystems();
                         this._game.RemoveAllObjects();
                         //GameScreen gameScreen = new GameScreen(this._game, SpriteType.Yoshi, SpriteType.Yoshi);
-                        CharacterSelectScreen selectScreen = new CharacterSelectScreen(this._game);
+                        //CharacterSelectScreen selectScreen = new CharacterSelectScreen(this._game);
+                        ModeScreen modeScreen = new ModeScreen(this._game);
                         this._game.LoadScene();
                 }
             }
