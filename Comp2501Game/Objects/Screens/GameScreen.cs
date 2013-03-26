@@ -56,6 +56,7 @@ namespace Comp2501Game.Objects.Screens
         int mapRendererID;
         int mapInitSystemID;
         int songInitSystemID;
+        int songSystemID;
 
 
         public GameScreen(Game1 game, SpriteType player1, SpriteType player2)
@@ -89,6 +90,7 @@ namespace Comp2501Game.Objects.Screens
             int aStarPathRendererID = game.RegisterSystem(new AStarPathRenderer(game));
             int aStarRendererID = game.RegisterSystem(new AStarPathfindingRenderer(game));
             int aiSystemID = game.RegisterSystem(new AISystem(game));
+            songSystemID = game.RegisterSystem(new MusicSystem(game));
 
             //services
             int collisionSystemID = game.RegisterSystem(new SATCollisionSystem(game, "Collision"));
@@ -121,7 +123,8 @@ namespace Comp2501Game.Objects.Screens
                     this.spriteRendererID,
                     this.uiRendererID,
                     aStarRendererID,
-                    aStarPathRendererID
+                    aStarPathRendererID,
+                    songSystemID
                 });
             if (player1 == SpriteType.Yoshi)
             {

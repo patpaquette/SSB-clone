@@ -41,8 +41,8 @@ namespace Comp2501Game.Systems.Renderer
                 Rectangle destRect = new Rectangle(0, 0, this._game.Window.ClientBounds.Width, this._game.Window.ClientBounds.Height);
                 this._spriteBatch.Draw(mapComponent.map, destRect, Color.White);
 
-                MouseState mouseState = Mouse.GetState();
-                _spriteBatch.DrawString(_spriteFont, mouseState.X + " + " + mouseState.Y, new Vector2(20, 20), Color.Black);
+                //MouseState mouseState = Mouse.GetState();
+                //_spriteBatch.DrawString(_spriteFont, mouseState.X + " + " + mouseState.Y, new Vector2(20, 20), Color.Black);
             }
 
             this._spriteBatch.End();

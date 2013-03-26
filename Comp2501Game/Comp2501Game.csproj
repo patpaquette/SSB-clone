@@ -228,6 +228,7 @@
     <Compile Include="Systems\StateMod\HealthSystem.cs" />
     <Compile Include="Systems\StateMod\InputSystem.cs" />
     <Compile Include="Systems\StateMod\LifetimeSystem.cs" />
+    <Compile Include="Systems\StateMod\MusicSystem.cs" />
     <Compile Include="Systems\StateMod\screens\ModeInputSystem.cs" />
     <Compile Include="Systems\StateMod\MovementSystem.cs">
       <SubType>Code</SubType>
