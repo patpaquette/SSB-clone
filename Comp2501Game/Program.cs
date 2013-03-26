@@ -31,8 +31,8 @@ namespace Comp2501Game
             {
 
 
-                //GameScreen gameScreen = new GameScreen(game, SpriteType.Yoshi, SpriteType.Yoshi);
-                StartScreen startScreen = new StartScreen(game);
+                GameScreen gameScreen = new GameScreen(game, SpriteType.Yoshi, SpriteType.Kirby);
+                //StartScreen startScreen = new StartScreen(game);
                 //CharacterSelectScreen selectScreen = new CharacterSelectScreen(game);
 
                 //EnvironmentFactory envFactory = new EnvironmentFactory(game);
@@ -157,7 +157,7 @@ namespace Comp2501Game
 
                 game.Character1 = yoshi;
                 game.Character2 = kirby;
-    (/
+    */
                 game.Run();
             }
         }

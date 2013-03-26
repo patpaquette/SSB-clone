@@ -199,7 +199,6 @@
     <Compile Include="Systems\Renderer\AStarPathfindingRenderer.cs" />
     <Compile Include="Systems\Renderer\AStarPathRenderer.cs" />
     <Compile Include="Objects\Screens\StartScreen.cs" />
-    <Compile Include="Systems\Collisions\CollisionType.cs" />
     <Compile Include="Systems\Initializer\HandInitSystem.cs" />
     <Compile Include="Systems\Initializer\ScreenInitializationSystem.cs" />
     <Compile Include="Systems\Renderer\CollisionRenderSystem.cs" />

@@ -39,7 +39,8 @@ namespace Comp2501Game.EntityFactory
                 game,
                 entity1,
                 opponent,
-                (AStarPathfindingSystem)game.GetService("Pathfinding")
+                (AStarPathfindingSystem)game.GetService("Pathfinding"),
+                false
             );
 
             ActionAttackNode attackOpponent = new ActionAttackNode(
@@ -56,6 +57,7 @@ namespace Comp2501Game.EntityFactory
             root.AddChild(attackSequence);
             attackSequence.AddChild(conditionDistance30);
             attackSequence.AddChild(attackOpponent);
+            //root.AddChild(moveToOpponent);
 
             return root;
         }

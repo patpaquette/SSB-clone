@@ -58,7 +58,7 @@ namespace Comp2501Game.Systems.StateMod
                     actionComponent.curAction.secondaryAction == SecondaryAction.Second_Jump)
                 {
                     //Added += new Vector2(0, -10);
-                    motionComponent.AddVelocity(new Vector2(0.0f, -20.0f));
+                    motionComponent.AddForce(new Vector2(0.0f, -1500.0f));
                 }
 
                 if (actionComponent.curAction.primaryAction == PrimaryAction.Fall_Faster)
@@ -71,7 +71,7 @@ namespace Comp2501Game.Systems.StateMod
                     actionComponent.curAction.secondaryAction == SecondaryAction.Falling ||
                     actionComponent.curAction.secondaryAction == SecondaryAction.Second_Falling)
                 {
-                    tbAdded = new Vector2(0, 8);
+                    tbAdded = new Vector2(0, 1000);
                 }
 
 

@@ -19,6 +19,7 @@ namespace Comp2501Game.EntityFactory
     {
         public static GameObject BuildComputerControlledEntity(
             Game1 game,
+            int playerNumber,
             Color playerColor,
             Vector2 position,
             float rotation,
@@ -30,9 +31,9 @@ namespace Comp2501Game.EntityFactory
             Dictionary<ActionDefinition, ActionInfo> actionsInformationList,
             GameObject opponent)
         {
-            GameObject entity = DynamicEntityFactory.BuildPlayerControlledEntity(
+            GameObject entity = DynamicEntityFactory.BuildCharacterEntity(
                 game,
-                2,
+                playerNumber,
                 playerColor,
                 position,
                 rotation,
@@ -53,6 +54,7 @@ namespace Comp2501Game.EntityFactory
                     entity,
                     opponent
                 ));
+            SoundComponent soundComponent = new SoundComponent(entity);
 
 
             entity.AddComponent(aiComponent);
@@ -75,18 +77,41 @@ namespace Comp2501Game.EntityFactory
             List<Shape> boundingBoxes,
             Dictionary<ActionDefinition, ActionInfo> actionsInformationList)
         {
+            GameObject entity = DynamicEntityFactory.BuildCharacterEntity(game, playerNumber, playerColor, position, rotation, scale, maxGroundSpeed, maxAirSpeed, spriteType, boundingBoxes, actionsInformationList);
+
+            
+
+            ArrowComponent arrowComponent = new ArrowComponent(entity);
+            entity.AddComponent(arrowComponent);
+
+            return entity;
+        }
+
+        public static GameObject BuildCharacterEntity(
+            Game1 game,
+            int playerNumber,
+            Color playerColor,
+            Vector2 position,
+            float rotation,
+            Vector2 scale,
+            float maxGroundSpeed,
+            float maxAirSpeed,
+            SpriteType spriteType,
+            List<Shape> boundingBoxes,
+            Dictionary<ActionDefinition, ActionInfo> actionsInformationList)
+        {
             GameObject entity = DynamicEntityFactory.BuildDynamicEntity(game, position, rotation, scale, maxGroundSpeed, maxAirSpeed, spriteType, boundingBoxes);
 
             PlayerComponent playerComponent = new PlayerComponent(entity, playerNumber);
             HealthComponent healthComponent = new HealthComponent(entity);
             ColorComponent colorComponent = new ColorComponent(entity, playerColor);
-
             CurrentActionComponent curActionComponent = (CurrentActionComponent)entity.GetComponent(ComponentType.Action);
             curActionComponent.SetActionInfoList(actionsInformationList);
 
             entity.AddComponent(playerComponent);
             entity.AddComponent(healthComponent);
             entity.AddComponent(colorComponent);
+
 
             return entity;
         }
@@ -121,7 +146,7 @@ namespace Comp2501Game.EntityFactory
             IsPhysicalComponent isPhysicalComponent = new IsPhysicalComponent(entity, true);
             IsCharacterComponent isCharComponent = new IsCharacterComponent(entity);
             SoundComponent soundComponent = new SoundComponent(entity);
-            ArrowComponent arrowComponent = new ArrowComponent(entity);
+            
 
             
             entity.AddComponent(transformComponent);
@@ -133,7 +158,7 @@ namespace Comp2501Game.EntityFactory
             entity.AddComponent(isPhysicalComponent);
             entity.AddComponent(isCharComponent);
             entity.AddComponent(soundComponent);
-            entity.AddComponent(arrowComponent);
+            
             return entity;
         }
 

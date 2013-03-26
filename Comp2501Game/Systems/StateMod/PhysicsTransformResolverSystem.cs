@@ -32,6 +32,10 @@ namespace Comp2501Game.Systems.StateMod
                     (MotionPropertiesComponent)obj.GetComponent(ComponentType.MotionProperties);
 
                 Vector2 objVelocity = motionComponent.GetVelocity();
+                if (objVelocity.Y < 0)
+                {
+                    motionComponent.State = MotionState.Air;
+                }
 
                 if (motionComponent.State == MotionState.Ground)
                 {

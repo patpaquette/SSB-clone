@@ -19,7 +19,7 @@ namespace Comp2501Game.Systems.StateMod
         {
             this._componentDependencies.Add(ComponentType.MotionProperties);
             this._componentDependencies.Add(ComponentType.Transform2D);
-            this.GravityForce = 300.0f;
+            this.GravityForce = 20.0f;
         }
 
         public override void Initialize()
@@ -43,7 +43,7 @@ namespace Comp2501Game.Systems.StateMod
                         (GravityComponent)obj.GetComponent(ComponentType.Gravity);
                     
 
-                    motionComponent.AddForce(
+                    motionComponent.AddVelocity(
                         new Vector2(
                             0.0f, 
                             this.GravityForce * gravComponent.StrengthFactor

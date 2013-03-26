@@ -10,6 +10,7 @@ using Comp2501Game.Systems.Collisions;
 using Comp2501Game.Systems.Renderer;
 using Comp2501Game.Objects.Components;
 using Comp2501Game.Libs.Geometry;
+using Comp2501Game.Systems.AI;
 
 namespace Comp2501Game.Objects.Screens
 {
@@ -48,6 +49,7 @@ namespace Comp2501Game.Objects.Screens
         int lifetimeSystemID;
 
 
+
         public GameScreen(Game1 game, SpriteType player1, SpriteType player2)
         {
             this.envFactory = new EnvironmentFactory(game);
@@ -66,13 +68,19 @@ namespace Comp2501Game.Objects.Screens
             actionSystemID = game.RegisterSystem(new ActionSystem(game));
             physicsSystemID = game.RegisterSystem(new PhysicsSystem(game));
             boundsSystemID = game.RegisterSystem(new BoundsSystem(game));
-            collisionSystemID = game.RegisterSystem(new SATCollisionSystem(game, "Collision"));
             meshRendererID = game.RegisterSystem(new LinebatchMeshRenderSystem(game));
             collisionRendererID = game.RegisterSystem(new CollisionRenderSystem(game));
             spriteRendererID = game.RegisterSystem(new SpriteRenderer(game));
             uiRendererID = game.RegisterSystem(new UIRenderer(game));
             transformResolverID = game.RegisterSystem(new PhysicsTransformResolverSystem(game));
             lifetimeSystemID = game.RegisterSystem(new LifetimeSystem(game));
+            int aStarPathRendererID = game.RegisterSystem(new AStarPathRenderer(game));
+            int aStarRendererID = game.RegisterSystem(new AStarPathfindingRenderer(game));
+            int aiSystemID = game.RegisterSystem(new AISystem(game));
+
+            //services
+            int collisionSystemID = game.RegisterSystem(new SATCollisionSystem(game, "Collision"));
+            int aStarServiceID = game.RegisterSystem(new AStarPathfindingSystem(game, "Pathfinding", 50));
 
             game.SetSystemCallOrder(new List<int>
                 {
@@ -80,6 +88,7 @@ namespace Comp2501Game.Objects.Screens
                     this.spriteInitSystemID2,
                     this.arrowInputSystemID,
                     this.controllerInputSystemID,
+                    aiSystemID,
                     this.inputSystemID1,
                     this.inputSystemID2,
                     this.animationSystemID1,
@@ -88,7 +97,6 @@ namespace Comp2501Game.Objects.Screens
                     this.movementSystemID2,
                     this.actionSystemID,
                     this.physicsSystemID,
-                    this.collisionSystemID,
                     this.transformResolverID,
                     this.boundsSystemID,
                     this.lifetimeSystemID,
@@ -96,7 +104,9 @@ namespace Comp2501Game.Objects.Screens
                     this.meshRendererID,
                     this.collisionRendererID,
                     this.spriteRendererID,
-                    this.uiRendererID
+                    this.uiRendererID,
+                    aStarRendererID,
+                    aStarPathRendererID
                 });
             if (player1 == SpriteType.Yoshi)
             {
@@ -108,11 +118,11 @@ namespace Comp2501Game.Objects.Screens
                      0.0f,
                      new Vector2(1.0f, 1.0f),
                      300,
-                     10000,
+                     1000,
                      SpriteType.Yoshi,
                      new List<Shape>
                             {
-                                Shape.BuildRectangle(new Rectangle(-55, -60, 90, 60)),
+                                //Shape.BuildRectangle(new Rectangle(-55, -60, 90, 60)),
                                 Shape.BuildRectangle(new Rectangle(-40, 0, 120, 60)),
                                 Shape.BuildRectangle(new Rectangle(25, 60, 40, 30))
                             },
@@ -129,7 +139,7 @@ namespace Comp2501Game.Objects.Screens
                     0.0f,
                     new Vector2(1.0f, 1.0f),
                     300,
-                    10000,
+                    1000,
                     SpriteType.Kirby,
                     new List<Shape>
                         {
@@ -152,7 +162,7 @@ namespace Comp2501Game.Objects.Screens
                      game,
                      2,
                      Color.Pink,
-                     new Vector2(500, 0),
+                     new Vector2(800, 0),
                      0.0f,
                      new Vector2(1.0f, 1.0f),
                      300,
@@ -160,7 +170,7 @@ namespace Comp2501Game.Objects.Screens
                      SpriteType.Yoshi,
                      new List<Shape>
                             {
-                                Shape.BuildRectangle(new Rectangle(-55, -60, 90, 60)),
+                                //Shape.BuildRectangle(new Rectangle(-55, -60, 90, 60)),
                                 Shape.BuildRectangle(new Rectangle(-40, 0, 120, 60)),
                                 Shape.BuildRectangle(new Rectangle(25, 60, 40, 30))
                             },
@@ -169,6 +179,7 @@ namespace Comp2501Game.Objects.Screens
             }
             else
             {
+                /*
                 this.p2 = DynamicEntityFactory.BuildPlayerControlledEntity(
                     game,
                     2,
@@ -184,10 +195,25 @@ namespace Comp2501Game.Objects.Screens
                             Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
                         },
                     MoveDefinitions.GetKirbyMoves()
-                );
+                );*/
 
-                //kirby.AddComponent(new LifetimeComponent(kirby, 5000));
-                //kirby.SetParent(yoshi);
+                this.p2 = DynamicEntityFactory.BuildComputerControlledEntity(
+                    game,
+                    2,
+                    Color.Pink,
+                    new Vector2(500, 0),
+                    0.0f,
+                    new Vector2(1.0f, 1.0f),
+                    300,
+                    10000,
+                    SpriteType.Kirby,
+                    new List<Shape>
+                        {
+                            Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
+                        },
+                    MoveDefinitions.GetYoshiMoves(),
+                    this.p1
+                );
             }
 
             game.AddObject(p2);
@@ -199,7 +225,7 @@ namespace Comp2501Game.Objects.Screens
             game.AddObject(envFactory.BuildStaticRectangularObstacle(
                 new Vector2(clientBounds.Width / 2, clientBounds.Height),
                 new Rectangle(-clientBounds.Width / 2, -10, clientBounds.Width, 20),
-                1000.0f,
+                2000.0f,
                 Color.Red));
 
             game.AddObject(new TimeObject(game, new Vector2(0, 0), Color.Black));

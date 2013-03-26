@@ -42,9 +42,9 @@ namespace Comp2501Game.Objects.Screens
                 mapInitSystemID,
                 arrowInputSystemID,
                 controllerInputSystemID,
-                modeInputSystemID,
                 mapRendererID,
-                modeRendererID
+                modeRendererID,
+                modeInputSystemID
              });
 
             game.AddObject(new TextObject(game));
