@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Comp2501Game.Types;
 using Comp2501Game.Objects.Screens;
 using Comp2501Game.Systems.Renderer.Screens;
+using Comp2501Game.Screens;
 
 namespace Comp2501Game.Systems.StateMod
 {
@@ -134,12 +135,13 @@ namespace Comp2501Game.Systems.StateMod
 
             if (this.filled)
             {
-                this._game.curScreen = ScreenType.Character;
+                this._game.curScreen = ScreenType.Map;
                 this._game.RemoveAllSystems();
                 this._game.RemoveAllObjects();
                 //CharacterSelectScreen selectScreen = new CharacterSelectScreen(this._game);
                 //ModeScreen modeScreen = new ModeScreen(this._game);
                 MapScreen mapSelect = new MapScreen(this._game);
+                //StartScreen startScreen = new StartScreen(this._game);
                 this._game.LoadScene();
             }
         }
