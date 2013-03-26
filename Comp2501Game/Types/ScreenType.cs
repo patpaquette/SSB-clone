@@ -12,6 +12,7 @@ namespace Comp2501Game.Types
         Character,
         Game,
         Map,
+        Mode,
         WinLosss
     }
 }

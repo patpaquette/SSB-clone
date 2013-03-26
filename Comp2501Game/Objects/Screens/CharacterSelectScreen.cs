@@ -17,8 +17,6 @@ namespace Comp2501Game.Objects.Screens
         private Rectangle clientBounds;
         private ScreenType _screen;
 
-        public SpriteType player1, player2;
-
         private int arrowInputSystemID;
         private int controllerInputSystemID;
         private int selectsInputID1;
@@ -33,9 +31,7 @@ namespace Comp2501Game.Objects.Screens
             this._game = game;
             this._screen = ScreenType.Character;
             this.clientBounds = game.Window.ClientBounds;
-
-            player1 = SpriteType.None;
-            player2 = SpriteType.None;
+            this._game.IsMouseVisible = false;
 
             arrowInputSystemID = game.RegisterSystem(new ArrowInputSystem(game, 1));
             handInitSystemID = game.RegisterSystem(new HandInitSystem(game));
