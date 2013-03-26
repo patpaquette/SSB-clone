@@ -5,12 +5,15 @@ using System.Text;
 using Comp2501Game.Objects.Components;
 using Microsoft.Xna.Framework;
 using Comp2501Game.Objects.Components.Actions;
+using Microsoft.Xna.Framework.Media;
+using Comp2501Game.Objects.Components.Types;
 
 namespace Comp2501Game.Systems
 {
     class AnimationSystem : GameSystem
     {
         public int playerNumber;
+        bool justStarted;
 
          public AnimationSystem(Game1 game, int playerNum)
             : base(game)
@@ -20,6 +23,7 @@ namespace Comp2501Game.Systems
             this._componentDependencies.Add(ComponentType.Sprite);
             this._componentDependencies.Add(ComponentType.Sound);
             this.playerNumber = playerNum;
+            this.justStarted = true;
         }
 
          public override SystemType GetType()
@@ -140,8 +144,15 @@ namespace Comp2501Game.Systems
                  CurrentActionComponent actionComponent = (CurrentActionComponent)obj.GetComponent(ComponentType.Action);
                  SpriteComponent spriteComponent = (SpriteComponent)obj.GetComponent(ComponentType.Sprite);
                  SoundComponent soundComponent = (SoundComponent)obj.GetComponent(ComponentType.Sound);
+                 SongComponent songComponent = (SongComponent)obj.GetComponent(ComponentType.Song);
 
 
+                 if (this.justStarted)
+                 {
+                     this.justStarted = false;
+                     MediaPlayer.Play(songComponent.soundEffect);
+                     MediaPlayer.IsRepeating = true;
+                 }
                  //Console.WriteLine(actionComponent.curAction.curDirection + " " + actionComponent.curAction.secondaryAction + " " + actionComponent.curAction.primaryAction);
                  
                  

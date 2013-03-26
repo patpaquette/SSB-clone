@@ -157,6 +157,7 @@
     <Compile Include="Objects\Components\Physics\PhysicalPropertiesComponent.cs" />
     <Compile Include="Objects\Components\PositionComponent.cs" />
     <Compile Include="Objects\Components\PageComponents\SelectComponent.cs" />
+    <Compile Include="Objects\Components\SongComponent.cs" />
     <Compile Include="Objects\Components\SoundComponent.cs" />
     <Compile Include="Objects\Components\Transform2DComponent.cs" />
     <Compile Include="Objects\Components\Types\ArrowType.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Objects\Screens\CharacterSelectScreen.cs" />
     <Compile Include="Objects\Screens\GameScreen.cs" />
     <Compile Include="Objects\Screens\ModeScreen.cs" />
+    <Compile Include="Objects\SongObject.cs" />
     <Compile Include="Objects\TestObject.cs" />
     <Compile Include="Objects\Components\TimerComponent.cs" />
     <Compile Include="Objects\TextObject.cs" />
@@ -198,6 +200,7 @@
     <Compile Include="Systems\AI\Pathfinding\AStarNode.cs" />
     <Compile Include="Systems\AI\Pathfinding\IPosition.cs" />
     <Compile Include="Systems\Collisions\CollisionType.cs" />
+    <Compile Include="Systems\Initializer\SongInitializer.cs" />
     <Compile Include="Systems\Renderer\AStarPathfindingRenderer.cs" />
     <Compile Include="Systems\Renderer\AStarPathRenderer.cs" />
     <Compile Include="Objects\Screens\StartScreen.cs" />

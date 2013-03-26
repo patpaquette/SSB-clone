@@ -15,6 +15,7 @@ using Comp2501Game.Systems.AI.Pathfinding;
 using Comp2501Game.Objects.Components.AI.Pathfinding;
 using Comp2501Game.Systems.Physics.Initializer;
 using Comp2501Game.Objects.Components.Types;
+using Comp2501Game.Systems.Initializer;
 
 namespace Comp2501Game.Objects.Screens
 {
@@ -24,6 +25,7 @@ namespace Comp2501Game.Objects.Screens
 
         EnvironmentFactory envFactory;
         Rectangle clientBounds;
+
 
         GameObject p1, p2;
 
@@ -53,18 +55,19 @@ namespace Comp2501Game.Objects.Screens
         int lifetimeSystemID;
         int mapRendererID;
         int mapInitSystemID;
+        int songInitSystemID;
 
 
         public GameScreen(Game1 game, SpriteType player1, SpriteType player2)
         {
             game.IsMouseVisible = true;
 
-
             this.envFactory = new EnvironmentFactory(game);
             this.clientBounds = game.Window.ClientBounds;
             mapInitSystemID = game.RegisterSystem(new ScreenInitializationSystem(game));
             spriteInitSystemID1 = game.RegisterSystem(new SpriteInitializationSystem(game, 1));
             spriteInitSystemID2 = game.RegisterSystem(new SpriteInitializationSystem(game, 2));
+            songInitSystemID = game.RegisterSystem(new SongInitializer(game));
             arrowInputSystemID = game.RegisterSystem(new ArrowInputSystem(game, 2));
             controllerInputSystemID = game.RegisterSystem(new ControllerInputSystem(game, 1));
             inputSystemID1 = game.RegisterSystem(new InputSystem(game, 1));
@@ -96,6 +99,7 @@ namespace Comp2501Game.Objects.Screens
                     this.mapInitSystemID,
                     this.spriteInitSystemID1,
                     this.spriteInitSystemID2,
+                    this.songInitSystemID,
                     this.arrowInputSystemID,
                     this.controllerInputSystemID,
                     aiSystemID,
@@ -257,6 +261,8 @@ namespace Comp2501Game.Objects.Screens
                     new Rectangle(0, -10, -927, -1),
                     2000.0f,
                     Color.Red));
+
+                game.AddObject(new SongObject(game, MapType.Basic));
             }
             else
             {
@@ -316,6 +322,8 @@ namespace Comp2501Game.Objects.Screens
                     new Rectangle(0, -10, -10, -306),
                     2000.0f,
                     Color.Red));
+
+                game.AddObject(new SongObject(game, MapType.Hyrule));
             }
 
 

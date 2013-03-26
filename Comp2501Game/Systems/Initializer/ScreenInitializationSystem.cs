@@ -5,6 +5,8 @@ using System.Text;
 using Comp2501Game.Types;
 using Comp2501Game.Objects.Components;
 using Microsoft.Xna.Framework.Graphics;
+using Comp2501Game.Objects.Components.Types;
+using Microsoft.Xna.Framework.Media;
 
 namespace Comp2501Game.Systems.Physics.Initializer
 {
@@ -27,6 +29,7 @@ namespace Comp2501Game.Systems.Physics.Initializer
             foreach (GameObject obj in this._objects)
             {
                 MapComponent mapComponent = (MapComponent)obj.GetComponent(ComponentType.Map);
+                SongComponent songComponent = (SongComponent)obj.GetComponent(ComponentType.Song);
 
                 if (mapComponent.screenType == ScreenType.Start)
                 {
@@ -51,6 +54,19 @@ namespace Comp2501Game.Systems.Physics.Initializer
                 else if (mapComponent.screenType == ScreenType.Basic)
                 {
                     mapComponent.map = this.Game.Content.Load<Texture2D>(@"Images/GameMap/BasicMap");
+                }
+
+
+                if (songComponent != null)
+                {
+                    if (songComponent.map == MapType.Hyrule)
+                    {
+                        songComponent.soundEffect = this._game.Content.Load<Song>(@"Songs/Delilah's Song");
+                    }
+                    else
+                    {
+                        songComponent.soundEffect = this._game.Content.Load<Song>(@"Songs/San Pedro");
+                    }
                 }
             }
 
