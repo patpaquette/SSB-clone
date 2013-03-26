@@ -128,8 +128,15 @@ namespace Comp2501Game.Systems.StateMod
             if (velocityCorrection.Y != 0.0f)
             {
                 obj1MotionComponent.State = MotionState.Ground;
-                if (obj1CurActionComponent != null)
+                if (obj1CurActionComponent != null &&
+                    obj1CurActionComponent.curAction.secondaryAction != SecondaryAction.Smash && 
+                    obj1CurActionComponent.curAction.secondaryAction != SecondaryAction.Shield &&
+                    obj1CurActionComponent.curAction.secondaryAction != SecondaryAction.Walk &&
+                    obj1CurActionComponent.curAction.secondaryAction != SecondaryAction.Throw &&
+                    obj1CurActionComponent.curAction.secondaryAction != SecondaryAction.Grabbed &&
+                    obj1CurActionComponent.curAction.secondaryAction != SecondaryAction.Grab)
                 {
+                    obj1CurActionComponent.curAction.primaryAction = PrimaryAction.None;
                     obj1CurActionComponent.curAction.secondaryAction = SecondaryAction.Stand;
                 }
             }

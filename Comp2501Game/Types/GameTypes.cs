@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Comp2501Game.Objects.Components
+namespace Comp2501Game.Types
 {
-    public enum SpriteType
+    public enum GameTypes
     {
-        Yoshi,
-        Kirby,
+        Stock,
+        Timed,
         None
     }
 }

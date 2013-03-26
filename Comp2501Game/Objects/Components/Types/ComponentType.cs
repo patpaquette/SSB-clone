@@ -33,6 +33,10 @@ namespace Comp2501Game.Objects.Components
         AStar,
         AStarGraph,
         AIController,
-        Behaviour
+        Behaviour,
+        Map,
+        Hand,
+        Select,
+        Text
     }
 }

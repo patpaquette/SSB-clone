@@ -10,6 +10,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Comp2501Game.Systems;
 using Comp2501Game.Systems.AI.Pathfinding;
+using Comp2501Game.Types;
+using Comp2501Game.Objects.Components;
 
 namespace Comp2501Game
 {
@@ -29,6 +31,11 @@ namespace Comp2501Game
         List<GameObject> _objects;
         Dictionary<string, GameSystem> _services;
         List<int> _systemsCallOrder;
+        
+        public ScreenType curScreen;
+        public SpriteType play1, play2;
+        public GameTypes gameType;
+        public int LivesOrTime;
 
         public Game1()
         {
@@ -38,10 +45,16 @@ namespace Comp2501Game
             this._objects = new List<GameObject>();
             this._services = new Dictionary<string, GameSystem>();
             this._systemsCallOrder = new List<int>();
+            this.curScreen = ScreenType.Start;
             this.graphics.PreferredBackBufferWidth = 1200;
             this.graphics.PreferredBackBufferHeight = 800;
             this.graphics.ApplyChanges();
             this.CurrentPathfindingGraph = new AStarGraph(this, new List<AStarNode>());
+            this.play1 = SpriteType.None;
+            this.play2 = SpriteType.None;
+
+            gameType = GameTypes.None;
+            LivesOrTime = 0;
         }
 
         /// <summary>
@@ -126,6 +139,7 @@ namespace Comp2501Game
             base.Update(gameTime);
         }
 
+
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -203,6 +217,22 @@ namespace Comp2501Game
             {
                 system.TryRegisterObject(obj);
             }
+        }
+
+        public void RemoveAllObjects()
+        {
+            this._objects.Clear();
+        }
+
+        public void RemoveAllSystems()
+        {
+            this._systems.Clear();
+        }
+        
+        
+        public void LoadScene()
+        {
+            Initialize();
         }
     }
 }

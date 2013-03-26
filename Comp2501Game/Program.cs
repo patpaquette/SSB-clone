@@ -14,6 +14,8 @@ using Comp2501Game.Systems.AI.Pathfinding;
 using Comp2501Game.Objects.Components.AI.Pathfinding;
 using Comp2501Game.Systems.AI;
 using Comp2501Game.Objects.Components.AI;
+using Comp2501Game.Objects.Screens;
+using Comp2501Game.Screens;
 
 namespace Comp2501Game
 {
@@ -27,15 +29,22 @@ namespace Comp2501Game
         {
             using (Game1 game = new Game1())
             {
-                EnvironmentFactory envFactory = new EnvironmentFactory(game);
-                Rectangle clientBounds = game.Window.ClientBounds;
+
+
+                //GameScreen gameScreen = new GameScreen(game, SpriteType.Yoshi, SpriteType.Yoshi);
+                StartScreen startScreen = new StartScreen(game);
+                //CharacterSelectScreen selectScreen = new CharacterSelectScreen(game);
+
+                //EnvironmentFactory envFactory = new EnvironmentFactory(game);
+                //Rectangle clientBounds = game.Window.ClientBounds;
 
                 
                 
-                //game.RegisterSystem(new PlayerInputSystem(game, 1));
-                //game.RegisterSystem(new TimerSystem(game));
-                //game.RegisterSystem(new TimerRenderSystem(game));
-
+                ////game.RegisterSystem(new PlayerInputSystem(game, 1));
+                ////game.RegisterSystem(new TimerSystem(game));
+                ////game.RegisterSystem(new TimerRenderSystem(game));
+                
+    /*
                 int spriteInitSystemID = game.RegisterSystem(new SpriteInitializationSystem(game, 1));
                 //int arrowInputSystemID = game.RegisterSystem(new ArrowInputSystem(game, 1));
                 int controllerInputSystemID = game.RegisterSystem(new ControllerInputSystem(game, 1));
@@ -148,7 +157,7 @@ namespace Comp2501Game
 
                 game.Character1 = yoshi;
                 game.Character2 = kirby;
-
+    (/
                 game.Run();
             }
         }
