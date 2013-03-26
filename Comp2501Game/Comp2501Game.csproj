@@ -176,6 +176,7 @@
     <Compile Include="Objects\SceneObject.cs" />
     <Compile Include="Objects\Screens\CharacterSelectScreen.cs" />
     <Compile Include="Objects\Screens\GameScreen.cs" />
+    <Compile Include="Objects\Screens\HumanAIScreen.cs" />
     <Compile Include="Objects\Screens\ModeScreen.cs" />
     <Compile Include="Objects\SongObject.cs" />
     <Compile Include="Objects\TestObject.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="Systems\Renderer\AABBCollisionRenderSystem.cs" />
     <Compile Include="Systems\Renderer\Screens\HandRenderer.cs" />
     <Compile Include="Systems\Renderer\LinebatchMeshRenderSystem.cs" />
+    <Compile Include="Systems\Renderer\Screens\HandRenderer1.cs" />
     <Compile Include="Systems\Renderer\Screens\MapRenderer.cs" />
     <Compile Include="Objects\Screens\MapScreen.cs" />
     <Compile Include="Systems\Renderer\Screens\ModeTextRenderer.cs" />
@@ -246,6 +248,7 @@
     <Compile Include="Systems\Renderer\TimerRenderSystem.cs" />
     <Compile Include="Systems\StateMod\TimerSystem.cs" />
     <Compile Include="Types\GameTypes.cs" />
+    <Compile Include="Types\PlayerType.cs" />
     <Compile Include="Types\ScreenType.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,7 @@ using Comp2501Game.Objects.Components.AI.Pathfinding;
 using Comp2501Game.Systems.Physics.Initializer;
 using Comp2501Game.Objects.Components.Types;
 using Comp2501Game.Systems.Initializer;
+using Comp2501Game.Types;
 
 namespace Comp2501Game.Objects.Screens
 {
@@ -69,10 +70,18 @@ namespace Comp2501Game.Objects.Screens
             spriteInitSystemID1 = game.RegisterSystem(new SpriteInitializationSystem(game, 1));
             spriteInitSystemID2 = game.RegisterSystem(new SpriteInitializationSystem(game, 2));
             songInitSystemID = game.RegisterSystem(new SongInitializer(game));
-            arrowInputSystemID = game.RegisterSystem(new ArrowInputSystem(game, 2));
-            controllerInputSystemID = game.RegisterSystem(new ControllerInputSystem(game, 1));
-            inputSystemID1 = game.RegisterSystem(new InputSystem(game, 1));
-            inputSystemID2 = game.RegisterSystem(new InputSystem(game, 2));
+            if (game.playe2 == PlayerType.Human)
+            {
+                controllerInputSystemID = game.RegisterSystem(new ControllerInputSystem(game, 2));
+                //arrowInputSystemID = game.RegisterSystem(new ArrowInputSystem(game, 2));
+                inputSystemID2 = game.RegisterSystem(new InputSystem(game, 2));
+            }
+            if (game.playe1 == PlayerType.Human)
+            {
+                arrowInputSystemID = game.RegisterSystem(new ArrowInputSystem(game, 1));
+                //controllerInputSystemID = game.RegisterSystem(new ControllerInputSystem(game, 1));
+                inputSystemID1 = game.RegisterSystem(new InputSystem(game, 1));
+            }
             animationSystemID1 = game.RegisterSystem(new AnimationSystem(game, 1));
             animationSystemID2 = game.RegisterSystem(new AnimationSystem(game, 2));
             movementSystemID1 = game.RegisterSystem(new MovementSystem(game, 1));
@@ -90,148 +99,308 @@ namespace Comp2501Game.Objects.Screens
             int aStarPathRendererID = game.RegisterSystem(new AStarPathRenderer(game));
             int aStarRendererID = game.RegisterSystem(new AStarPathfindingRenderer(game));
             int aiSystemID = game.RegisterSystem(new AISystem(game));
+            
             songSystemID = game.RegisterSystem(new MusicSystem(game));
 
             //services
             int collisionSystemID = game.RegisterSystem(new SATCollisionSystem(game, "Collision"));
             int aStarServiceID = game.RegisterSystem(new AStarPathfindingSystem(game, "Pathfinding", 50));
 
-            game.SetSystemCallOrder(new List<int>
-                {
-                    this.mapInitSystemID,
-                    this.spriteInitSystemID1,
-                    this.spriteInitSystemID2,
-                    this.songInitSystemID,
-                    this.arrowInputSystemID,
-                    this.controllerInputSystemID,
-                    aiSystemID,
-                    this.inputSystemID1,
-                    this.inputSystemID2,
-                    this.animationSystemID1,
-                    this.animationSystemID2,
-                    this.movementSystemID1,
-                    this.movementSystemID2,
-                    this.actionSystemID,
-                    this.physicsSystemID,
-                    this.transformResolverID,
-                    this.boundsSystemID,
-                    this.lifetimeSystemID,
-                    //this.physicsSystemID,
-                    this.meshRendererID,
-                    this.mapRendererID,
-                    this.collisionRendererID,
-                    this.spriteRendererID,
-                    this.uiRendererID,
-                    aStarRendererID,
-                    aStarPathRendererID,
-                    songSystemID
-                });
-            if (player1 == SpriteType.Yoshi)
+            if (game.playe1 == PlayerType.Human && game.playe2 == PlayerType.Human)
             {
-                this.p1 = DynamicEntityFactory.BuildPlayerControlledEntity(
-                     game,
-                     1,
-                     Color.Green,
-                     new Vector2(100, 0),
-                     0.0f,
-                     new Vector2(1.0f, 1.0f),
-                     400,
-                     1000,
-                     SpriteType.Yoshi,
-                     new List<Shape>
+                game.SetSystemCallOrder(new List<int>
+                    {
+                        this.mapInitSystemID,
+                        this.spriteInitSystemID1,
+                        this.spriteInitSystemID2,
+                        this.songInitSystemID,
+                        this.arrowInputSystemID,
+                        this.controllerInputSystemID,
+                        aiSystemID,
+                        this.inputSystemID1,
+                        this.inputSystemID2,
+                        this.animationSystemID1,
+                        this.animationSystemID2,
+                        this.movementSystemID1,
+                        this.movementSystemID2,
+                        this.actionSystemID,
+                        this.physicsSystemID,
+                        this.transformResolverID,
+                        this.boundsSystemID,
+                        this.lifetimeSystemID,
+                        //this.physicsSystemID,
+                        this.meshRendererID,
+                        this.mapRendererID,
+                        this.collisionRendererID,
+                        this.spriteRendererID,
+                        this.uiRendererID,
+                        aStarRendererID,
+                        aStarPathRendererID,
+                        songSystemID
+                    });
+            }
+            else if (game.playe1 == PlayerType.Human)
+            {
+                game.SetSystemCallOrder(new List<int>
+                    {
+                        this.mapInitSystemID,
+                        this.spriteInitSystemID1,
+                        this.spriteInitSystemID2,
+                        this.songInitSystemID,
+                        this.arrowInputSystemID,
+                        aiSystemID,
+                        this.inputSystemID1,
+                        this.animationSystemID1,
+                        this.animationSystemID2,
+                        this.movementSystemID1,
+                        this.movementSystemID2,
+                        this.actionSystemID,
+                        this.physicsSystemID,
+                        this.transformResolverID,
+                        this.boundsSystemID,
+                        this.lifetimeSystemID,
+                        //this.physicsSystemID,
+                        this.meshRendererID,
+                        this.mapRendererID,
+                        this.collisionRendererID,
+                        this.spriteRendererID,
+                        this.uiRendererID,
+                        aStarRendererID,
+                        aStarPathRendererID,
+                        songSystemID
+                    });
+            }
+            else if (game.playe2 == PlayerType.Human)
+            {
+                game.SetSystemCallOrder(new List<int>
+                    {
+                        this.mapInitSystemID,
+                        this.spriteInitSystemID1,
+                        this.spriteInitSystemID2,
+                        this.songInitSystemID,
+                        this.controllerInputSystemID,
+                        aiSystemID,
+                        this.inputSystemID2,
+                        this.animationSystemID1,
+                        this.animationSystemID2,
+                        this.movementSystemID1,
+                        this.movementSystemID2,
+                        this.actionSystemID,
+                        this.physicsSystemID,
+                        this.transformResolverID,
+                        this.boundsSystemID,
+                        this.lifetimeSystemID,
+                        //this.physicsSystemID,
+                        this.meshRendererID,
+                        this.mapRendererID,
+                        this.collisionRendererID,
+                        this.spriteRendererID,
+                        this.uiRendererID,
+                        aStarRendererID,
+                        aStarPathRendererID,
+                        songSystemID
+                    });
+            }
+
+            if (game.playe1 == PlayerType.Human)
+            {
+                if (player1 == SpriteType.Yoshi)
+                {
+                    this.p1 = DynamicEntityFactory.BuildPlayerControlledEntity(
+                         game,
+                         1,
+                         Color.Green,
+                         new Vector2(100, 0),
+                         0.0f,
+                         new Vector2(1.0f, 1.0f),
+                         400,
+                         1000,
+                         SpriteType.Yoshi,
+                         new List<Shape>
+                                {
+                                    //Shape.BuildRectangle(new Rectangle(-55, -60, 90, 60)),
+                                    Shape.BuildRectangle(new Rectangle(-40, 0, 120, 60)),
+                                    Shape.BuildRectangle(new Rectangle(25, 60, 40, 30))
+                                },
+                         MoveDefinitions.GetYoshiMoves()
+                     );
+                }
+                else
+                {
+                    this.p1 = DynamicEntityFactory.BuildPlayerControlledEntity(
+                        game,
+                        1,
+                        Color.Green,
+                        new Vector2(100, 0),
+                        0.0f,
+                        new Vector2(1.0f, 1.0f),
+                        300,
+                        1000,
+                        SpriteType.Kirby,
+                        new List<Shape>
                             {
-                                //Shape.BuildRectangle(new Rectangle(-55, -60, 90, 60)),
-                                Shape.BuildRectangle(new Rectangle(-40, 0, 120, 60)),
-                                Shape.BuildRectangle(new Rectangle(25, 60, 40, 30))
+                                Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
                             },
-                     MoveDefinitions.GetYoshiMoves()
-                 );
+                        MoveDefinitions.GetKirbyMoves()
+                    );
+
+                    //kirby.AddComponent(new LifetimeComponent(kirby, 5000));
+                    //kirby.SetParent(yoshi);
+                }
             }
             else
             {
-                this.p1 = DynamicEntityFactory.BuildPlayerControlledEntity(
-                    game,
-                    1,
-                    Color.Green,
-                    new Vector2(100, 0),
-                    0.0f,
-                    new Vector2(1.0f, 1.0f),
-                    300,
-                    1000,
-                    SpriteType.Kirby,
-                    new List<Shape>
-                        {
-                            Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
-                        },
-                    MoveDefinitions.GetKirbyMoves()
-                );
-
-                //kirby.AddComponent(new LifetimeComponent(kirby, 5000));
-                //kirby.SetParent(yoshi);
+                if (player1 == SpriteType.Yoshi)
+                {
+                    this.p1 = DynamicEntityFactory.BuildComputerControlledEntity(
+                        game,
+                        1,
+                        Color.Green,
+                        new Vector2(800, 0),
+                        0.0f,
+                        new Vector2(1.0f, 1.0f),
+                        250,
+                        500,
+                        SpriteType.Yoshi,
+                        new List<Shape>
+                            {
+                                    Shape.BuildRectangle(new Rectangle(-40, 0, 120, 60)),
+                                    Shape.BuildRectangle(new Rectangle(25, 60, 40, 30))
+                            },
+                        MoveDefinitions.GetYoshiMoves(),
+                        this.p2
+                    );
+                }
+                else
+                {
+                    this.p1 = DynamicEntityFactory.BuildComputerControlledEntity(
+                        game,
+                        1,
+                        Color.Green,
+                        new Vector2(800, 0),
+                        0.0f,
+                        new Vector2(1.0f, 1.0f),
+                        250,
+                        500,
+                        SpriteType.Kirby,
+                        new List<Shape>
+                            {
+                                    Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
+                            },
+                        MoveDefinitions.GetKirbyMoves(),
+                        this.p2
+                        );
+                }
             }
 
             game.AddObject(p1);
 
 
-
-            if (player2 == SpriteType.Yoshi)
+            if (game.playe1 == PlayerType.Human)
             {
-                this.p2 = DynamicEntityFactory.BuildPlayerControlledEntity(
-                     game,
-                     2,
-                     Color.Pink,
-                     new Vector2(800, 0),
-                     0.0f,
-                     new Vector2(1.0f, 1.0f),
-                     400,
-                     500,
-                     SpriteType.Yoshi,
-                     new List<Shape>
+                if (player2 == SpriteType.Yoshi)
+                {
+                    this.p2 = DynamicEntityFactory.BuildPlayerControlledEntity(
+                         game,
+                         2,
+                         Color.Pink,
+                         new Vector2(800, 0),
+                         0.0f,
+                         new Vector2(1.0f, 1.0f),
+                         400,
+                         500,
+                         SpriteType.Yoshi,
+                         new List<Shape>
+                                {
+                                    //Shape.BuildRectangle(new Rectangle(-55, -60, 90, 60)),
+                                    Shape.BuildRectangle(new Rectangle(-40, 0, 120, 60)),
+                                    Shape.BuildRectangle(new Rectangle(25, 60, 40, 30))
+                                },
+                         MoveDefinitions.GetYoshiMoves()
+                     );
+                }
+                else
+                {
+
+                    this.p2 = DynamicEntityFactory.BuildPlayerControlledEntity(
+                        game,
+                        2,
+                        Color.Pink,
+                        new Vector2(500, 0),
+                        0.0f,
+                        new Vector2(1.0f, 1.0f),
+                        300,
+                        10000,
+                        SpriteType.Kirby,
+                        new List<Shape>
                             {
-                                //Shape.BuildRectangle(new Rectangle(-55, -60, 90, 60)),
-                                Shape.BuildRectangle(new Rectangle(-40, 0, 120, 60)),
-                                Shape.BuildRectangle(new Rectangle(25, 60, 40, 30))
+                                Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
                             },
-                     MoveDefinitions.GetYoshiMoves()
-                 );
+                        MoveDefinitions.GetKirbyMoves()
+                    );
+
+                    //this.p2 = DynamicEntityFactory.BuildComputerControlledEntity(
+                    //    game,
+                    //    2,
+                    //    Color.Pink,
+                    //    new Vector2(800, 0),
+                    //    0.0f,
+                    //    new Vector2(1.0f, 1.0f),
+                    //    250,
+                    //    500,
+                    //    SpriteType.Kirby,
+                    //    new List<Shape>
+                    //        {
+                    //            Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
+                    //        },
+                    //    MoveDefinitions.GetYoshiMoves(),
+                    //    this.p1
+                    //);
+                }
             }
             else
             {
-                
-                this.p2 = DynamicEntityFactory.BuildPlayerControlledEntity(
-                    game,
-                    2,
-                    Color.Pink,
-                    new Vector2(500, 0),
-                    0.0f,
-                    new Vector2(1.0f, 1.0f),
-                    300,
-                    10000,
-                    SpriteType.Kirby,
-                    new List<Shape>
-                        {
-                            Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
-                        },
-                    MoveDefinitions.GetKirbyMoves()
-                );
-
-                //this.p2 = DynamicEntityFactory.BuildComputerControlledEntity(
-                //    game,
-                //    2,
-                //    Color.Pink,
-                //    new Vector2(800, 0),
-                //    0.0f,
-                //    new Vector2(1.0f, 1.0f),
-                //    250,
-                //    500,
-                //    SpriteType.Kirby,
-                //    new List<Shape>
-                //        {
-                //            Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
-                //        },
-                //    MoveDefinitions.GetYoshiMoves(),
-                //    this.p1
-                //);
+                if (player2 == SpriteType.Yoshi)
+                {
+                    this.p2 = DynamicEntityFactory.BuildComputerControlledEntity(
+                        game,
+                        2,
+                        Color.Pink,
+                        new Vector2(800, 0),
+                        0.0f,
+                        new Vector2(1.0f, 1.0f),
+                        250,
+                        500,
+                        SpriteType.Yoshi,
+                        new List<Shape>
+                            {
+                                    Shape.BuildRectangle(new Rectangle(-40, 0, 120, 60)),
+                                    Shape.BuildRectangle(new Rectangle(25, 60, 40, 30))
+                            },
+                        MoveDefinitions.GetYoshiMoves(),
+                        this.p1
+                    );
+                }
+                else
+                {
+                    this.p2 = DynamicEntityFactory.BuildComputerControlledEntity(
+                        game,
+                        2,
+                        Color.Pink,
+                        new Vector2(800, 0),
+                        0.0f,
+                        new Vector2(1.0f, 1.0f),
+                        250,
+                        500,
+                        SpriteType.Kirby,
+                        new List<Shape>
+                            {
+                                    Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
+                            },
+                        MoveDefinitions.GetKirbyMoves(),
+                        this.p1
+                        );
+                }
             }
 
             game.AddObject(p2);

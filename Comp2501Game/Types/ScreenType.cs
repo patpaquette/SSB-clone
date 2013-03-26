@@ -15,6 +15,7 @@ namespace Comp2501Game.Types
         Mode,
         WinLosss,
         Basic,
-        Hyrule
+        Hyrule,
+        HumanAI
     }
 }

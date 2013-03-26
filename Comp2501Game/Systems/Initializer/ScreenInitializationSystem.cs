@@ -57,7 +57,10 @@ namespace Comp2501Game.Systems.Physics.Initializer
                 {
                     mapComponent.map = this.Game.Content.Load<Texture2D>(@"Images/GameMap/BasicMap");
                 }
-
+                else if (mapComponent.screenType == ScreenType.HumanAI)
+                {
+                    mapComponent.map = this.Game.Content.Load<Texture2D>(@"Images/Screens/HumAIScreen");
+                }
 
                 //if (songComponent != null)
                 //{
