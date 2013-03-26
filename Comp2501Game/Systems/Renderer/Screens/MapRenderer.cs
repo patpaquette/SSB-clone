@@ -13,11 +13,13 @@ namespace Comp2501Game.Systems.Renderer
     {
         private SpriteBatch _spriteBatch;
         private SpriteFont _spriteFont;
+        Game1 _game;
 
         public MapRenderer(Game1 game)
             : base(game)
         {
             this._componentDependencies.Add(ComponentType.Map);
+            this._game = game;
         }
 
         public override void Initialize()
@@ -41,8 +43,9 @@ namespace Comp2501Game.Systems.Renderer
                 Rectangle destRect = new Rectangle(0, 0, this._game.Window.ClientBounds.Width, this._game.Window.ClientBounds.Height);
                 this._spriteBatch.Draw(mapComponent.map, destRect, Color.White);
 
-                MouseState mouseState = Mouse.GetState();
-                _spriteBatch.DrawString(_spriteFont, mouseState.X + " + " + mouseState.Y, new Vector2(20, 20), Color.Black);
+                //this._game.IsMouseVisible = true;
+                //MouseState mouseState = Mouse.GetState();
+                //_spriteBatch.DrawString(_spriteFont, mouseState.X + " + " + mouseState.Y, new Vector2(20, 20), Color.White);
             }
 
             this._spriteBatch.End();

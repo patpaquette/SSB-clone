@@ -40,6 +40,7 @@ namespace Comp2501Game
         public MapType mapType;
         public bool HasEnded = false;
         public GameObject Winner;
+        public PlayerType playe1, playe2;
 
         public Game1()
         {
@@ -56,6 +57,9 @@ namespace Comp2501Game
             this.CurrentPathfindingGraph = new AStarGraph(this, new List<AStarNode>());
             this.play1 = SpriteType.None;
             this.play2 = SpriteType.None;
+
+            this.playe1 = PlayerType.None;
+            this.playe2 = PlayerType.None;
 
             gameType = GameTypes.None;
             LivesOrTime = 0;

@@ -60,7 +60,8 @@ namespace Comp2501Game.Systems.StateMod.screens
                 this._game.curScreen = ScreenType.Character;
                 this._game.RemoveAllSystems();
                 this._game.RemoveAllObjects();
-                CharacterSelectScreen selectScreen = new CharacterSelectScreen(this._game);
+                //CharacterSelectScreen selectScreen = new CharacterSelectScreen(this._game);
+                HumanAIScreen humAIScreen = new HumanAIScreen(this._game);
                 //ModeScreen modeScreen = new ModeScreen(this._game);
                 //MapScreen mapSelect = new MapScreen(this._game);
                 //StartScreen startScreen = new StartScreen(this._game);
