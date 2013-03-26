@@ -168,7 +168,7 @@ namespace Comp2501Game.Objects.Screens
                      0.0f,
                      new Vector2(1.0f, 1.0f),
                      400,
-                     1000,
+                     500,
                      SpriteType.Yoshi,
                      new List<Shape>
                             {
@@ -206,8 +206,8 @@ namespace Comp2501Game.Objects.Screens
                     new Vector2(800, 0),
                     0.0f,
                     new Vector2(1.0f, 1.0f),
-                    200,
-                    1000,
+                    250,
+                    500,
                     SpriteType.Kirby,
                     new List<Shape>
                         {
@@ -230,14 +230,24 @@ namespace Comp2501Game.Objects.Screens
                 2000.0f,
                 Color.Red));
 
+            game.AddObject(envFactory.BuildStaticRectangularObstacle(
+                new Vector2(clientBounds.Width / 2, clientBounds.Height/3 * 2),
+                new Rectangle(-clientBounds.Width / 2, -10, clientBounds.Width/2, 20),
+                2000.0f,
+                Color.Red));
+
+
             game.AddObject(new TimeObject(game, new Vector2(0, 0), Color.Black));
 
             AStarPathfindingSystem pathfinding = (AStarPathfindingSystem)game.GetService("Pathfinding");
             AStarNode node1 = new AStarNode(new Vector2(clientBounds.Width / 2, clientBounds.Height - 50));
-            AStarNode node2 = new AStarNode(new Vector2(clientBounds.Width / 2 + 200, clientBounds.Height - 50));
+            AStarNode node2 = new AStarNode(new Vector2(clientBounds.Width / 2 + 200, clientBounds.Height - 50), true);
+            AStarNode node3 = new AStarNode(new Vector2(clientBounds.Width / 2, clientBounds.Height - 300));
             node1.AddNeighbor(node2);
             node2.AddNeighbor(node1);
-            AStarGraph graph = new AStarGraph(game, new List<AStarNode> { node1, node2 });
+            node2.AddNeighbor(node3);
+            node3.AddNeighbor(node2);
+            AStarGraph graph = new AStarGraph(game, new List<AStarNode> { node1, node2, node3 });
             GameObject graphEntity = new GameObject(game);
             graphEntity.AddComponent(new AStarGraphComponent(graphEntity, graph));
             game.AddObject(graphEntity);

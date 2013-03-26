@@ -32,7 +32,7 @@ namespace Comp2501Game.Libs.Geometry
 
         public T GetClosest(Vector2 position)
         {
-            if (!this.Boundary.Contains((int)position.X, (int)position.Y) || this.SpatialData.Count == 0)
+            if (this.SpatialData.Count == 0)
             {
                 return null;
             }
@@ -58,7 +58,12 @@ namespace Comp2501Game.Libs.Geometry
                 childRet = child.GetClosest(position);
                 if (childRet != null)
                 {
-                    return childRet;
+                    float length = (childRet.GetPosition() - position).Length();
+                    if (length < minLength)
+                    {
+                        minLength = length;
+                        toReturn = childRet;
+                    }
                 }
             }
 

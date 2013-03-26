@@ -16,6 +16,7 @@ namespace Comp2501Game.Objects.Components.AI.Pathfinding
         public Vector2 GoalPosition;
         public bool SwitchedEntity;
         public bool DoSearch;
+        public AStarNode CurrentNode;
 
         public AStarComponent(GameObject parent)
             :base(parent)
@@ -27,6 +28,7 @@ namespace Comp2501Game.Objects.Components.AI.Pathfinding
             this.GoalPosition = Vector2.Zero;
             this.SwitchedEntity = false;
             this.DoSearch = false;
+            this.CurrentNode = null;
         }
 
         public void SetFollowEntity(GameObject entity)

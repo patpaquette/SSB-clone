@@ -22,6 +22,7 @@ namespace Comp2501Game.Systems.AI.Pathfinding
             }
         }
 
+        public bool Jump;
         public float GScore;
         public float FScore;
         public bool Visited;
@@ -36,9 +37,21 @@ namespace Comp2501Game.Systems.AI.Pathfinding
         }
 
         public AStarNode(Vector2 position, List<AStarNode> neighbors)
+            : this(position, neighbors, false)
+        {
+            
+        }
+
+        public AStarNode(Vector2 position, bool jump)
+            : this(position, new List<AStarNode>(), jump)
+        {
+        }
+
+        public AStarNode(Vector2 position, List<AStarNode> neighbors, bool jump)
         {
             this._position = position;
             this._neighbors = neighbors;
+            this.Jump = jump;
         }
 
         public void Initialize()

@@ -51,14 +51,23 @@ namespace Comp2501Game.Systems.AI.BehaviourNodes
 
                     Vector2 dirVector = goalPosition - curPosition;
 
-                    if (dirVector.X > 0)
+                    if (aStarComponent.CurrentNode.Jump)
                     {
-                        curActionComponent.curAction.secondaryAction = SecondaryAction.Walk;
-                        curActionComponent.curAction.curDirection = DirectionalAction.Right;
+                        curActionComponent.curAction.secondaryAction = SecondaryAction.Jump;
                     }
                     else
                     {
                         curActionComponent.curAction.secondaryAction = SecondaryAction.Walk;
+                    }
+
+                    if (dirVector.X > 0)
+                    {
+                        
+                        curActionComponent.curAction.curDirection = DirectionalAction.Right;
+                    }
+                    else
+                    {
+  
                         curActionComponent.curAction.curDirection = DirectionalAction.Left;
                     }
 

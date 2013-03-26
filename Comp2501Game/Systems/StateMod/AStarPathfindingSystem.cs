@@ -43,6 +43,7 @@ namespace Comp2501Game.Systems.StateMod
             }
 
             AStarNode entityNode = graph.GetClosestNode(transformComponent.GetTranslation());
+            aStarComponent.CurrentNode = entityNode;
             AStarNode goalNode;
 
             if (aStarComponent.Follow)
