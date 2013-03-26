@@ -44,6 +44,14 @@ namespace Comp2501Game.Systems.Physics.Initializer
                 {
                     mapComponent.map = this.Game.Content.Load<Texture2D>(@"Images/Screens/MapSelect");
                 }
+                else if (mapComponent.screenType == ScreenType.Hyrule)
+                {
+                    mapComponent.map = this.Game.Content.Load<Texture2D>(@"Images/GameMap/Hyrule");
+                }
+                else if (mapComponent.screenType == ScreenType.Basic)
+                {
+                    mapComponent.map = this.Game.Content.Load<Texture2D>(@"Images/GameMap/BasicMap");
+                }
             }
 
             base.Initialize();

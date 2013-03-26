@@ -13,6 +13,8 @@ namespace Comp2501Game.Types
         Game,
         Map,
         Mode,
-        WinLosss
+        WinLosss,
+        Basic,
+        Hyrule
     }
 }

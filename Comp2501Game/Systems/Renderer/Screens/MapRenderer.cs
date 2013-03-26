@@ -5,12 +5,14 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Comp2501Game.Objects.Components;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace Comp2501Game.Systems.Renderer
 {
     class MapRenderer : GameSystem
     {
         private SpriteBatch _spriteBatch;
+        private SpriteFont _spriteFont;
 
         public MapRenderer(Game1 game)
             : base(game)
@@ -21,6 +23,7 @@ namespace Comp2501Game.Systems.Renderer
         public override void Initialize()
         {
             this._spriteBatch = new SpriteBatch(this.Game.GraphicsDevice);
+            this._spriteFont = this.Game.Content.Load<SpriteFont>("SpriteFont2");
             //base.Initialize();
         }
 
@@ -37,6 +40,9 @@ namespace Comp2501Game.Systems.Renderer
 
                 Rectangle destRect = new Rectangle(0, 0, this._game.Window.ClientBounds.Width, this._game.Window.ClientBounds.Height);
                 this._spriteBatch.Draw(mapComponent.map, destRect, Color.White);
+
+                MouseState mouseState = Mouse.GetState();
+                _spriteBatch.DrawString(_spriteFont, mouseState.X + " + " + mouseState.Y, new Vector2(20, 20), Color.Black);
             }
 
             this._spriteBatch.End();

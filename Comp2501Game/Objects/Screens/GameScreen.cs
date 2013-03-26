@@ -13,6 +13,8 @@ using Comp2501Game.Libs.Geometry;
 using Comp2501Game.Systems.AI;
 using Comp2501Game.Systems.AI.Pathfinding;
 using Comp2501Game.Objects.Components.AI.Pathfinding;
+using Comp2501Game.Systems.Physics.Initializer;
+using Comp2501Game.Objects.Components.Types;
 
 namespace Comp2501Game.Objects.Screens
 {
@@ -49,14 +51,18 @@ namespace Comp2501Game.Objects.Screens
         int uiRendererID;
         int transformResolverID;
         int lifetimeSystemID;
-
+        int mapRendererID;
+        int mapInitSystemID;
 
 
         public GameScreen(Game1 game, SpriteType player1, SpriteType player2)
         {
+            game.IsMouseVisible = true;
+
+
             this.envFactory = new EnvironmentFactory(game);
             this.clientBounds = game.Window.ClientBounds;
-
+            mapInitSystemID = game.RegisterSystem(new ScreenInitializationSystem(game));
             spriteInitSystemID1 = game.RegisterSystem(new SpriteInitializationSystem(game, 1));
             spriteInitSystemID2 = game.RegisterSystem(new SpriteInitializationSystem(game, 2));
             arrowInputSystemID = game.RegisterSystem(new ArrowInputSystem(game, 2));
@@ -72,6 +78,7 @@ namespace Comp2501Game.Objects.Screens
             boundsSystemID = game.RegisterSystem(new BoundsSystem(game));
             meshRendererID = game.RegisterSystem(new LinebatchMeshRenderSystem(game));
             collisionRendererID = game.RegisterSystem(new CollisionRenderSystem(game));
+            mapRendererID = game.RegisterSystem(new MapRenderer(game));
             spriteRendererID = game.RegisterSystem(new SpriteRenderer(game));
             uiRendererID = game.RegisterSystem(new UIRenderer(game));
             transformResolverID = game.RegisterSystem(new PhysicsTransformResolverSystem(game));
@@ -86,6 +93,7 @@ namespace Comp2501Game.Objects.Screens
 
             game.SetSystemCallOrder(new List<int>
                 {
+                    this.mapInitSystemID,
                     this.spriteInitSystemID1,
                     this.spriteInitSystemID2,
                     this.arrowInputSystemID,
@@ -102,8 +110,9 @@ namespace Comp2501Game.Objects.Screens
                     this.transformResolverID,
                     this.boundsSystemID,
                     this.lifetimeSystemID,
-                    //physicsSystemID,
+                    //this.physicsSystemID,
                     this.meshRendererID,
+                    this.mapRendererID,
                     this.collisionRendererID,
                     this.spriteRendererID,
                     this.uiRendererID,
@@ -181,7 +190,7 @@ namespace Comp2501Game.Objects.Screens
             }
             else
             {
-                /*
+                
                 this.p2 = DynamicEntityFactory.BuildPlayerControlledEntity(
                     game,
                     2,
@@ -197,44 +206,130 @@ namespace Comp2501Game.Objects.Screens
                             Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
                         },
                     MoveDefinitions.GetKirbyMoves()
-                );*/
-
-                this.p2 = DynamicEntityFactory.BuildComputerControlledEntity(
-                    game,
-                    2,
-                    Color.Pink,
-                    new Vector2(800, 0),
-                    0.0f,
-                    new Vector2(1.0f, 1.0f),
-                    250,
-                    500,
-                    SpriteType.Kirby,
-                    new List<Shape>
-                        {
-                            Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
-                        },
-                    MoveDefinitions.GetYoshiMoves(),
-                    this.p1
                 );
+
+                //this.p2 = DynamicEntityFactory.BuildComputerControlledEntity(
+                //    game,
+                //    2,
+                //    Color.Pink,
+                //    new Vector2(800, 0),
+                //    0.0f,
+                //    new Vector2(1.0f, 1.0f),
+                //    250,
+                //    500,
+                //    SpriteType.Kirby,
+                //    new List<Shape>
+                //        {
+                //            Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
+                //        },
+                //    MoveDefinitions.GetYoshiMoves(),
+                //    this.p1
+                //);
             }
 
             game.AddObject(p2);
 
 
+            if (game.mapType == MapType.Basic)
+            {
+                game.AddObject(new TextObject2(game, MapType.Basic));
+
+                game.AddObject(envFactory.BuildStaticRectangularObstacle(
+                    new Vector2(403, 347),
+                    new Rectangle(0, -10, -378, -36),
+                    2000.0f,
+                    Color.Red));
+
+                game.AddObject(envFactory.BuildStaticRectangularObstacle(
+                    new Vector2(1173, 498),
+                    new Rectangle(0, -10, -380, -37),
+                    2000.0f,
+                    Color.Red));
+
+                game.AddObject(envFactory.BuildStaticRectangularObstacle(
+                    new Vector2(1165, 119),
+                    new Rectangle(0, -10, -530, -39),
+                    2000.0f,
+                    Color.Red));
+
+                game.AddObject(envFactory.BuildStaticRectangularObstacle(
+                    new Vector2(1050, 662),
+                    new Rectangle(0, -10, -927, -1),
+                    2000.0f,
+                    Color.Red));
+            }
+            else
+            {
+                game.AddObject(new TextObject2(game, MapType.Hyrule));
+
+                game.AddObject(envFactory.BuildStaticRectangularObstacle(
+                    new Vector2(303, 500),
+                    new Rectangle(0, -10, -10, -120),
+                    2000.0f,
+                    Color.Red));
+
+                game.AddObject(envFactory.BuildStaticRectangularObstacle(
+                    new Vector2(302, 515),
+                    new Rectangle(0, -10, -140, -10),
+                    2000.0f,
+                    Color.Red));
 
 
+                game.AddObject(envFactory.BuildStaticRectangularObstacle(
+                    new Vector2(815, 400),
+                    new Rectangle(0, -10, -516, -10),
+                    2000.0f,
+                    Color.Red));
 
-            game.AddObject(envFactory.BuildStaticRectangularObstacle(
-                new Vector2(clientBounds.Width / 2, clientBounds.Height),
-                new Rectangle(-clientBounds.Width / 2, -10, clientBounds.Width, 20),
-                2000.0f,
-                Color.Red));
+                //game.AddObject(envFactory.BuildStaticRectangularObstacle(
+                //    new Vector2(704, 330),
+                //    new Rectangle(0, -10, -109, -10),
+                //    2000.0f,
+                //    Color.Red));
 
-            game.AddObject(envFactory.BuildStaticRectangularObstacle(
-                new Vector2(clientBounds.Width / 2, clientBounds.Height/3 * 2),
-                new Rectangle(-clientBounds.Width / 2, -10, clientBounds.Width/2, 20),
-                2000.0f,
-                Color.Red));
+                //game.AddObject(envFactory.BuildStaticRectangularObstacle(
+                //    new Vector2(757, 223),
+                //    new Rectangle(0, -10, -107, -10),
+                //    2000.0f,
+                //    Color.Red));
+
+                game.AddObject(envFactory.BuildStaticRectangularObstacle(
+                    new Vector2(1064, 521),
+                    new Rectangle(0, -10, -250, -10),
+                    2000.0f,
+                    Color.Red));
+
+                game.AddObject(envFactory.BuildStaticRectangularObstacle(
+                    new Vector2(818, 510),
+                    new Rectangle(0, -10, -10, -130),
+                    2000.0f,
+                    Color.Red));
+
+                game.AddObject(envFactory.BuildStaticRectangularObstacle(
+                    new Vector2(174, 800),
+                    new Rectangle(0, -10, -10, -300),
+                    2000.0f,
+                    Color.Red));
+
+                game.AddObject(envFactory.BuildStaticRectangularObstacle(
+                    new Vector2(1066, 810),
+                    new Rectangle(0, -10, -10, -306),
+                    2000.0f,
+                    Color.Red));
+            }
+
+
+            //game.AddObject(envFactory.BuildStaticRectangularObstacle(
+            //    new Vector2(clientBounds.Width / 2, clientBounds.Height),
+            //    new Rectangle(-clientBounds.Width / 2, -10, clientBounds.Width, 20),
+            //    2000.0f,
+            //    Color.Red));
+
+            //game.AddObject(envFactory.BuildStaticRectangularObstacle(
+            //    new Vector2(clientBounds.Width / 2, clientBounds.Height / 3 * 2),
+            //    new Rectangle(-clientBounds.Width / 2, -10, clientBounds.Width / 2, 20),
+            //    2000.0f,
+            //    Color.Red));
 
 
             game.AddObject(new TimeObject(game, new Vector2(0, 0), Color.Black));
