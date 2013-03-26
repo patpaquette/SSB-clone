@@ -41,6 +41,7 @@ namespace Comp2501Game
         public bool HasEnded = false;
         public GameObject Winner;
         public PlayerType playe1, playe2;
+        public int winner;
 
         public Game1()
         {
@@ -57,7 +58,7 @@ namespace Comp2501Game
             this.CurrentPathfindingGraph = new AStarGraph(this, new List<AStarNode>());
             this.play1 = SpriteType.None;
             this.play2 = SpriteType.None;
-
+            this.winner = 0;
             this.playe1 = PlayerType.None;
             this.playe2 = PlayerType.None;
 

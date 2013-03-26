@@ -175,6 +175,7 @@
     <Compile Include="Objects\PlayerObject.cs" />
     <Compile Include="Objects\SceneObject.cs" />
     <Compile Include="Objects\Screens\CharacterSelectScreen.cs" />
+    <Compile Include="Objects\Screens\CreditsScreen.cs" />
     <Compile Include="Objects\Screens\GameScreen.cs" />
     <Compile Include="Objects\Screens\HumanAIScreen.cs" />
     <Compile Include="Objects\Screens\ModeScreen.cs" />
@@ -242,6 +243,7 @@
     <Compile Include="Systems\StateMod\screens\MouseInputsystem.cs" />
     <Compile Include="Systems\StateMod\screens\ScreenInputSystem.cs" />
     <Compile Include="Systems\StateMod\screens\SelectInputSystem.cs" />
+    <Compile Include="Systems\StateMod\screens\SwitchScreenSystem.cs" />
     <Compile Include="Systems\Types\GameTypes.cs" />
     <Compile Include="Systems\Types\SystemType.cs" />
     <Compile Include="Systems\Renderer\TestRenderSystem.cs" />

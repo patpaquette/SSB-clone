@@ -550,10 +550,10 @@ namespace Comp2501Game.Objects.Screens
             //    2000.0f,
             //    Color.Red));
 
-            if (this._game.gameType == Types.GameTypes.Timed)
-            {
-                game.AddObject(new TimeObject(game, new Vector2(0, 0), Color.Black));
-            }
+            //if (this._game.gameType == Types.GameTypes.Timed)
+            //{
+            //    game.AddObject(new TimeObject(game, new Vector2(0, 0), Color.Black));
+            //}
 
             
 

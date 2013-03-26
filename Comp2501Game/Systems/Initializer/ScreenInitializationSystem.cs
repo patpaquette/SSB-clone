@@ -15,7 +15,7 @@ namespace Comp2501Game.Systems.Physics.Initializer
         Game1 _game;
 
         public ScreenInitializationSystem(Game1 game)
-            : base (game)
+            : base(game)
         {
             this._game = game;
             this._componentDependencies.Add(ComponentType.Map);
@@ -35,11 +35,11 @@ namespace Comp2501Game.Systems.Physics.Initializer
 
                 if (mapComponent.screenType == ScreenType.Start)
                 {
-                    mapComponent.map = this.Game.Content.Load<Texture2D>(@"Images/Screens/Start Screen"); 
+                    mapComponent.map = this.Game.Content.Load<Texture2D>(@"Images/Screens/Start Screen");
                 }
                 else if (mapComponent.screenType == ScreenType.Character)
                 {
-                    mapComponent.map = this.Game.Content.Load<Texture2D>(@"Images/Screens/CharacterSelectScreen"); 
+                    mapComponent.map = this.Game.Content.Load<Texture2D>(@"Images/Screens/CharacterSelectScreen");
                 }
                 else if (mapComponent.screenType == ScreenType.Mode)
                 {
@@ -61,7 +61,10 @@ namespace Comp2501Game.Systems.Physics.Initializer
                 {
                     mapComponent.map = this.Game.Content.Load<Texture2D>(@"Images/Screens/HumAIScreen");
                 }
-
+                else if (mapComponent.screenType == ScreenType.Credits)
+                {
+                    mapComponent.map = this.Game.Content.Load<Texture2D>(@"Images/Screens/Credits");
+                }
                 //if (songComponent != null)
                 //{
                 //    if (this._game.mapType == MapType.Hyrule)

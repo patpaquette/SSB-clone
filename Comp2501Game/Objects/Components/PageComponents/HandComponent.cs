@@ -13,11 +13,11 @@ namespace Comp2501Game.Objects.Components
         public Vector2 position;
         public int playerNum;
 
-        public HandComponent(GameObject parent, int num, Game game)
-            : base (parent)
+        public HandComponent(GameObject parent, int num, Game game, Vector2 vec)
+            : base(parent)
         {
             this.playerNum = num;
-            position = new Vector2(100 * num, 350);
+            position = vec;
         }
 
         public override ComponentType GetType()

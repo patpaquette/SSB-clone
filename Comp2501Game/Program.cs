@@ -31,10 +31,10 @@ namespace Comp2501Game
             {
 
 
-                GameScreen gameScreen = new GameScreen(game, SpriteType.Yoshi, SpriteType.Kirby);
-                //StartScreen startScreen = new StartScreen(game);
+                //GameScreen gameScreen = new GameScreen(game, SpriteType.Yoshi, SpriteType.Kirby);
+                StartScreen startScreen = new StartScreen(game);
                 //CharacterSelectScreen selectScreen = new CharacterSelectScreen(game);
-
+                //CreditsScreen creditScreen = new CreditsScreen(game);
                 //EnvironmentFactory envFactory = new EnvironmentFactory(game);
                 //Rectangle clientBounds = game.Window.ClientBounds;
 
