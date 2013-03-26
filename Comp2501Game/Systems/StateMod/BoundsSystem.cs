@@ -6,6 +6,7 @@ using Comp2501Game.Objects.Components;
 using Microsoft.Xna.Framework;
 using Comp2501Game.Objects.Components.Health_Components;
 using Comp2501Game.Objects.Components.Physics;
+using Comp2501Game.Types;
 
 namespace Comp2501Game.Systems.StateMod
 {
@@ -37,14 +38,13 @@ namespace Comp2501Game.Systems.StateMod
 
                 if (translation.X < 0.0f ||
                     translation.X > this._game.Window.ClientBounds.Width ||
-                    translation.Y < 0.0f ||
                     translation.Y > this._game.Window.ClientBounds.Height)
                 {
                     transformComponent.SetTransform(
                         Matrix.CreateTranslation(
                             new Vector3(
                                 this._game.Window.ClientBounds.Width / 2,
-                                100.0f,
+                                0.0f,
                                 1.0f
                             )
                     ));
@@ -54,6 +54,16 @@ namespace Comp2501Game.Systems.StateMod
                     motionComponent.State = MotionState.Air;
                     motionComponent.AccelerationVector = Vector2.Zero;
                     healthComponent.ResetDmg();
+                    healthComponent.Deaths++;
+
+                    if (this._game.gameType == GameTypes.Stock)
+                    {
+                        if (healthComponent.Deaths == this._game.LivesOrTime)
+                        {
+                            this._game.HasEnded = true;
+                            
+                        }
+                    }
                 }
             }
 

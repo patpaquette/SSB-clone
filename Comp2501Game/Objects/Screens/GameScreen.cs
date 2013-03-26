@@ -86,6 +86,8 @@ namespace Comp2501Game.Objects.Screens
             int aStarPathRendererID = game.RegisterSystem(new AStarPathRenderer(game));
             int aStarRendererID = game.RegisterSystem(new AStarPathfindingRenderer(game));
             int aiSystemID = game.RegisterSystem(new AISystem(game));
+            int timerRendererID = game.RegisterSystem(new TimerRenderSystem(game));
+            int timerSystemID = game.RegisterSystem(new TimerSystem(game));
 
             //services
             int collisionSystemID = game.RegisterSystem(new SATCollisionSystem(game, "Collision"));
@@ -110,6 +112,7 @@ namespace Comp2501Game.Objects.Screens
                     this.transformResolverID,
                     this.boundsSystemID,
                     this.lifetimeSystemID,
+                    timerSystemID,
                     //this.physicsSystemID,
                     this.meshRendererID,
                     this.mapRendererID,
@@ -117,7 +120,8 @@ namespace Comp2501Game.Objects.Screens
                     this.spriteRendererID,
                     this.uiRendererID,
                     aStarRendererID,
-                    aStarPathRendererID
+                    aStarPathRendererID,
+                    timerRendererID
                 });
             if (player1 == SpriteType.Yoshi)
             {
@@ -125,7 +129,7 @@ namespace Comp2501Game.Objects.Screens
                      game,
                      1,
                      Color.Green,
-                     new Vector2(100, 0),
+                     new Vector2(200, 0),
                      0.0f,
                      new Vector2(1.0f, 1.0f),
                      400,
@@ -134,8 +138,8 @@ namespace Comp2501Game.Objects.Screens
                      new List<Shape>
                             {
                                 //Shape.BuildRectangle(new Rectangle(-55, -60, 90, 60)),
-                                Shape.BuildRectangle(new Rectangle(-40, 0, 120, 60)),
-                                Shape.BuildRectangle(new Rectangle(25, 60, 40, 30))
+                                Shape.BuildRectangle(new Rectangle(-60, 0, 120, 90)),
+                                //Shape.BuildRectangle(new Rectangle(25, 60, 40, 30))
                             },
                      MoveDefinitions.GetYoshiMoves()
                  );
@@ -146,7 +150,7 @@ namespace Comp2501Game.Objects.Screens
                     game,
                     1,
                     Color.Green,
-                    new Vector2(100, 0),
+                    new Vector2(200, 0),
                     0.0f,
                     new Vector2(1.0f, 1.0f),
                     300,
@@ -169,7 +173,7 @@ namespace Comp2501Game.Objects.Screens
 
             if (player2 == SpriteType.Yoshi)
             {
-                this.p2 = DynamicEntityFactory.BuildPlayerControlledEntity(
+                this.p2 = DynamicEntityFactory.BuildComputerControlledEntity(
                      game,
                      2,
                      Color.Pink,
@@ -177,35 +181,37 @@ namespace Comp2501Game.Objects.Screens
                      0.0f,
                      new Vector2(1.0f, 1.0f),
                      400,
-                     500,
+                     1000,
                      SpriteType.Yoshi,
                      new List<Shape>
                             {
                                 //Shape.BuildRectangle(new Rectangle(-55, -60, 90, 60)),
-                                Shape.BuildRectangle(new Rectangle(-40, 0, 120, 60)),
-                                Shape.BuildRectangle(new Rectangle(25, 60, 40, 30))
+                                Shape.BuildRectangle(new Rectangle(-60, 0, 120, 90)),
+                                //Shape.BuildRectangle(new Rectangle(25, 60, 40, 30))
                             },
-                     MoveDefinitions.GetYoshiMoves()
+                     MoveDefinitions.GetYoshiMoves(),
+                     this.p1
                  );
             }
             else
             {
                 
-                this.p2 = DynamicEntityFactory.BuildPlayerControlledEntity(
+                this.p2 = DynamicEntityFactory.BuildComputerControlledEntity(
                     game,
                     2,
                     Color.Pink,
-                    new Vector2(500, 0),
+                    new Vector2(800, 0),
                     0.0f,
                     new Vector2(1.0f, 1.0f),
                     300,
-                    10000,
+                    1000,
                     SpriteType.Kirby,
                     new List<Shape>
                         {
                             Shape.BuildRectangle(new Rectangle(-60, -60, 110, 110))
                         },
-                    MoveDefinitions.GetKirbyMoves()
+                    MoveDefinitions.GetYoshiMoves(),
+                    this.p1
                 );
 
                 //this.p2 = DynamicEntityFactory.BuildComputerControlledEntity(
@@ -257,6 +263,26 @@ namespace Comp2501Game.Objects.Screens
                     new Rectangle(0, -10, -927, -1),
                     2000.0f,
                     Color.Red));
+
+                AStarPathfindingSystem pathfinding = (AStarPathfindingSystem)game.GetService("Pathfinding");
+                AStarNode node1 = new AStarNode(new Vector2(700, 50));
+                AStarNode node2 = new AStarNode(new Vector2(320, 270), true);
+                AStarNode node3 = new AStarNode(new Vector2(820, 400));
+                AStarNode node4 = new AStarNode(new Vector2(700, 620), true);
+                AStarNode node5 = new AStarNode(new Vector2(300, 620));
+                node1.AddNeighbor(node2);
+                node2.AddNeighbor(node1);
+                node2.AddNeighbor(node3);
+                node3.AddNeighbor(node2);
+                node3.AddNeighbor(node4);
+                node4.AddNeighbor(node3);
+                node4.AddNeighbor(node5);
+                node5.AddNeighbor(node4);
+                AStarGraph graph = new AStarGraph(game, new List<AStarNode> { node1, node2, node3, node4, node5 });
+                GameObject graphEntity = new GameObject(game);
+                graphEntity.AddComponent(new AStarGraphComponent(graphEntity, graph));
+                game.AddObject(graphEntity);
+                game.CurrentPathfindingGraph = graph;
             }
             else
             {
@@ -269,14 +295,14 @@ namespace Comp2501Game.Objects.Screens
                     Color.Red));
 
                 game.AddObject(envFactory.BuildStaticRectangularObstacle(
-                    new Vector2(302, 515),
+                    new Vector2(302, 505),
                     new Rectangle(0, -10, -140, -10),
                     2000.0f,
                     Color.Red));
 
 
                 game.AddObject(envFactory.BuildStaticRectangularObstacle(
-                    new Vector2(815, 400),
+                    new Vector2(815, 390),
                     new Rectangle(0, -10, -516, -10),
                     2000.0f,
                     Color.Red));
@@ -294,7 +320,7 @@ namespace Comp2501Game.Objects.Screens
                 //    Color.Red));
 
                 game.AddObject(envFactory.BuildStaticRectangularObstacle(
-                    new Vector2(1064, 521),
+                    new Vector2(1064, 510),
                     new Rectangle(0, -10, -250, -10),
                     2000.0f,
                     Color.Red));
@@ -316,6 +342,23 @@ namespace Comp2501Game.Objects.Screens
                     new Rectangle(0, -10, -10, -306),
                     2000.0f,
                     Color.Red));
+
+                AStarPathfindingSystem pathfinding = (AStarPathfindingSystem)game.GetService("Pathfinding");
+                AStarNode node1 = new AStarNode(new Vector2(230, 480), true);
+                AStarNode node2 = new AStarNode(new Vector2(320, 350));
+                AStarNode node3 = new AStarNode(new Vector2(800, 350));
+                AStarNode node4 = new AStarNode(new Vector2(890, 480), true);
+                node1.AddNeighbor(node2);
+                node2.AddNeighbor(node1);
+                node2.AddNeighbor(node3);
+                node3.AddNeighbor(node2);
+                node3.AddNeighbor(node4);
+                node4.AddNeighbor(node3);
+                AStarGraph graph = new AStarGraph(game, new List<AStarNode> { node1, node2, node3, node4 });
+                GameObject graphEntity = new GameObject(game);
+                graphEntity.AddComponent(new AStarGraphComponent(graphEntity, graph));
+                game.AddObject(graphEntity);
+                game.CurrentPathfindingGraph = graph;
             }
 
 
@@ -331,22 +374,12 @@ namespace Comp2501Game.Objects.Screens
             //    2000.0f,
             //    Color.Red));
 
+            if (this._game.gameType == Types.GameTypes.Timed)
+            {
+                game.AddObject(new TimeObject(game, new Vector2(0, 0), Color.Black));
+            }
 
-            game.AddObject(new TimeObject(game, new Vector2(0, 0), Color.Black));
-
-            AStarPathfindingSystem pathfinding = (AStarPathfindingSystem)game.GetService("Pathfinding");
-            AStarNode node1 = new AStarNode(new Vector2(clientBounds.Width / 2, clientBounds.Height - 50));
-            AStarNode node2 = new AStarNode(new Vector2(clientBounds.Width / 2 + 200, clientBounds.Height - 50), true);
-            AStarNode node3 = new AStarNode(new Vector2(clientBounds.Width / 2, clientBounds.Height - 300));
-            node1.AddNeighbor(node2);
-            node2.AddNeighbor(node1);
-            node2.AddNeighbor(node3);
-            node3.AddNeighbor(node2);
-            AStarGraph graph = new AStarGraph(game, new List<AStarNode> { node1, node2, node3 });
-            GameObject graphEntity = new GameObject(game);
-            graphEntity.AddComponent(new AStarGraphComponent(graphEntity, graph));
-            game.AddObject(graphEntity);
-            game.CurrentPathfindingGraph = graph;
+            
 
             game.Character1 = this.p1;
             game.Character2 = this.p2;

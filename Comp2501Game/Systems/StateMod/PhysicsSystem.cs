@@ -120,17 +120,31 @@ namespace Comp2501Game.Systems.StateMod
             }
 
             Vector2 velocityCorrection = normal * depth * (float)(1.0f / timestep);
+            Vector2 positionCorrection = normal * depth;
 
             if (obj2.HasComponent(ComponentType.MotionProperties))
             {
                 MotionPropertiesComponent obj2MotionComponent =
                     (MotionPropertiesComponent)obj2.GetComponent(ComponentType.MotionProperties);
-                obj1MotionComponent.AddVelocity(velocityCorrection);
+
+                
+                //obj1MotionComponent.AddVelocity(velocityCorrection);
 
             }
             else
             {
-                obj1MotionComponent.AddVelocity(velocityCorrection);
+                obj1TransformComponent.AddTranslation(positionCorrection);
+
+                if (positionCorrection.Y != 0)
+                {
+                    obj1MotionComponent.SetVelocity(new Vector2(obj1MotionComponent.GetVelocity().X, 0.0f));
+                }
+                else if(positionCorrection.X != 0)
+                {
+                    obj1MotionComponent.SetVelocity(new Vector2(0.0f, obj1MotionComponent.GetVelocity().Y));
+                }
+                //obj1MotionComponent.AddVelocity(velocityCorrection);
+
             }
 
             if (velocityCorrection.Y != 0.0f)
@@ -176,9 +190,6 @@ namespace Comp2501Game.Systems.StateMod
                     }
                 }
             }
-
-
-
         }
     }
 }

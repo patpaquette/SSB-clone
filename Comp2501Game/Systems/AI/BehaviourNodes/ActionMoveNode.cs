@@ -51,7 +51,7 @@ namespace Comp2501Game.Systems.AI.BehaviourNodes
 
                     Vector2 dirVector = goalPosition - curPosition;
 
-                    if (aStarComponent.CurrentNode.Jump)
+                    if (aStarComponent.CurrentNode.Jump && position.Y < goalPosition.Y -100)
                     {
                         curActionComponent.curAction.secondaryAction = SecondaryAction.Jump;
                     }

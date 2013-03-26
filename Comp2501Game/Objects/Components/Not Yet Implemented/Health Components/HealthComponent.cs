@@ -9,13 +9,15 @@ namespace Comp2501Game.Objects.Components.Health_Components
 {
     class HealthComponent : ObjectComponent
     {
-        public int currentDmg;  
+        public int currentDmg;
+        public int Deaths;
 
         //constructor sets damage taken to 0
         public HealthComponent(GameObject parent)
             : base(parent)
         {
             this.currentDmg = 0;
+            this.Deaths = 0;
         }
 
         //returns float value of characters currentDmg

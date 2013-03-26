@@ -29,7 +29,10 @@ namespace Comp2501Game.Systems.AI.BehaviourNodes
             MotionPropertiesComponent parentMotionComponent =
                 (MotionPropertiesComponent)this._parent.GetComponent(ComponentType.MotionProperties);
 
-            if (parentMotionComponent.State == MotionState.Ground && parentCurActionComponent.Timing <= 0)
+            if (parentMotionComponent.State == MotionState.Ground && 
+                parentCurActionComponent.Timing <= 0 &&
+                (parentCurActionComponent.curAction.secondaryAction == SecondaryAction.Stand ||
+                parentCurActionComponent.curAction.secondaryAction == SecondaryAction.Walk))
             {
                 parentCurActionComponent.curAction.primaryAction = this._actDef.PrimaryAction;
                 parentCurActionComponent.curAction.secondaryAction = this._actDef.SecondaryAction;

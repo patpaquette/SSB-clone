@@ -38,6 +38,8 @@ namespace Comp2501Game
         public GameTypes gameType;
         public int LivesOrTime;
         public MapType mapType;
+        public bool HasEnded = false;
+        public GameObject Winner;
 
         public Game1()
         {
@@ -57,7 +59,8 @@ namespace Comp2501Game
 
             gameType = GameTypes.None;
             LivesOrTime = 0;
-            this.mapType = MapType.None;
+            this.mapType = MapType.Basic;
+            this.Winner = null;
         }
 
         /// <summary>

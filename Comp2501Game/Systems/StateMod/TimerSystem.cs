@@ -135,7 +135,7 @@ namespace Comp2501Game.Systems
                     //if the timer is new (yet to be set) set it to 1 min, else check time
                     if (curTime.isActive == false)
                     {
-                        setTime(gameTime, 243, curTime);
+                        setTime(gameTime, this._game.LivesOrTime, curTime);
                     }
                     else
                     {
