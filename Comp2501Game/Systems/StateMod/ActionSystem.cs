@@ -35,20 +35,21 @@ namespace Comp2501Game.Systems.StateMod
             foreach (GameObject obj in this._objects)
             {
                 CurrentActionComponent curActionComponent = (CurrentActionComponent)obj.GetComponent(ComponentType.Action);
+                curActionComponent.Timing -= gameTime.ElapsedGameTime.Milliseconds;
 
                 if (!curActionComponent.curAction.GetDefinition().Equals(curActionComponent.LastActionDef))
                 {
                     curActionComponent.InProgress = false;
                 }
 
-                if (curActionComponent.InProgress == false)
+                if (curActionComponent.InProgress == false && curActionComponent.Timing <= 0)
                 {   
                     curActionComponent.InProgress = true;
-                    curActionComponent.LastActionDef = curActionComponent.curAction.GetDefinition();
 
                     if (curActionComponent.GetActionInfo().GetType() == ActionType.AttackProjectile)
                     {
                         ActionInfoProjectile actInfo = (ActionInfoProjectile)curActionComponent.GetActionInfo();
+                        curActionComponent.Timing = actInfo.Timing;
 
                         objsToAdd.Add(
                             DynamicEntityFactory.BuildActionProjectile(
@@ -101,7 +102,7 @@ namespace Comp2501Game.Systems.StateMod
 
             obj2HealthComponent.AddDmg(actionInfo.OnHitDamage);
             Vector2 forceFinal = actionInfo.OnHitForce * obj2HealthComponent.getCurrDmg() / obj2MotionComponent.Mass;
-            obj2MotionComponent.AddForce(forceFinal);
+            obj2MotionComponent.AddVelocity(forceFinal);
             obj1LifetimeComponent.Lifetime = 0;
 
             if (obj1Parent != null)

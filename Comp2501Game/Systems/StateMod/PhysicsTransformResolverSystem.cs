@@ -55,6 +55,8 @@ namespace Comp2501Game.Systems.StateMod
                 transformComponent.AddTranslation(
                     objVelocity * gameTime.ElapsedGameTime.Milliseconds / 1000.0f
                 );
+
+                motionComponent.SetVelocity(objVelocity);
             }
 
             base.Update(gameTime);

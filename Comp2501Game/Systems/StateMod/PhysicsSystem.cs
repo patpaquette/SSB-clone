@@ -19,7 +19,7 @@ namespace Comp2501Game.Systems.StateMod
         {
             this._componentDependencies.Add(ComponentType.MotionProperties);
             this._componentDependencies.Add(ComponentType.Transform2D);
-            this.GravityForce = 20.0f;
+            this.GravityForce = 10.0f;
         }
 
         public override void Initialize()
@@ -48,6 +48,14 @@ namespace Comp2501Game.Systems.StateMod
                             0.0f, 
                             this.GravityForce * gravComponent.StrengthFactor
                     ));
+                }
+
+                if (motionComponent.State == MotionState.Air)
+                {
+                    Vector2 velocity = motionComponent.GetVelocity();
+                    velocity.Normalize();
+
+                    motionComponent.AddForce(new Vector2(-1 * velocity.X * 200, 0));
                 }
 
                 this.resolveVelocity(

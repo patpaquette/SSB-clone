@@ -12,6 +12,7 @@ namespace Comp2501Game.Objects.Components.Actions
         public int Lifetime; //in milliseconds
         public Vector2 OnHitForce;
         public int OnHitDamage;
+        public int Timing;
         public Rectangle BoundingBoxRect;
 
         public ActionInfoProjectile(
@@ -19,7 +20,8 @@ namespace Comp2501Game.Objects.Components.Actions
             int lifetime,
             Vector2 OnHitForce,
             int OnHitDamage,
-            Rectangle boundingBoxRect)
+            Rectangle boundingBoxRect,
+            int timing)
             : base()
         {
             this.Velocity = velocity;
@@ -27,6 +29,7 @@ namespace Comp2501Game.Objects.Components.Actions
             this.OnHitForce = OnHitForce;
             this.OnHitDamage = OnHitDamage;
             this.BoundingBoxRect = boundingBoxRect;
+            this.Timing = timing;
         }
 
         public override ActionType GetType()

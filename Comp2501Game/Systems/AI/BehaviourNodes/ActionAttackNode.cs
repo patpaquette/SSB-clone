@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Comp2501Game.Objects.Components.Actions;
 using Comp2501Game.Objects.Components;
+using Comp2501Game.Objects.Components.Physics;
 
 namespace Comp2501Game.Systems.AI.BehaviourNodes
 {
@@ -25,16 +26,15 @@ namespace Comp2501Game.Systems.AI.BehaviourNodes
         {
             CurrentActionComponent parentCurActionComponent =
                 (CurrentActionComponent)this._parent.GetComponent(ComponentType.Action);
+            MotionPropertiesComponent parentMotionComponent =
+                (MotionPropertiesComponent)this._parent.GetComponent(ComponentType.MotionProperties);
 
-            if (parentCurActionComponent.curAction.primaryAction == this._actDef.PrimaryAction)
-            {
-                parentCurActionComponent.curAction.primaryAction = PrimaryAction.None;
-            }
-            else
+            if (parentMotionComponent.State == MotionState.Ground && parentCurActionComponent.Timing <= 0)
             {
                 parentCurActionComponent.curAction.primaryAction = this._actDef.PrimaryAction;
+                parentCurActionComponent.curAction.secondaryAction = this._actDef.SecondaryAction;
             }
-            
+
             return true;
         }
 

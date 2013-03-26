@@ -21,7 +21,8 @@ namespace Comp2501Game.EntityFactory
                                 100,
                                 new Vector2(0.0f, -5.0f),
                                 20,
-                                new Rectangle(-25, 80, 50, 50)
+                                new Rectangle(-25, 80, 50, 50),
+                                400
                             )
                         },
                          {
@@ -31,7 +32,8 @@ namespace Comp2501Game.EntityFactory
                                 100,
                                 new Vector2(0.0f, -5.0f),
                                 20,
-                                new Rectangle(-25, 80, 50, 50)
+                                new Rectangle(-25, 80, 50, 50),
+                                400
                             )
                         },
                         {
@@ -39,9 +41,10 @@ namespace Comp2501Game.EntityFactory
                             new ActionInfoProjectile(
                                 new Vector2(1000.0f, 0.0f),
                                 70,
-                                new Vector2(20.0f, -20.0f),
+                                new Vector2(10.0f, -10.0f),
                                 50,
-                                new Rectangle(-50, -50, 100, 100)
+                                new Rectangle(-50, -50, 100, 100),
+                                1000
                             )
                         },
                         {
@@ -49,9 +52,32 @@ namespace Comp2501Game.EntityFactory
                             new ActionInfoProjectile(
                                 new Vector2(-1000.0f, 0.0f),
                                 70,
-                                new Vector2(-20.0f, -20.0f),
+                                new Vector2(-10.0f, -10.0f),
                                 50,
-                                new Rectangle(-50, -50, 100, 100)
+                                new Rectangle(-50, -50, 100, 100),
+                                1000
+                            )
+                        },
+                        {
+                            new ActionDefinition(DirectionalAction.Right, PrimaryAction.Up_A, SecondaryAction.Smash),
+                            new ActionInfoProjectile(
+                                new Vector2(0.0f, -1000.0f),
+                                70,
+                                new Vector2(10.0f, -10.0f),
+                                50,
+                                new Rectangle(-50, -50, 100, 100),
+                                1000
+                            )
+                        },
+                        {
+                            new ActionDefinition(DirectionalAction.Left, PrimaryAction.Up_A, SecondaryAction.Smash),
+                            new ActionInfoProjectile(
+                                new Vector2(0.0f, -1000.0f),
+                                70,
+                                new Vector2(10.0f, -10.0f),
+                                50,
+                                new Rectangle(-50, -50, 100, 100),
+                                1000
                             )
                         }
                     };

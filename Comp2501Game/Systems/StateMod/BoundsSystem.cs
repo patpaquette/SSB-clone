@@ -51,6 +51,8 @@ namespace Comp2501Game.Systems.StateMod
 
                     motionComponent.ResetForces();
                     motionComponent.SetVelocity(Vector2.Zero);
+                    motionComponent.State = MotionState.Air;
+                    motionComponent.AccelerationVector = Vector2.Zero;
                     healthComponent.ResetDmg();
                 }
             }

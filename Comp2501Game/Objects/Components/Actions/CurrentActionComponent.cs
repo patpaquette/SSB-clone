@@ -13,6 +13,7 @@ namespace Comp2501Game.Objects.Components
         public ActionComponent curAction;
         public ActionDefinition LastActionDef;
         public bool InProgress;
+        public int Timing;
         private Dictionary<ActionDefinition, ActionInfo> _actionsInformation;
 
         public CurrentActionComponent(
@@ -25,6 +26,7 @@ namespace Comp2501Game.Objects.Components
             this.LastActionDef = curAction.GetDefinition();
             this._actionsInformation = actionsInformation;
             this.InProgress = false;
+            this.Timing = 0;
         }
 
         public ActionInfo GetActionInfo()

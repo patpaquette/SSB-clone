@@ -11,6 +11,8 @@ using Comp2501Game.Systems.Renderer;
 using Comp2501Game.Objects.Components;
 using Comp2501Game.Libs.Geometry;
 using Comp2501Game.Systems.AI;
+using Comp2501Game.Systems.AI.Pathfinding;
+using Comp2501Game.Objects.Components.AI.Pathfinding;
 
 namespace Comp2501Game.Objects.Screens
 {
@@ -57,8 +59,8 @@ namespace Comp2501Game.Objects.Screens
 
             spriteInitSystemID1 = game.RegisterSystem(new SpriteInitializationSystem(game, 1));
             spriteInitSystemID2 = game.RegisterSystem(new SpriteInitializationSystem(game, 2));
-            arrowInputSystemID = game.RegisterSystem(new ArrowInputSystem(game, 1));
-            controllerInputSystemID = game.RegisterSystem(new ControllerInputSystem(game, 2));
+            arrowInputSystemID = game.RegisterSystem(new ArrowInputSystem(game, 2));
+            controllerInputSystemID = game.RegisterSystem(new ControllerInputSystem(game, 1));
             inputSystemID1 = game.RegisterSystem(new InputSystem(game, 1));
             inputSystemID2 = game.RegisterSystem(new InputSystem(game, 2));
             animationSystemID1 = game.RegisterSystem(new AnimationSystem(game, 1));
@@ -117,7 +119,7 @@ namespace Comp2501Game.Objects.Screens
                      new Vector2(100, 0),
                      0.0f,
                      new Vector2(1.0f, 1.0f),
-                     300,
+                     400,
                      1000,
                      SpriteType.Yoshi,
                      new List<Shape>
@@ -165,8 +167,8 @@ namespace Comp2501Game.Objects.Screens
                      new Vector2(800, 0),
                      0.0f,
                      new Vector2(1.0f, 1.0f),
-                     300,
-                     10000,
+                     400,
+                     1000,
                      SpriteType.Yoshi,
                      new List<Shape>
                             {
@@ -201,11 +203,11 @@ namespace Comp2501Game.Objects.Screens
                     game,
                     2,
                     Color.Pink,
-                    new Vector2(500, 0),
+                    new Vector2(800, 0),
                     0.0f,
                     new Vector2(1.0f, 1.0f),
-                    300,
-                    10000,
+                    200,
+                    1000,
                     SpriteType.Kirby,
                     new List<Shape>
                         {
@@ -230,7 +232,19 @@ namespace Comp2501Game.Objects.Screens
 
             game.AddObject(new TimeObject(game, new Vector2(0, 0), Color.Black));
 
-            
+            AStarPathfindingSystem pathfinding = (AStarPathfindingSystem)game.GetService("Pathfinding");
+            AStarNode node1 = new AStarNode(new Vector2(clientBounds.Width / 2, clientBounds.Height - 50));
+            AStarNode node2 = new AStarNode(new Vector2(clientBounds.Width / 2 + 200, clientBounds.Height - 50));
+            node1.AddNeighbor(node2);
+            node2.AddNeighbor(node1);
+            AStarGraph graph = new AStarGraph(game, new List<AStarNode> { node1, node2 });
+            GameObject graphEntity = new GameObject(game);
+            graphEntity.AddComponent(new AStarGraphComponent(graphEntity, graph));
+            game.AddObject(graphEntity);
+            game.CurrentPathfindingGraph = graph;
+
+            game.Character1 = this.p1;
+            game.Character2 = this.p2;
         }
     }
 }

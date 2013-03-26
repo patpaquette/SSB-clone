@@ -48,8 +48,8 @@ namespace Comp2501Game.EntityFactory
                 entity1,
                 new ActionDefinition(
                     DirectionalAction.Right,
-                    PrimaryAction.A,
-                    SecondaryAction.Walk
+                    PrimaryAction.Forward_A,
+                    SecondaryAction.Smash
                 )
             );
 
@@ -57,7 +57,7 @@ namespace Comp2501Game.EntityFactory
             root.AddChild(attackSequence);
             attackSequence.AddChild(conditionDistance30);
             attackSequence.AddChild(attackOpponent);
-            //root.AddChild(moveToOpponent);
+            root.AddChild(moveToOpponent);
 
             return root;
         }
